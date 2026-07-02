@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0F2238">
+<title>Enliten UI/UX Walkthrough · Enliten Luminz</title>
+<meta property="og:title" content="The Enliten UI/UX Walkthrough">
+<meta property="og:description" content="Nine scenes: videos become Luminz, Luminz become credentials. A guided concept tour.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22td%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23F2A233%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23D0491F%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%225%22%20y%3D%225%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%224.5%22%20fill%3D%22url(%23td)%22%20transform%3D%22rotate(45%2012%2012)%22%2F%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ENLITEN INVESTOR WALKTHROUGH — 9 scenes, one file
+   "Night & Flame" v1.0 · Shook Solutions · 07-01-2026
+   ============================================================ */
+:root{
+  /* night ground */
+  --night-0:#0A1A2E; --night-1:#0F2238; --night-2:#1B3A5C; --night-3:#24507C;
+  /* official logo blues (swap exact hexes when PNG lands) */
+  --logo-blue-hi:#2E6CA4; --logo-blue-lo:#173A5E;
+  /* flame */
+  --flame-light:#F5A623; --flame:#E8842C; --flame-deep:#C2410C;
+  --tittle-hi:#F2A233; --tittle-lo:#D0491F;
+  /* ink on night */
+  --star:#F8FAFC; --mist:#B9CBDE; --dim:#8FA6BD;
+  --ember-tint:#F4D9BC; --h1-warm:#F8B96B;
+  /* surfaces */
+  --card:rgba(15,34,56,.72); --panel:#122741;
+  --hairline:rgba(185,203,222,.25); --hairline-strong:rgba(185,203,222,.35);
+  --scrim:rgba(10,26,46,.62); --plate:#F8FAFC;
+  /* gradients */
+  --grad-night:linear-gradient(158deg,var(--night-0) 0%,var(--night-1) 46%,var(--night-2) 82%,var(--night-3) 100%);
+  --grad-ember-sky:radial-gradient(120% 140% at 82% -10%,rgba(232,132,44,.16),transparent 44%);
+  --grad-flame:linear-gradient(90deg,var(--flame-light),var(--flame));
+  --grad-flame-v:linear-gradient(180deg,var(--flame-light),var(--flame));
+  --grad-tittle:linear-gradient(180deg,var(--tittle-hi),var(--tittle-lo));
+  --grad-h1:linear-gradient(115deg,#FFFFFF 55%,var(--h1-warm) 130%);
+  /* spacing */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px;
+  --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px;
+  /* radii */
+  --r-sm:9px; --r-md:14px; --r-lg:16px; --r-xl:20px; --r-pill:999px;
+  /* shadows & glows */
+  --glow-flame-sm:0 0 12px rgba(245,166,35,.50);
+  --glow-flame-md:0 0 10px rgba(245,166,35,.45);
+  --glow-flame-lg:0 0 34px rgba(245,166,35,.30);
+  --shadow-panel:0 10px 30px rgba(4,12,22,.45);
+  --shadow-plate:0 24px 70px rgba(4,12,22,.55);
+  --ring-ember:0 0 0 1px rgba(244,217,188,.28);
+  /* layers */
+  --z-bg:0; --z-scene:1; --z-spotlight:3; --z-chrome:20; --z-nav:30; --z-toast:40;
+  /* motion */
+  --ease:cubic-bezier(.22,.9,.24,1);
+  --t-fast:150ms; --t-med:300ms; --t-scene:420ms;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;overflow-x:clip}
+body{
+  font-family:'Inter',system-ui,sans-serif;color:var(--star);
+  background:var(--grad-ember-sky),var(--grad-night);
+  background-attachment:fixed,fixed;
+  -webkit-font-smoothing:antialiased;
+}
+.sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid var(--flame-light);outline-offset:3px;border-radius:6px}
+button{font:inherit;color:inherit}
+
+/* ---------- persistent chrome ---------- */
+.chrome{position:fixed;left:0;right:0;z-index:var(--z-chrome);display:flex;align-items:center;gap:14px;padding:0 clamp(20px,5vw,64px)}
+.chrome-top{top:calc(env(safe-area-inset-top) + 22px);height:24px}
+.chrome-bot{bottom:calc(env(safe-area-inset-bottom) + 18px);height:24px;gap:18px}
+.chrome,.navbtn{animation:chromeIn .5s ease both}
+@keyframes chromeIn{from{opacity:0}to{opacity:1}}
+.mark{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.02em;font-size:15px;color:#FFF}
+.mark svg{filter:drop-shadow(var(--glow-flame-md))}
+.mark .lum{color:var(--flame-light)}
+.crumb{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);white-space:nowrap;overflow:hidden}
+.dots{display:flex;gap:8px;align-items:center}
+.dotbtn{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:none;border:0;padding:0;cursor:pointer;border-radius:var(--r-pill)}
+.dotbtn .dot{width:7px;height:7px;border-radius:50%;background:rgba(185,203,222,.28);transition:all .3s var(--ease)}
+.dotbtn.done .dot{background:rgba(245,166,35,.55)}
+.dotbtn[aria-current] .dot{width:22px;border-radius:5px;background:var(--grad-flame);box-shadow:var(--glow-flame-sm)}
+.hint{margin-left:auto;font-size:12px;color:var(--mist);display:flex;gap:14px;align-items:center;white-space:nowrap}
+.key{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border:1px solid var(--hairline-strong);border-radius:6px;font-size:11px;font-weight:600;color:var(--mist)}
+.key.flash{border-color:var(--flame-light);color:var(--flame-light)}
+.hint-swipe{display:none}
+@media (pointer:coarse){.hint-keys,.hint-back{display:none}.hint-swipe{display:inline}}
+.navbtn{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:var(--z-nav);
+  width:46px;height:46px;border-radius:50%;border:1px solid rgba(185,203,222,.28);
+  background:rgba(15,34,56,.55);color:var(--mist);font-size:19px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;backdrop-filter:none;
+  transition:all .25s var(--ease);
+}
+.navbtn:hover{border-color:var(--flame-light);color:var(--flame-light)}
+.navbtn.prev{left:clamp(10px,2vw,26px)}
+.navbtn.next{right:clamp(10px,2vw,26px)}
+.navbtn[aria-disabled="true"]{opacity:.35;cursor:default}
+.navbtn[aria-disabled="true"]:hover{border-color:rgba(185,203,222,.28);color:var(--mist)}
+
+/* ---------- scene shell ---------- */
+.scene{
+  position:fixed;inset:0;display:grid;grid-template-rows:40px minmax(0,1fr) 30px;
+  padding:calc(env(safe-area-inset-top) + 22px) clamp(20px,5vw,64px) calc(env(safe-area-inset-bottom) + 18px);
+  visibility:hidden;opacity:0;pointer-events:none;z-index:var(--z-scene);
+}
+.scene.active{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
+.stage{min-height:0;grid-row:2}
+
+/* scene transitions (JS adds anim-* classes; reduced motion never gets them) */
+@keyframes inFwd{from{opacity:0;transform:translateX(48px)}to{opacity:1;transform:none}}
+@keyframes outFwd{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-32px)}}
+@keyframes inBack{from{opacity:0;transform:translateX(-48px)}to{opacity:1;transform:none}}
+@keyframes outBack{from{opacity:1;transform:none}to{opacity:0;transform:translateX(32px)}}
+.anim-in-fwd{animation:inFwd var(--t-scene) var(--ease) both}
+.anim-out-fwd{animation:outFwd var(--t-med) var(--ease) both}
+.anim-in-back{animation:inBack var(--t-scene) var(--ease) both}
+.anim-out-back{animation:outBack var(--t-med) var(--ease) both}
+/* ladder-hold (3↔4↔5): only the copy column slides; art crossfades in place */
+.anim-hold-in .copy{animation:inFwd var(--t-scene) var(--ease) both}
+.anim-hold-out .copy{animation:outFwd var(--t-med) var(--ease) both}
+.anim-hold-in.anim-play .art{animation:none}
+.anim-hold-in .copy>*{animation-name:rise}
+
+/* entrance choreography (re-triggered per entry) */
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes glowIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.anim-play .copy>*,.anim-play .cover>*,.anim-play .tour-head>*{animation:rise .7s var(--ease) both}
+.anim-play .eyebrow{animation-delay:.05s}
+.anim-play h1{animation-delay:.14s}
+.anim-play .define,.anim-play .subline,.anim-play .pipeline,.anim-play .lockup,.anim-play .tour-intro{animation-delay:.26s}
+.anim-play .why,.anim-play .cta,.anim-play .toast,.anim-play .contact{animation-delay:.4s}
+.anim-play .art,.anim-play .tour-grid{animation:glowIn .8s var(--ease) .3s both}
+.anim-play .logoslot{animation:glowIn .8s var(--ease) .1s both}
+.anim-play .cover-accent{animation:glowIn .8s var(--ease) 0s both}
+@keyframes corePulse{0%,100%{opacity:.55}50%{opacity:1}}
+#hd-ladder .pulse{animation:corePulse 3.2s ease-in-out 1.4s infinite}
+#hd-ladder #hd-v1-solid,#hd-ladder #hd-v2-solid{transition-delay:.15s}
+@keyframes popIn{0%{transform:scale(.85)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+.anim-pop{animation:popIn .35s var(--ease)}
+@keyframes stepOut{to{opacity:0;transform:translateY(8px)}}
+@keyframes stepIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.anim-step-out{animation:stepOut var(--t-fast) var(--ease) both}
+.anim-step-in{animation:stepIn 250ms var(--ease) 120ms both}
+
+/* ---------- type roles ---------- */
+.eyebrow{
+  font-size:clamp(11px,1.1vw,13px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--flame-light);
+  display:flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:26px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--flame-light),transparent)}
+.cover .eyebrow{margin-bottom:0;justify-content:center}
+.cover .eyebrow::before{background:linear-gradient(270deg,var(--flame-light),transparent)}
+.cover .eyebrow::after{content:"";width:26px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--flame-light),transparent)}
+h1{
+  font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-weight:600;
+  font-size:clamp(46px,7.5vw,96px);line-height:1.04;letter-spacing:-.015em;
+  background:var(--grad-h1);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cover h1{font-size:clamp(52px,9vw,116px);line-height:1.02}
+.subline{
+  font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-weight:600;font-style:italic;
+  font-size:clamp(20px,2.6vw,30px);line-height:1.35;color:var(--mist);max-width:34ch;
+}
+.define{font-size:clamp(16px,1.9vw,21px);line-height:1.5;color:var(--mist);margin-top:22px;max-width:24ch}
+.define strong{color:#FFF;font-weight:600}
+.cover .define{margin-top:0;max-width:44ch}
+.why{
+  margin-top:30px;display:inline-flex;flex-direction:column;gap:4px;align-items:flex-start;
+  border-left:2px solid var(--flame);padding:2px 0 2px 14px;
+  font-size:clamp(14px,1.5vw,15px);color:var(--ember-tint);max-width:34ch;line-height:1.5;text-align:left;
+}
+.why b{color:#FFF;font-weight:700}
+.why-label{display:block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ember-tint);opacity:.85}
+.why-center{border-left:0;padding:0;margin-top:6px;align-items:center;text-align:center}
+.why-center .why-text{display:inline-flex;align-items:center;gap:9px}
+.why-center .why-text::before{content:"";flex:none;width:9px;height:9px;border-radius:2.5px;background:var(--grad-tittle);transform:rotate(45deg)}
+.cta{
+  display:inline-flex;align-items:center;gap:8px;background:var(--grad-flame);color:var(--night-0);
+  font-weight:700;font-size:14px;border:0;border-radius:var(--r-pill);padding:12px 26px;cursor:pointer;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.cta:hover{transform:translateY(-1px);box-shadow:var(--glow-flame-sm)}
+.contact{
+  display:inline-flex;align-items:center;border:1px solid var(--hairline-strong);border-radius:var(--r-pill);
+  padding:9px 20px;color:var(--mist);font-size:13px;font-weight:600;text-decoration:none;
+  transition:border-color .2s var(--ease),color .2s var(--ease);
+}
+.contact:hover{border-color:var(--flame-light);color:var(--flame-light)}
+
+/* ---------- stage variants ---------- */
+.split{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,72px);
+  align-items:center;max-width:1160px;width:100%;margin:0 auto;min-height:0;
+}
+.cover{
+  max-width:880px;margin:auto;text-align:center;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:var(--sp-5);width:100%;min-height:0;
+}
+.art{position:relative;display:flex;justify-content:center;min-width:0}
+.art svg{width:min(100%,470px);height:auto;overflow:visible}
+.art.art-wide svg{width:min(100%,520px)}
+.lockup{margin-top:16px;font-size:13px;font-weight:600;color:var(--star);letter-spacing:.02em}
+.lockup .parrow{color:var(--flame-light);font-weight:700}
+.pipeline{display:flex;flex-wrap:wrap;gap:6px 7px;align-items:center;margin-top:14px;font-size:clamp(13px,1.4vw,14px);color:var(--mist);max-width:38ch}
+.pchip{border:1px solid var(--hairline-strong);border-radius:var(--r-pill);padding:3px 10px;font-size:12px;font-weight:600;color:var(--mist);white-space:nowrap;background:var(--card)}
+.parrow{color:var(--flame-light)}
+.toast{
+  margin-top:22px;display:flex;gap:12px;align-items:flex-start;max-width:38ch;
+  background:var(--panel);border:1px solid var(--hairline);border-radius:var(--r-md);
+  box-shadow:var(--shadow-panel),var(--ring-ember);padding:13px 16px;
+}
+.toast svg{flex:none;margin-top:2px}
+.toast p{font-size:13.5px;line-height:1.5;color:var(--star)}
+.toast .toast-bar{display:block;margin-top:8px;width:100%;height:4px;border-radius:2px;background:rgba(185,203,222,.16);overflow:hidden}
+.toast .toast-bar span{display:block;width:9%;height:100%;border-radius:2px;background:var(--grad-flame)}
+.s7 .define{max-width:30ch;font-size:clamp(15px,1.7vw,19px);margin-top:16px}
+.s7 h1{font-size:clamp(42px,6.5vw,84px)}
+.s7 .why{margin-top:18px}
+
+/* logo slot: fallback mark by default; plate + PNG when the image loads */
+.logoslot{display:flex;justify-content:center}
+.logoslot .plate{
+  display:none;background:var(--plate);border-radius:var(--r-xl);box-shadow:var(--shadow-plate),0 0 0 1px rgba(46,108,164,.2);
+  padding:clamp(14px,2.4vw,24px) clamp(20px,3.4vw,34px);
+}
+.logoslot.haslogo .plate{display:inline-flex}
+.logoslot.haslogo .logo-fallback{display:none}
+.logoslot[data-size="hero"] .plate img{width:min(46vw,340px);min-width:96px;display:block}
+.logoslot[data-size="close"] .plate img{width:min(32vw,238px);min-width:96px;display:block}
+.logoslot[data-size="hero"] .plate{box-shadow:var(--shadow-plate),0 0 0 1px rgba(46,108,164,.2),0 0 40px rgba(245,166,35,.12)}
+.logo-fallback{display:inline-flex;align-items:center;gap:12px}
+.logo-word{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:-.01em;color:var(--star);
+  font-size:clamp(38px,5.4vw,58px);line-height:1;
+}
+.logoslot[data-size="close"] .logo-word{font-size:clamp(30px,4vw,42px)}
+
+/* ---------- tour (scene 8) ---------- */
+.tour{display:flex;flex-direction:column;max-width:1280px;width:100%;margin:0 auto;min-height:0;gap:var(--sp-3)}
+.tour-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.tour-head .eyebrow{margin-bottom:0}
+.tour-head h1{font-size:clamp(34px,4.2vw,58px)}
+.tour-intro{font-size:clamp(13px,1.4vw,15px);color:var(--mist)}
+.tour-grid{
+  flex:1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3.4fr);
+  gap:clamp(20px,3vw,40px);align-items:center;min-height:0;
+}
+.tour-art{position:relative;display:flex;justify-content:center;align-items:center;min-height:0;height:100%}
+.art-desk{position:relative;width:min(100%,calc((100vh - 264px)*1.121));border-radius:16px;box-shadow:var(--shadow-plate);transition:opacity .4s var(--ease)}
+.art-desk svg,.art-phone svg{display:block;width:100%;height:auto}
+.art-phone{
+  position:absolute;inset:0;display:flex;justify-content:center;align-items:center;
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+}
+.art-phone .phone-box{position:relative;width:min(40vw,calc((100vh - 280px)*.486),270px)}
+.tour-art.show-phone .art-phone{opacity:1}
+.tour-art.show-phone .art-desk{opacity:0}
+.overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tour-side{display:flex;flex-direction:column;gap:var(--sp-4);min-width:0}
+.ann{
+  background:var(--panel);border:1px solid var(--hairline);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-panel),var(--ring-ember);padding:var(--sp-5);
+}
+.step-eyebrow{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--flame-light)}
+.step-title{font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--star);margin-top:10px;background:none;-webkit-text-fill-color:currentColor}
+.step-text{font-size:13.5px;line-height:1.5;color:var(--mist);margin-top:6px;min-height:5.2em}
+.step-controls{display:flex;align-items:center;gap:10px;margin-top:14px}
+.stepbtn{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--hairline);background:rgba(15,34,56,.55);
+  color:var(--mist);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .25s var(--ease);flex:none;
+}
+.stepbtn:hover{border-color:var(--flame-light);color:var(--flame-light)}
+.pips{display:flex;gap:4px;align-items:center;margin:0 auto}
+.pip{width:14px;height:14px;border:0;background:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.pip::after{content:"";width:5px;height:5px;border-radius:50%;background:rgba(185,203,222,.28);transition:all .3s var(--ease)}
+.pip.done::after{background:rgba(245,166,35,.55)}
+.pip[aria-current]::after{width:14px;border-radius:3px;background:var(--grad-flame);box-shadow:var(--glow-flame-sm)}
+.tour-side .why{margin-top:0}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .tour-grid{grid-template-columns:1fr;align-items:start;gap:var(--sp-4)}
+  .tour-art{height:auto}
+  .art-desk{width:min(100%,calc(52vh*1.121))}
+  .art-phone .phone-box{width:min(52vw,calc(44vh*.486))}
+}
+@media (max-width:860px){
+  .split{grid-template-columns:1fr;gap:26px;align-content:center}
+  .split .copy{order:0}.split .art{order:1}
+  .art svg,.art.art-wide svg{width:min(78vw,360px)}
+  .navbtn{display:none}
+  .define{max-width:none}
+  .cover h1{font-size:clamp(44px,9vw,72px)}
+}
+@media (max-width:560px){
+  .scene{padding-left:20px;padding-right:20px}
+  .chrome{padding-left:20px;padding-right:20px}
+  .dots{gap:4px}
+  .dotbtn{width:20px;height:20px}
+  .dotbtn .dot{width:6px;height:6px}
+  .dotbtn[aria-current] .dot{width:18px;border-radius:5px}
+  .crumb{display:none}
+  .hint-swipe{font-size:11px}
+}
+@media (max-width:400px){
+  h1{font-size:clamp(40px,10.5vw,52px)}
+  .cover h1{font-size:clamp(44px,11.5vw,54px)}
+  .define{font-size:16px}
+  .art svg,.art.art-wide svg{width:min(78vw,320px)}
+  .ann{padding:var(--sp-4)}
+  .step-text{font-size:13px}
+  .art-desk{width:min(100%,calc(44vh*1.121))}
+}
+@media (max-height:640px){
+  h1{font-size:clamp(36px,6vw,54px)}
+  .cover h1{font-size:clamp(40px,6.5vw,60px)}
+  .why{margin-top:16px}
+  .cover{gap:var(--sp-4)}
+  .s7 .define{margin-top:10px}
+  .toast{margin-top:14px}
+}
+/* QA fix: short phones (iPhone SE class) — let the stage scroll instead of clipping */
+@media (max-height:720px){
+  .stage{overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;align-content:start}
+}
+/* QA fix: 44px-class touch targets on coarse pointers */
+@media (pointer:coarse){
+  .dotbtn{width:34px;height:44px}
+  .pip{width:26px;height:44px}
+  .stepbtn{width:44px;height:44px}
+  .navbtn{width:48px;height:48px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ persistent chrome ============ -->
+<header class="chrome chrome-top">
+  <div class="mark">
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+      <defs><linearGradient id="tdChrome" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F2A233"/><stop offset="1" stop-color="#D0491F"/>
+      </linearGradient></defs>
+      <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#tdChrome)" transform="rotate(45 12 12)"/>
+    </svg>
+    enliten <span class="lum">· luminz</span>
+  </div>
+  <div class="crumb" id="crumb"></div>
+</header>
+
+<footer class="chrome chrome-bot">
+  <nav class="dots" id="dots" aria-label="Scene progress"></nav>
+  <div class="hint">
+    <span class="hint-keys"><span class="key">←</span> <span class="key">→</span> <span>Scroll or press → to advance</span></span>
+    <span class="hint-back">Press ← to go back</span>
+    <span class="hint-swipe">Swipe between scenes on mobile</span>
+    <span class="hint-steps" id="hintSteps" hidden>· steps</span>
+  </div>
+</footer>
+
+<button class="navbtn prev" id="btnPrev" aria-label="Previous scene">←</button>
+<button class="navbtn next" id="btnNext" aria-label="Next scene">→</button>
+<p class="sr-only" aria-live="polite" id="announcer"></p>
+
+<main id="scenes">
+<!-- ============ SCENE 1 · WELCOME ============ -->
+<section class="scene s1" id="s1" role="group" aria-roledescription="scene" aria-label="Scene 1 of 9 — Welcome">
+  <div class="stage cover">
+    <svg class="cover-accent" width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">
+      <defs><linearGradient id="td1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F2A233"/><stop offset="1" stop-color="#D0491F"/>
+      </linearGradient></defs>
+      <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
+    </svg>
+    <div class="logoslot" data-size="hero">
+      <span class="plate"><!-- SWAP: brand PNG --><img src="assets/enliten-logo.png" alt="enliten" loading="eager" fetchpriority="high" onload="this.closest('.logoslot').classList.add('haslogo')" onerror="this.closest('.logoslot').classList.add('nologo')"></span>
+      <span class="logo-fallback" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
+        </svg>
+        <span class="logo-word">enliten</span>
+      </span>
+    </div>
+    <p class="eyebrow">Enliten · Luminz</p>
+    <h1>Welcome to the Enliten UI/UX Walkthrough</h1>
+    <p class="subline">Nine scenes. One belief: education measured by what you can prove — not seat time.</p>
+    <button class="cta" id="beginBtn">Begin</button>
+    <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">You're about to see the loop that acquires, teaches, and retains learners.</span></p>
+  </div>
+</section>
+
+<!-- ============ SCENE 2 · TERMINOLOGY ============ -->
+<section class="scene s2" id="s2" role="group" aria-roledescription="scene" aria-label="Scene 2 of 9 — But first, terminology">
+  <div class="stage cover">
+    <p class="eyebrow">Before the tour</p>
+    <h1>But first — terminology.</h1>
+    <p class="define">Three terms carry everything: <strong>Programs</strong>, <strong>Courses</strong>, <strong>Learning Objectives</strong>. Learn them once — every screen follows.</p>
+    <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">Precise terms mean a precise data model — the reason credit moves automatically.</span></p>
+  </div>
+</section>
+
+<!-- ============ SCENE 3 · PROGRAMS ============ -->
+<section class="scene s3" id="s3" role="group" aria-roledescription="scene" aria-label="Scene 3 of 9 — Programs">
+  <div class="stage split">
+    <div class="copy">
+      <p class="eyebrow">Terminology · 1 of 3</p>
+      <h1>Programs</h1>
+      <p class="define">A Program is what a learner earns — a degree, a certificate, or a badge.<br>Programs are made of Courses.</p>
+      <p class="why"><span class="why-label">Why it matters</span>One structure spans badge to degree — one build, an entire product ladder.</p>
+      <p class="sr-only">Diagram: a hierarchy ladder. The Program layer — a Bookkeeping Certificate card — is lit; Course and Learning Objective layers wait below as ghosts.</p>
+    </div>
+    <div class="art diagram" id="ladderSlot3">
+      <svg id="hd-ladder" data-state="a" viewBox="0 0 520 460" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
+        <style>
+          #hd-ladder .fx{opacity:0;transition:opacity .7s cubic-bezier(.22,.9,.24,1)}
+          #hd-ladder[data-state="a"] .vis-a,
+          #hd-ladder[data-state="b"] .vis-b,
+          #hd-ladder[data-state="c"] .vis-c{opacity:1}
+          @media (prefers-reduced-motion:reduce){#hd-ladder .fx{transition:none}}
+        </style>
+        <defs>
+          <linearGradient id="hdFlame" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/>
+          </linearGradient>
+          <radialGradient id="hdHalo" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#F5A623" stop-opacity=".32"/><stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle  id="hd-halo-a" class="fx vis-a" cx="260" cy="88"  r="118" fill="url(#hdHalo)"/>
+        <ellipse id="hd-halo-b" class="fx vis-b" cx="260" cy="230" rx="238" ry="108" fill="url(#hdHalo)"/>
+        <circle  id="hd-halo-c" class="fx vis-c" cx="146" cy="336" r="100" fill="url(#hdHalo)"/>
+        <path id="hd-v1-ghost" class="fx vis-a" d="M260 136v24M146 160h228M146 160v24M374 160v24"
+              fill="none" stroke="rgba(185,203,222,.25)" stroke-width="1.6" stroke-dasharray="4 6"/>
+        <path id="hd-v1-solid" class="fx vis-b vis-c" d="M260 136v24M146 160h228M146 160v24M374 160v24"
+              fill="none" stroke="rgba(185,203,222,.55)" stroke-width="1.6"/>
+        <path id="hd-v2-ghost" class="fx vis-a vis-b" d="M146 276v32M374 276v32M146 364v12M374 364v12"
+              fill="none" stroke="rgba(185,203,222,.25)" stroke-width="1.6" stroke-dasharray="4 6"/>
+        <path id="hd-v2-solid" class="fx vis-c" d="M146 276v32M374 276v32M146 364v12M374 364v12"
+              fill="none" stroke="rgba(185,203,222,.55)" stroke-width="1.6"/>
+        <g id="lyr-program">
+          <rect x="120" y="40" width="280" height="96" rx="16" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+          <text x="144" y="72" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623">PROGRAM</text>
+          <text x="144" y="100" font-size="18.5" font-weight="700" letter-spacing="-.37" fill="#FFFFFF">Bookkeeping Certificate</text>
+          <text x="144" y="120" font-size="12" font-weight="500" fill="#8FA6BD">degree · certificate · badge</text>
+          <g transform="translate(358,58)">
+            <path fill="url(#hdFlame)" d="M14 0c.5 3-1 4.4-2.4 5.8C10.2 7.3 9 8.8 9 10.8a5 5 0 0 0 10 0c0-1.7-.8-2.9-1.7-3.8-.4.8-1 1.5-1.8 1.9.3-2.4-.3-6.2-1.5-8.9Z"/>
+          </g>
+        </g>
+        <g id="lyr-courses">
+          <g id="hd-courses-ghost" class="fx vis-a">
+            <rect x="36" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="56" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".38">COURSE</text>
+            <text x="56" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".38">Coming next…</text>
+            <rect x="264" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="284" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".38">COURSE</text>
+            <text x="284" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".38">Coming next…</text>
+          </g>
+          <g id="hd-courses-lit" class="fx vis-b vis-c">
+            <rect x="36" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="56" y="212" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623">COURSE</text>
+            <text x="56" y="236" font-size="16.5" font-weight="700" letter-spacing="-.33" fill="#FFFFFF">Financial Accounting</text>
+            <rect x="56" y="248" width="74" height="18" rx="9" fill="rgba(245,166,35,.14)" stroke="rgba(245,166,35,.45)" stroke-width="1"/>
+            <text x="93" y="260.5" text-anchor="middle" font-size="9.5" font-weight="700" letter-spacing=".8" fill="#F5A623">ACG 2021</text>
+            <rect x="264" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="284" y="212" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623">COURSE</text>
+            <text x="284" y="236" font-size="16.5" font-weight="700" letter-spacing="-.33" fill="#FFFFFF">Payroll Fundamentals</text>
+            <text x="284" y="260" font-size="11" font-weight="500" fill="#8FA6BD">certificate course</text>
+          </g>
+        </g>
+        <g id="lyr-objectives">
+          <g id="hd-obj-ghost" class="fx vis-a vis-b">
+            <rect x="36" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="62" y="340" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
+            <rect x="264" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="340" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
+            <rect x="36" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="62" y="408" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
+            <rect x="264" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="408" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
+          </g>
+          <g id="hd-obj-lit" class="fx vis-c">
+            <rect x="36" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="62" y="327" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="62" y="342" font-size="11" font-weight="600" fill="#FFFFFF">Apply the accrual basis</text>
+            <text x="62" y="355" font-size="11" font-weight="600" fill="#FFFFFF">of accounting</text>
+            <rect x="264" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="331" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="348" font-size="11.5" font-weight="600" fill="#FFFFFF">Calculate gross-to-net pay</text>
+            <rect x="36" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="62" y="399" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="62" y="416" font-size="11.5" font-weight="600" fill="#FFFFFF">Prepare journal entries</text>
+            <rect x="264" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="399" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="416" font-size="11.5" font-weight="600" fill="#FFFFFF">Classify payroll liabilities</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENE 4 · COURSES ============ -->
+<section class="scene s4" id="s4" role="group" aria-roledescription="scene" aria-label="Scene 4 of 9 — Courses">
+  <div class="stage split">
+    <div class="copy">
+      <p class="eyebrow">Terminology · 2 of 3</p>
+      <h1>Courses</h1>
+      <p class="define">Courses are made of Learning Objectives.<br>Each course carries a Florida SCNS course code — Financial Accounting is ACG 2021.</p>
+      <p class="why"><span class="why-label">Why it matters</span>SCNS makes courses legible to colleges — the bridge to transfer credit and degrees.</p>
+      <p class="sr-only">Diagram: the ladder's Course layer lights — Financial Accounting, coded ACG 2021, and Payroll Fundamentals — now connected upward to the Program.</p>
+    </div>
+    <div class="art diagram" id="ladderSlot4"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 5 · LEARNING OBJECTIVES ============ -->
+<section class="scene s5" id="s5" role="group" aria-roledescription="scene" aria-label="Scene 5 of 9 — Learning Objectives">
+  <div class="stage split">
+    <div class="copy">
+      <p class="eyebrow">Terminology · 3 of 3</p>
+      <h1>Learning Objectives</h1>
+      <p class="define">A Learning Objective is one clear sentence about what a learner should be able to do.<br>Aligned to Florida B.E.S.T. and NGSSS benchmarks (CPALMS).</p>
+      <p class="lockup">Programs <span class="parrow">→</span> Courses <span class="parrow">→</span> Learning Objectives</p>
+      <p class="why"><span class="why-label">Why it matters</span>The platform's atoms — where video credit attaches and flows.</p>
+      <p class="sr-only">Diagram: the full ladder is lit — the Program, two Courses, and four Learning Objective pills such as Apply the accrual basis of accounting.</p>
+    </div>
+    <div class="art diagram" id="ladderSlot5"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 6 · VIDEOS & THE WATCH LIST ============ -->
+<section class="scene s6" id="s6" role="group" aria-roledescription="scene" aria-label="Scene 6 of 9 — Videos and the Watch List">
+  <div class="stage split">
+    <div class="copy">
+      <h1>Videos &amp; the Watch List</h1>
+      <p class="define">In Chrome, the Enliten Video Collector sends a YouTube video to your Watch List.</p>
+      <p class="pipeline">Vetting: <span class="pchip">transcript</span> <span class="parrow">→</span> <span class="pchip">AI classification</span> <span class="parrow">→</span> <span class="pchip">quality score</span> <span class="parrow">→</span> <span class="pchip">team approval</span>.</p>
+      <p class="define" style="margin-top:14px">Approved videos attach to the Learning Objectives they teach.</p>
+      <p class="why"><span class="why-label">Why it matters</span>Only approved videos earn — learner-sourced supply at near-zero content cost.</p>
+      <p class="sr-only">Diagram: a video card from the Watch List travels through four cleared review gates — transcript, AI classification, quality score, team approval — and docks onto a Learning Objective pill, carrying its 15.4 Luminz chip the whole way.</p>
+    </div>
+    <div class="art art-wide">
+      <svg id="fl-flow" viewBox="0 0 760 320" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
+        <defs>
+          <linearGradient id="flFlame" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/>
+          </linearGradient>
+          <linearGradient id="flThumb" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#24507C"/><stop offset="1" stop-color="#0F2238"/>
+          </linearGradient>
+          <radialGradient id="flHalo" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#F5A623" stop-opacity=".28"/><stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="653" cy="150" rx="118" ry="100" fill="url(#flHalo)"/>
+        <g id="fl-watchlist" transform="translate(36,34)">
+          <rect width="216" height="46" rx="12" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.25)" stroke-width="1.2"/>
+          <g transform="translate(10,6)">
+            <path fill="#B9CBDE" d="M7 7h5.6a3.4 3.4 0 0 1 6.8 0H27v5.6a3.4 3.4 0 0 1 0 6.8V27H7Z"/>
+          </g>
+          <text x="48" y="20" font-size="11.5" font-weight="700" fill="#FFFFFF">Watch List</text>
+          <text x="48" y="34" font-size="9" font-weight="500" fill="#8FA6BD">sent in with the Chrome extension</text>
+        </g>
+        <path id="fl-lead" d="M84 80C84 130 70 172 61 202" fill="none" stroke="rgba(185,203,222,.28)" stroke-width="1.4" stroke-dasharray="3 6"/>
+        <circle cx="60" cy="208" r="2.5" fill="#B9CBDE"/>
+        <path id="fl-track" d="M60 210H560" fill="none" stroke="rgba(185,203,222,.28)" stroke-width="1.6" stroke-dasharray="4 6"/>
+        <path id="fl-track-done" d="M60 210H560" pathLength="100" fill="none" stroke="rgba(245,166,35,.5)" stroke-width="1.6"/>
+        <rect x="178" y="152" width="392" height="126" rx="18" fill="rgba(15,34,56,.25)" stroke="rgba(185,203,222,.16)" stroke-width="1" stroke-dasharray="5 6"/>
+        <text x="374" y="140" text-anchor="middle" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#8FA6BD">ENLITEN REVIEW PIPELINE · EVERY VIDEO, EVERY TIME</text>
+        <g id="fl-g1" class="gate" transform="translate(216,210)">
+          <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
+          <rect x="-7" y="-10" width="14" height="19" rx="2" fill="none" stroke="#B9CBDE" stroke-width="1.5"/>
+          <path d="M-3-4.5h6M-3 0h6M-3 4.5h3.5" fill="none" stroke="#B9CBDE" stroke-width="1.5" stroke-linecap="round"/>
+          <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">Transcript</text>
+        </g>
+        <g id="fl-g2" class="gate" transform="translate(320,210)">
+          <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
+          <path fill="#B9CBDE" d="M0-10 2.4-2.4 10 0 2.4 2.4 0 10-2.4 2.4-10 0-2.4-2.4Z"/>
+          <circle cx="7.5" cy="-7.5" r="1.8" fill="#B9CBDE"/>
+          <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">AI classification</text>
+        </g>
+        <g id="fl-g3" class="gate" transform="translate(424,210)">
+          <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
+          <path d="M-8.5 4a9 9 0 1 1 17 0" fill="none" stroke="#B9CBDE" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M0 4 5-3.5" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cy="4" r="1.8" fill="#B9CBDE"/>
+          <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">Quality score</text>
+        </g>
+        <g id="fl-g4" class="gate" transform="translate(528,210)">
+          <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
+          <circle cx="-2" cy="-4.5" r="3.4" fill="none" stroke="#B9CBDE" stroke-width="1.6"/>
+          <path d="M-8.5 7a6.5 6.5 0 0 1 13 0" fill="none" stroke="#B9CBDE" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M4 1.5 6.6 4l4.6-5" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">Team approval</text>
+        </g>
+        <g id="fl-objective" transform="translate(560,182)">
+          <rect width="186" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#flFlame)" stroke-width="1.6"/>
+          <text x="26" y="22" font-size="8" font-weight="700" letter-spacing="1.3" fill="#F5A623">LEARNING OBJECTIVE</text>
+          <text x="26" y="37" font-size="10" font-weight="600" fill="#FFFFFF">Apply the accrual basis</text>
+          <text x="26" y="49" font-size="10" font-weight="600" fill="#FFFFFF">of accounting</text>
+        </g>
+        <path id="fl-snap" d="M653 164v18" fill="none" stroke="rgba(245,166,35,.6)" stroke-width="1.6"/>
+        <g id="fl-card" transform="translate(653,118)">
+          <rect x="-66" y="-46" width="132" height="92" rx="12" fill="rgba(15,34,56,.92)" stroke="url(#flFlame)" stroke-width="1.6"/>
+          <rect x="-56" y="-36" width="112" height="44" rx="8" fill="url(#flThumb)"/>
+          <rect x="-13" y="-22.5" width="26" height="17" rx="5" fill="url(#flFlame)"/>
+          <path d="M-3.5-19.5 4.5-14l-8 5.5Z" fill="#0A1A2E"/>
+          <rect x="14" y="-8" width="42" height="13" rx="3" fill="rgba(10,26,46,.9)"/>
+          <text x="35" y="1.5" text-anchor="middle" font-size="8" font-weight="600" fill="#FFFFFF">15.4 min</text>
+          <text x="-56" y="22" font-size="10.5" font-weight="600" fill="#FFFFFF">Accrual vs. Cash</text>
+          <text x="-56" y="36" font-size="9.5" font-weight="500" fill="#8FA6BD">Accounting · 15.4 min</text>
+          <g id="fl-lz" transform="translate(24,-46)">
+            <g class="pop-in">
+              <rect x="-32" y="-10" width="64" height="20" rx="10" fill="url(#flFlame)"/>
+              <rect x="-24.2" y="-4.2" width="8.4" height="8.4" rx="2.6" transform="rotate(45 -20 0)" fill="#0A1A2E"/>
+              <text x="-10" y="3.5" font-size="9.5" font-weight="800" fill="#0A1A2E">15.4 Lz</text>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENE 7 · LUMINZ ============ -->
+<section class="scene s7" id="s7" role="group" aria-roledescription="scene" aria-label="Scene 7 of 9 — Luminz">
+  <div class="stage split">
+    <div class="copy">
+      <p class="eyebrow">The currency</p>
+      <h1>Luminz</h1>
+      <p class="define">Watch. Pass the video's fresh AI quiz — 80% or better.<br>The video pays its Luminz: 1 Luminz = 1 minute of passed video.<br>Luminz flow automatically into every course whose Learning Objectives the video covers.</p>
+      <div class="toast">
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
+        </svg>
+        <p>You're already 9% of the way to a credential you never signed up for.<span class="toast-bar"><span></span></span></p>
+      </div>
+      <p class="why"><span class="why-label">Why it matters</span>This is the retention engine.</p>
+      <p class="sr-only">Diagram: a passed 15.4-minute video pays 15.4 Luminz. The chip rides on the video card from the start; the quiz-passed check only unlocks it, and the value then flows into three program bars at once — Bookkeeping Certificate to 78%, Accounting Certificate to 42%, A.S. Business degree track to 9%.</p>
+    </div>
+    <div class="art art-wide">
+      <svg id="ct-counter" viewBox="0 0 720 424" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
+        <defs>
+          <linearGradient id="ctFlame" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/>
+          </linearGradient>
+          <linearGradient id="ctFlameH" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/>
+          </linearGradient>
+          <linearGradient id="ctThumb" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#24507C"/><stop offset="1" stop-color="#0F2238"/>
+          </linearGradient>
+          <radialGradient id="ctHalo" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#F5A623" stop-opacity=".3"/><stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="ctTip" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#FFD9A8"/><stop offset=".55" stop-color="#E8842C"/><stop offset=".75" stop-color="#E8842C" stop-opacity="0"/><stop offset="1" stop-color="#E8842C" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g id="ct-card" transform="translate(40,36)">
+          <rect width="170" height="112" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#ctFlame)" stroke-width="1.6"/>
+          <rect x="12" y="12" width="146" height="54" rx="8" fill="url(#ctThumb)"/>
+          <rect x="71" y="30" width="28" height="18" rx="5" fill="url(#ctFlame)"/>
+          <path d="M81 34l10 5-10 5Z" fill="#0A1A2E"/>
+          <text x="12" y="86" font-size="9.5" font-weight="600" fill="#FFFFFF">Accrual vs. Cash Accounting</text>
+          <text x="12" y="100" font-size="9" font-weight="500" fill="#8FA6BD">15.4 min · approved for Luminz</text>
+          <g id="ct-chip" transform="translate(104,-11)">
+            <g class="pop-in">
+              <rect width="78" height="22" rx="11" fill="url(#ctFlame)"/>
+              <rect x="9.8" y="6.8" width="8.4" height="8.4" rx="2.6" transform="rotate(45 14 11)" fill="#0A1A2E"/>
+              <text x="26" y="15.5" font-size="10" font-weight="800" fill="#0A1A2E">15.4 Lz</text>
+            </g>
+          </g>
+          <g id="ct-lock" transform="translate(194,-2)" opacity="0">
+            <path d="M-3 0v-2.5a3 3 0 0 1 6 0V0" fill="none" stroke="#8FA6BD" stroke-width="1.6"/>
+            <rect x="-5" width="10" height="8" rx="2" fill="#8FA6BD"/>
+          </g>
+          <g id="ct-lock-open" transform="translate(194,-2)">
+            <path d="M-3 0v-2.2a3 3 0 0 1 5.6-1.5" fill="none" stroke="#F5A623" stroke-width="1.6"/>
+            <rect x="-5" width="10" height="8" rx="2" fill="#F5A623"/>
+          </g>
+        </g>
+        <circle cx="272" cy="72" r="56" fill="url(#ctHalo)"/>
+        <rect id="ct-mark" x="252" y="52" width="40" height="40" rx="12" transform="rotate(45 272 72)" fill="url(#ctFlame)"/>
+        <text id="ct-num" x="316" y="104" font-size="92" font-weight="800" letter-spacing="-3.7" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">15.4</text>
+        <text id="ct-unit" x="534" y="104" font-size="26" font-weight="700" fill="#F5A623">Lz</text>
+        <text x="316" y="127" font-size="11" font-weight="500" fill="#8FA6BD">1 Luminz = 1 minute of passed video</text>
+        <g transform="translate(316,140)">
+          <rect width="300" height="8" rx="4" fill="rgba(185,203,222,.16)"/>
+          <rect id="ct-vfill" width="300" height="8" rx="4" fill="url(#ctFlameH)"/>
+          <circle id="ct-vtip" cx="300" cy="4" r="8" fill="url(#ctTip)"/>
+          <text id="ct-vlabel" y="24" font-size="9.5" font-weight="500" fill="#8FA6BD" style="font-variant-numeric:tabular-nums">video · 15.4 of 15.4 min</text>
+        </g>
+        <g id="ct-quiz" transform="translate(40,180)">
+          <g class="pop-in">
+            <rect width="176" height="30" rx="15" fill="rgba(34,197,94,.14)" stroke="rgba(34,197,94,.5)" stroke-width="1.2"/>
+            <g transform="translate(18,15)"><circle r="9" fill="#22C55E"/><path d="M-3.8.2-1.2 2.8 4-2.8" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <text x="34" y="19.5" font-size="11" font-weight="700" fill="#86EFAC">quiz passed · 80%+</text>
+          </g>
+        </g>
+        <path id="ct-flowvein" d="M128 214v18" fill="none" stroke="rgba(245,166,35,.5)" stroke-width="1.6"/>
+        <g transform="translate(40,252)">
+          <text y="-4" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#8FA6BD">AUTO-FLOW · ONE VIDEO FEEDS EVERY MATCHING PROGRAM</text>
+          <g transform="translate(0,14)">
+            <text y="12" font-size="12" font-weight="600" fill="#F8FAFC">Bookkeeping Certificate</text>
+            <rect y="20" width="430" height="10" rx="5" fill="rgba(185,203,222,.14)"/>
+            <rect y="20" width="309.6" height="10" rx="5" fill="url(#ctFlameH)"/>
+            <rect id="ct-d1" x="304" y="20" width="31.4" height="10" rx="5" fill="#FFD9A8" opacity=".95"/>
+            <circle id="ct-t1" cx="335.4" cy="25" r="7" fill="url(#ctTip)"/>
+            <text id="ct-p1" x="486" y="30" text-anchor="end" font-size="15" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">78%</text>
+            <g id="ct-c1"><rect x="496" y="16" width="44" height="17" rx="8.5" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="518" y="28" text-anchor="middle" font-size="9.5" font-weight="700" fill="#F5A623">+6%</text></g>
+          </g>
+          <g transform="translate(0,70)">
+            <text y="12" font-size="12" font-weight="600" fill="#F8FAFC">Accounting Certificate</text>
+            <rect y="20" width="430" height="10" rx="5" fill="rgba(185,203,222,.14)"/>
+            <rect y="20" width="163.4" height="10" rx="5" fill="url(#ctFlameH)"/>
+            <rect id="ct-d2" x="158" y="20" width="22.6" height="10" rx="5" fill="#FFD9A8" opacity=".95"/>
+            <circle id="ct-t2" cx="180.6" cy="25" r="7" fill="url(#ctTip)"/>
+            <text id="ct-p2" x="486" y="30" text-anchor="end" font-size="15" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">42%</text>
+            <g id="ct-c2"><rect x="496" y="16" width="44" height="17" rx="8.5" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="518" y="28" text-anchor="middle" font-size="9.5" font-weight="700" fill="#F5A623">+4%</text></g>
+          </g>
+          <g transform="translate(0,126)">
+            <text y="12" font-size="12" font-weight="600" fill="#F8FAFC">A.S. Business <tspan font-size="9.5" font-weight="500" fill="#8FA6BD">· degree track</tspan></text>
+            <rect y="20" width="430" height="10" rx="5" fill="rgba(185,203,222,.14)"/>
+            <rect y="20" width="38.7" height="10" rx="5" fill="url(#ctFlameH)"/>
+            <rect id="ct-d3" x="34.4" y="20" width="4.3" height="10" rx="2.1" fill="#FFD9A8" opacity=".95"/>
+            <circle id="ct-t3" cx="38.7" cy="25" r="7" fill="url(#ctTip)"/>
+            <text id="ct-p3" x="486" y="30" text-anchor="end" font-size="15" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">9%</text>
+            <g id="ct-c3"><rect x="496" y="16" width="44" height="17" rx="8.5" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="518" y="28" text-anchor="middle" font-size="9.5" font-weight="700" fill="#F5A623">+1%</text></g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENE 8 · PATHLIGHT TOUR ============ -->
+<section class="scene s8" id="s8" role="group" aria-roledescription="scene" aria-label="Scene 8 of 9 — Pathlight, the dashboard tour">
+  <div class="stage tour">
+    <div class="tour-head">
+      <p class="eyebrow">The concept UI</p>
+      <h1>Pathlight</h1>
+      <p class="tour-intro">The learner's home. Eight stops.</p>
+    </div>
+    <p class="sr-only">Artwork: a simplified Pathlight dashboard with a moving spotlight — hero and call to action, KPI row, Ember guide card, Work on next list, Watch List table, Standards by subject, program cards — and a phone-frame variant for the final stop.</p>
+    <div class="tour-grid">
+      <div class="tour-art" id="tourArt">
+        <div class="art-desk" id="artDesk">
+          <svg id="db-dash" viewBox="0 0 1000 892" aria-hidden="true">
+            <defs>
+              <linearGradient id="dbFlame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
+              <linearGradient id="dbFlameH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
+              <linearGradient id="dbHero" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0F2238"/><stop offset=".7" stop-color="#1B3A5C"/><stop offset="1" stop-color="#24507C"/></linearGradient>
+              <linearGradient id="dbNight" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B3A5C"/><stop offset="1" stop-color="#2C5E8F"/></linearGradient>
+              <radialGradient id="dbGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#E8842C" stop-opacity=".4"/><stop offset="1" stop-color="#E8842C" stop-opacity="0"/></radialGradient>
+              <radialGradient id="dbTip" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD9A8"/><stop offset=".55" stop-color="#E8842C"/><stop offset=".75" stop-color="#E8842C" stop-opacity="0"/></radialGradient>
+              <clipPath id="dbClip"><rect width="1000" height="892" rx="16"/></clipPath>
+              <clipPath id="dbHeroClip"><rect y="52" width="1000" height="124"/></clipPath>
+              <path id="dbFl" d="M12 2c.6 3.6-1.2 5.3-2.9 7C7.4 10.8 6 12.6 6 15a6 6 0 0 0 12 0c0-2-1-3.5-2-4.6-.5 1-1.2 1.8-2.2 2.3.4-2.9-.3-7.4-1.8-10.7Z"/>
+            </defs>
+            <g clip-path="url(#dbClip)">
+              <rect width="1000" height="892" fill="#F2F5FA"/>
+              <rect width="1000" height="52" fill="#FFFFFF"/><rect y="51" width="1000" height="1" fill="#E2E9F1"/>
+              <use href="#dbFl" transform="translate(20,12) scale(1.17)" fill="url(#dbFlame)"/>
+              <rect x="58" y="16" width="92" height="12" rx="6" fill="#1B3A5C"/><rect x="58" y="33" width="64" height="6" rx="3" fill="#C9D6E4"/>
+              <rect x="692" y="14" width="88" height="24" rx="12" fill="#FFFFFF" stroke="#C9D6E4"/>
+              <use href="#dbFl" transform="translate(701,19) scale(.58)" fill="#C2410C"/><rect x="720" y="23" width="46" height="6" rx="3" fill="#3D5670"/>
+              <rect x="788" y="14" width="118" height="24" rx="12" fill="#FFFFFF" stroke="#C9D6E4"/>
+              <circle cx="803" cy="26" r="5" fill="#22C55E"/><rect x="814" y="23" width="78" height="6" rx="3" fill="#C9D6E4"/>
+              <circle cx="944" cy="26" r="15" fill="url(#dbFlame)"/>
+              <g clip-path="url(#dbHeroClip)">
+                <rect y="52" width="1000" height="124" fill="url(#dbHero)"/>
+                <circle cx="930" cy="64" r="150" fill="url(#dbGlow)"/>
+              </g>
+              <rect x="32" y="78" width="120" height="7" rx="3.5" fill="#F8B96B"/>
+              <rect x="32" y="94" width="470" height="14" rx="7" fill="#FFFFFF" opacity=".92"/>
+              <rect x="32" y="116" width="360" height="8" rx="4" fill="#B9CBDE" opacity=".8"/>
+              <g id="db-cta">
+                <rect x="32" y="136" width="252" height="30" rx="15" fill="#C2410C"/>
+                <path d="M48 144l10 7-10 7Z" fill="#FFFFFF"/>
+                <rect x="66" y="147" width="196" height="8" rx="4" fill="#FFFFFF" opacity=".92"/>
+              </g>
+              <g id="db-kpis">
+                <g transform="translate(32,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="92" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="68" height="18" rx="6" fill="#1B3A5C"/><rect x="14" y="56" width="128" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="194" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="134" height="6" rx="3" fill="url(#dbFlameH)"/></g>
+                <g transform="translate(270,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="104" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="56" height="18" rx="6" fill="#1B3A5C"/><rect x="14" y="56" width="140" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="194" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="140" height="6" rx="3" fill="url(#dbFlameH)"/></g>
+                <g transform="translate(508,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="84" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="72" height="18" rx="6" fill="#1B3A5C"/><use href="#dbFl" transform="translate(94,31) scale(.7)" fill="#C2410C"/><rect x="14" y="56" width="120" height="6" rx="3" fill="#E2E9F1"/></g>
+                <g transform="translate(746,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="76" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="60" height="18" rx="6" fill="#1B3A5C"/><rect x="14" y="56" width="132" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="194" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="56" height="6" rx="3" fill="url(#dbFlameH)"/></g>
+              </g>
+              <g id="db-ember" transform="translate(32,284)">
+                <rect width="452" height="152" rx="12" fill="#FFFFFF" stroke="#F4D9BC" stroke-width="1.4"/>
+                <circle cx="30" cy="30" r="13" fill="url(#dbFlame)"/><use href="#dbFl" transform="translate(22,22) scale(.66)" fill="#FFFFFF"/>
+                <rect x="52" y="20" width="128" height="9" rx="4.5" fill="#3D5670"/><rect x="52" y="34" width="88" height="6" rx="3" fill="#C9D6E4"/>
+                <rect x="16" y="52" width="420" height="54" rx="10" fill="#E9EEF5"/>
+                <rect x="30" y="64" width="380" height="7" rx="3.5" fill="#BCCCDC"/><rect x="30" y="77" width="340" height="7" rx="3.5" fill="#BCCCDC"/><rect x="30" y="90" width="240" height="7" rx="3.5" fill="#BCCCDC"/>
+                <rect x="16" y="118" width="86" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="110" y="118" width="110" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="228" y="118" width="78" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/>
+              </g>
+              <g id="db-next" transform="translate(516,284)">
+                <rect width="452" height="152" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="16" y="18" width="140" height="9" rx="4.5" fill="#3D5670"/>
+                <circle cx="28" cy="53" r="10" fill="url(#dbFlame)"/><rect x="48" y="46" width="200" height="8" rx="4" fill="#3D5670"/><rect x="48" y="59" width="140" height="5" rx="2.5" fill="#C9D6E4"/><rect x="356" y="46" width="80" height="16" rx="8" fill="#DBEAFE"/><rect x="370" y="51" width="52" height="5" rx="2.5" fill="#1E40AF" opacity=".65"/>
+                <circle cx="28" cy="89" r="10" fill="#E9EEF5" stroke="#C9D6E4"/><rect x="48" y="82" width="184" height="8" rx="4" fill="#3D5670" opacity=".8"/><rect x="48" y="95" width="128" height="5" rx="2.5" fill="#C9D6E4"/><rect x="356" y="82" width="80" height="16" rx="8" fill="#FEF3C7"/><rect x="370" y="87" width="52" height="5" rx="2.5" fill="#92400E" opacity=".6"/>
+                <circle cx="28" cy="125" r="10" fill="#E9EEF5" stroke="#C9D6E4"/><rect x="48" y="118" width="212" height="8" rx="4" fill="#3D5670" opacity=".8"/><rect x="48" y="131" width="120" height="5" rx="2.5" fill="#C9D6E4"/><rect x="356" y="118" width="80" height="16" rx="8" fill="#FDEBD9"/><rect x="370" y="123" width="52" height="5" rx="2.5" fill="#A93A0B" opacity=".6"/>
+              </g>
+              <g id="db-watchlist" transform="translate(32,452)">
+                <rect width="936" height="164" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="16" y="16" width="110" height="9" rx="4.5" fill="#3D5670"/><rect x="138" y="18" width="150" height="6" rx="3" fill="#C9D6E4"/>
+                <rect x="826" y="12" width="94" height="22" rx="11" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="840" y="20" width="60" height="6" rx="3" fill="#C9D6E4"/>
+                <rect x="16" y="46" width="54" height="6" rx="3" fill="#C9D6E4"/><rect x="300" y="46" width="54" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="46" width="44" height="6" rx="3" fill="#C9D6E4"/><rect x="540" y="46" width="60" height="6" rx="3" fill="#C9D6E4"/><rect x="690" y="46" width="40" height="6" rx="3" fill="#C9D6E4"/><rect x="830" y="46" width="48" height="6" rx="3" fill="#C9D6E4"/>
+                <rect x="16" y="60" width="904" height="1.5" fill="#E2E9F1"/>
+                <g><rect x="16" y="72" width="210" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="72" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="72" width="34" height="6" rx="3" fill="#C9D6E4"/><use href="#dbFl" transform="translate(540,66) scale(.55)" fill="#C2410C"/><rect x="558" y="72" width="56" height="6" rx="3" fill="#F4B77B"/><rect x="690" y="71" width="30" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="830" y="67" width="86" height="16" rx="8" fill="#DCFCE7"/><rect x="846" y="72" width="54" height="5" rx="2.5" fill="#14532D" opacity=".55"/></g>
+                <g><rect x="16" y="96" width="188" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="96" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="96" width="34" height="6" rx="3" fill="#C9D6E4"/><use href="#dbFl" transform="translate(540,90) scale(.55)" fill="#C2410C"/><rect x="558" y="96" width="56" height="6" rx="3" fill="#F4B77B"/><rect x="690" y="95" width="30" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="830" y="91" width="86" height="16" rx="8" fill="#DBEAFE"/><rect x="846" y="96" width="54" height="5" rx="2.5" fill="#1E40AF" opacity=".55"/></g>
+                <g><rect x="16" y="120" width="222" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="120" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="120" width="34" height="6" rx="3" fill="#C9D6E4"/><use href="#dbFl" transform="translate(540,114) scale(.55)" fill="#C2410C"/><rect x="558" y="120" width="56" height="6" rx="3" fill="#F4B77B"/><rect x="690" y="119" width="30" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="830" y="115" width="86" height="16" rx="8" fill="#FEF3C7"/><rect x="846" y="120" width="54" height="5" rx="2.5" fill="#92400E" opacity=".55"/></g>
+                <g opacity=".65"><rect x="16" y="144" width="200" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="144" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="144" width="34" height="6" rx="3" fill="#C9D6E4"/><rect x="540" y="144" width="74" height="6" rx="3" fill="#E2E9F1"/><rect x="690" y="143" width="30" height="7" rx="3.5" fill="#C9D6E4"/><rect x="830" y="139" width="86" height="16" rx="8" fill="#E9EEF5"/><rect x="846" y="144" width="54" height="5" rx="2.5" fill="#3D5670" opacity=".5"/></g>
+              </g>
+              <g id="db-standards" transform="translate(32,628)">
+                <rect width="936" height="140" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="16" y="16" width="130" height="9" rx="4.5" fill="#3D5670"/><rect x="158" y="18" width="120" height="6" rx="3" fill="#C9D6E4"/>
+                <g>
+                  <rect x="16" y="45" width="64" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="42" width="210" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="310" y="42" width="70" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="384" y="42" width="36" height="12" rx="3" fill="#EF4444" opacity=".8"/>
+                  <rect x="16" y="69" width="52" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="66" width="190" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="290" y="66" width="60" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="354" y="66" width="22" height="12" rx="3" fill="#EF4444" opacity=".8"/>
+                  <rect x="16" y="93" width="58" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="90" width="170" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="270" y="90" width="44" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="318" y="90" width="40" height="12" rx="3" fill="#EF4444" opacity=".8"/>
+                  <rect x="16" y="117" width="70" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="114" width="150" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="250" y="114" width="24" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="278" y="114" width="20" height="12" rx="3" fill="#EF4444" opacity=".8"/>
+                </g>
+                <g>
+                  <rect x="520" y="42" width="230" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="520" y="55" width="150" height="5" rx="2.5" fill="#C9D6E4"/><rect x="830" y="40" width="74" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><rect x="846" y="48" width="42" height="6" rx="3" fill="#C2410C" opacity=".85"/>
+                  <rect x="520" y="76" width="206" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="520" y="89" width="164" height="5" rx="2.5" fill="#C9D6E4"/><rect x="830" y="74" width="74" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><rect x="846" y="82" width="42" height="6" rx="3" fill="#C2410C" opacity=".85"/>
+                  <rect x="520" y="110" width="218" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="520" y="123" width="140" height="5" rx="2.5" fill="#C9D6E4"/><rect x="830" y="108" width="74" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><rect x="846" y="116" width="42" height="6" rx="3" fill="#C2410C" opacity=".85"/>
+                </g>
+              </g>
+              <g id="db-programs" transform="translate(32,784)">
+                <rect width="452" height="88" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="16" y="14" width="120" height="8" rx="4" fill="#3D5670"/>
+                <rect x="16" y="32" width="30" height="30" rx="8" fill="url(#dbNight)"/>
+                <rect x="56" y="36" width="150" height="8" rx="4" fill="#3D5670"/><rect x="56" y="50" width="90" height="5" rx="2.5" fill="#C9D6E4"/>
+                <rect x="396" y="34" width="40" height="16" rx="5" fill="#1B3A5C"/>
+                <rect x="16" y="72" width="420" height="8" rx="4" fill="#E2E9F1"/><rect x="16" y="72" width="302" height="8" rx="4" fill="url(#dbFlameH)"/><circle cx="318" cy="76" r="6" fill="url(#dbTip)"/>
+              </g>
+              <g id="db-programs-2" transform="translate(516,784)">
+                <rect width="452" height="88" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="16" y="14" width="104" height="8" rx="4" fill="#3D5670"/>
+                <rect x="16" y="32" width="30" height="30" rx="8" fill="url(#dbNight)"/>
+                <rect x="56" y="36" width="132" height="8" rx="4" fill="#3D5670"/><rect x="56" y="50" width="104" height="5" rx="2.5" fill="#C9D6E4"/>
+                <rect x="396" y="34" width="40" height="16" rx="5" fill="#1B3A5C"/>
+                <rect x="16" y="72" width="420" height="8" rx="4" fill="#E2E9F1"/><rect x="16" y="72" width="160" height="8" rx="4" fill="url(#dbFlameH)"/><circle cx="176" cy="76" r="6" fill="url(#dbTip)"/>
+              </g>
+            </g>
+            <rect width="1000" height="892" rx="16" fill="none" stroke="#C9D6E4"/>
+          </svg>
+          <svg id="sp-overlay" class="overlay" viewBox="0 0 1000 892" aria-hidden="true">
+            <style>
+              #sp-overlay .mv{transition:x .65s cubic-bezier(.22,.9,.24,1),y .65s cubic-bezier(.22,.9,.24,1),width .65s cubic-bezier(.22,.9,.24,1),height .65s cubic-bezier(.22,.9,.24,1),rx .65s cubic-bezier(.22,.9,.24,1)}
+              @media (prefers-reduced-motion:reduce){#sp-overlay .mv{transition:none}}
+            </style>
+            <defs>
+              <linearGradient id="spFlame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
+              <mask id="spMask">
+                <rect width="1000" height="892" fill="#FFFFFF"/>
+                <rect id="sp-cut" class="mv" x="20" y="58" width="960" height="126" rx="18" fill="#000000"/>
+              </mask>
+            </defs>
+            <rect width="1000" height="892" fill="rgba(4,12,22,.62)" mask="url(#spMask)"/>
+            <rect id="sp-glow" class="mv" x="20" y="58" width="960" height="126" rx="18" fill="none" stroke="rgba(245,166,35,.22)" stroke-width="7"/>
+            <rect id="sp-ring" class="mv" x="20" y="58" width="960" height="126" rx="18" fill="none" stroke="url(#spFlame)" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <div class="art-phone" id="artPhone">
+          <div class="phone-box">
+            <svg id="ph-dash" viewBox="0 0 340 700" aria-hidden="true">
+              <defs>
+                <linearGradient id="phFlame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
+                <linearGradient id="phFlameH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
+                <linearGradient id="phHero" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0F2238"/><stop offset=".7" stop-color="#1B3A5C"/><stop offset="1" stop-color="#24507C"/></linearGradient>
+                <radialGradient id="phGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#E8842C" stop-opacity=".38"/><stop offset="1" stop-color="#E8842C" stop-opacity="0"/></radialGradient>
+                <clipPath id="phClip"><rect x="18" y="18" width="304" height="664" rx="34"/></clipPath>
+                <path id="phFl" d="M12 2c.6 3.6-1.2 5.3-2.9 7C7.4 10.8 6 12.6 6 15a6 6 0 0 0 12 0c0-2-1-3.5-2-4.6-.5 1-1.2 1.8-2.2 2.3.4-2.9-.3-7.4-1.8-10.7Z"/>
+              </defs>
+              <rect id="ph-frame" x="6" y="6" width="328" height="688" rx="46" fill="#0A1A2E" stroke="rgba(185,203,222,.35)" stroke-width="1.2"/>
+              <g clip-path="url(#phClip)">
+                <rect x="18" y="18" width="304" height="664" fill="#F2F5FA"/>
+                <rect x="130" y="28" width="80" height="16" rx="8" fill="#0A1A2E"/>
+                <rect x="34" y="32" width="24" height="6" rx="3" fill="#1B3A5C"/>
+                <use href="#phFl" transform="translate(32,54) scale(.9)" fill="url(#phFlame)"/>
+                <rect x="58" y="60" width="70" height="9" rx="4.5" fill="#1B3A5C"/>
+                <rect x="232" y="56" width="72" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/>
+                <use href="#phFl" transform="translate(238,59) scale(.5)" fill="#C2410C"/><rect x="256" y="63" width="38" height="6" rx="3" fill="#3D5670"/>
+                <rect x="18" y="88" width="304" height="118" fill="url(#phHero)"/>
+                <circle cx="300" cy="96" r="80" fill="url(#phGlow)"/>
+                <rect x="34" y="104" width="90" height="6" rx="3" fill="#F8B96B"/>
+                <rect x="34" y="118" width="240" height="11" rx="5.5" fill="#FFFFFF" opacity=".92"/>
+                <rect x="34" y="136" width="196" height="8" rx="4" fill="#B9CBDE" opacity=".8"/>
+                <g id="ph-cta"><rect x="34" y="156" width="200" height="26" rx="13" fill="#C2410C"/><path d="M48 163l8 6-8 6Z" fill="#FFFFFF"/><rect x="62" y="166" width="150" height="7" rx="3.5" fill="#FFFFFF" opacity=".92"/></g>
+                <g id="ph-kpis">
+                  <g transform="translate(34,218)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="60" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="44" height="12" rx="4" fill="#1B3A5C"/><rect x="10" y="46" width="118" height="5" rx="2.5" fill="#E2E9F1"/><rect x="10" y="46" width="82" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
+                  <g transform="translate(182,218)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="68" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="38" height="12" rx="4" fill="#1B3A5C"/><rect x="10" y="46" width="118" height="5" rx="2.5" fill="#E2E9F1"/><rect x="10" y="46" width="85" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
+                  <g transform="translate(34,290)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="52" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="46" height="12" rx="4" fill="#1B3A5C"/><use href="#phFl" transform="translate(62,22) scale(.5)" fill="#C2410C"/><rect x="10" y="46" width="90" height="5" rx="2.5" fill="#E2E9F1"/></g>
+                  <g transform="translate(182,290)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="56" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="34" height="12" rx="4" fill="#1B3A5C"/><rect x="10" y="46" width="118" height="5" rx="2.5" fill="#E2E9F1"/><rect x="10" y="46" width="34" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
+                </g>
+                <g id="ph-ember" transform="translate(34,366)">
+                  <rect width="286" height="118" rx="10" fill="#FFFFFF" stroke="#F4D9BC" stroke-width="1.4"/>
+                  <circle cx="22" cy="22" r="10" fill="url(#phFlame)"/><use href="#phFl" transform="translate(16,16) scale(.5)" fill="#FFFFFF"/>
+                  <rect x="40" y="16" width="90" height="7" rx="3.5" fill="#3D5670"/><rect x="40" y="27" width="64" height="5" rx="2.5" fill="#C9D6E4"/>
+                  <rect x="12" y="42" width="262" height="42" rx="8" fill="#E9EEF5"/>
+                  <rect x="24" y="52" width="230" height="6" rx="3" fill="#BCCCDC"/><rect x="24" y="63" width="190" height="6" rx="3" fill="#BCCCDC"/>
+                  <rect x="12" y="92" width="72" height="16" rx="8" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="92" y="92" width="94" height="16" rx="8" fill="#FFFFFF" stroke="#C9D6E4"/>
+                </g>
+                <g id="ph-next" transform="translate(34,496)">
+                  <rect width="286" height="106" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/>
+                  <rect x="12" y="14" width="100" height="7" rx="3.5" fill="#3D5670"/>
+                  <circle cx="24" cy="44" r="8" fill="url(#phFlame)"/><rect x="40" y="38" width="150" height="7" rx="3.5" fill="#3D5670"/><rect x="40" y="49" width="100" height="4" rx="2" fill="#C9D6E4"/><rect x="212" y="38" width="62" height="13" rx="6.5" fill="#DBEAFE"/>
+                  <circle cx="24" cy="78" r="8" fill="#E9EEF5" stroke="#C9D6E4"/><rect x="40" y="72" width="136" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="40" y="83" width="92" height="4" rx="2" fill="#C9D6E4"/><rect x="212" y="72" width="62" height="13" rx="6.5" fill="#FEF3C7"/>
+                </g>
+                <g id="ph-program" transform="translate(34,614)">
+                  <rect width="286" height="40" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/>
+                  <rect x="12" y="10" width="100" height="6" rx="3" fill="#3D5670"/>
+                  <rect x="12" y="24" width="200" height="6" rx="3" fill="#E2E9F1"/><rect x="12" y="24" width="144" height="6" rx="3" fill="url(#phFlameH)"/>
+                  <rect x="240" y="12" width="34" height="14" rx="4" fill="#1B3A5C"/>
+                </g>
+                <rect x="18" y="662" width="304" height="1" fill="#E2E9F1"/>
+                <rect x="18" y="663" width="304" height="19" fill="#FFFFFF"/>
+                <circle cx="76" cy="672" r="3.5" fill="#C2410C"/><circle cx="139" cy="672" r="3.5" fill="#C9D6E4"/><circle cx="202" cy="672" r="3.5" fill="#C9D6E4"/><circle cx="265" cy="672" r="3.5" fill="#C9D6E4"/>
+              </g>
+            </svg>
+            <svg id="sp2-overlay" class="overlay" viewBox="0 0 340 700" aria-hidden="true">
+              <defs>
+                <linearGradient id="sp2Flame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
+                <mask id="sp2Mask">
+                  <rect width="340" height="700" fill="#FFFFFF"/>
+                  <rect id="sp2-cut" x="6" y="6" width="328" height="688" rx="46" fill="#000000"/>
+                </mask>
+              </defs>
+              <rect width="340" height="700" fill="rgba(4,12,22,.55)" mask="url(#sp2Mask)"/>
+              <rect id="sp2-ring" x="6" y="6" width="328" height="688" rx="46" fill="none" stroke="url(#sp2Flame)" stroke-width="1.6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <aside class="tour-side">
+        <div class="ann" id="annCard">
+          <p class="step-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
+            </svg>
+            <span id="stepEyebrow">STEP 1 OF 8</span>
+          </p>
+          <div class="step-body" id="stepBody">
+            <h2 class="step-title" id="stepTitle">The path lights up</h2>
+            <p class="step-text" id="stepText">One greeting, one live number — 72% lit — and one CTA, bound to the learner's next best step. Never a menu.</p>
+          </div>
+          <div class="step-controls">
+            <button class="stepbtn" id="stepPrev" aria-label="Previous tour step">←</button>
+            <div class="pips" id="pips" role="group" aria-label="Tour steps"></div>
+            <button class="stepbtn" id="stepNext" aria-label="Next tour step">→</button>
+          </div>
+        </div>
+        <p class="why"><span class="why-label">Why it matters</span>One page turns mastery data into the next action — engagement designed in, not bolted on.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENE 9 · CLOSE ============ -->
+<section class="scene s9" id="s9" role="group" aria-roledescription="scene" aria-label="Scene 9 of 9 — Proof, not seat time">
+  <div class="stage cover">
+    <div class="logoslot" data-size="close">
+      <span class="plate"><!-- SWAP: brand PNG --><img src="assets/enliten-logo.png" alt="enliten" onload="this.closest('.logoslot').classList.add('haslogo')" onerror="this.closest('.logoslot').classList.add('nologo')"></span>
+      <span class="logo-fallback" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
+        </svg>
+        <span class="logo-word">enliten</span>
+      </span>
+    </div>
+    <p class="eyebrow">Enliten Luminz</p>
+    <h1>Proof, not seat time.</h1>
+    <p class="subline">Education measured by what a learner can prove — that is the whole idea.</p>
+    <p class="define">Next: walk the full specification and the working prototypes.</p>
+    <a class="contact" href="mailto:ryan@shooksolutions.com">ryan@shooksolutions.com</a>
+    <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">The design decisions are locked and the prototypes run today — execution, not exploration.</span></p>
+  </div>
+</section>
+</main>
+
+<style>
+/* SVG animation helpers (used only when motion is allowed) */
+#fl-flow .tick-in,#fl-flow .pop-in,#ct-counter .pop-in{transform-box:fill-box;transform-origin:center}
+#fl-card{transform-box:view-box}
+</style>
+<script>
+"use strict";
+(function () {
+  /* ============ setup ============ */
+  var REDUCED = (typeof window.matchMedia === "function") &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SCENES = Array.prototype.slice.call(document.querySelectorAll("section.scene"));
+  var N = SCENES.length; /* 9 */
+  var TITLES = ["Welcome", "But first — terminology.", "Programs", "Courses",
+    "Learning Objectives", "Videos & the Watch List", "Luminz", "Pathlight", "Proof, not seat time."];
+  var CRUMBS = ["", "Before the tour", "Terminology · 1 of 3", "Terminology · 2 of 3",
+    "Terminology · 3 of 3", "Supply", "The currency", "Product tour", "Enliten Luminz"];
+  var STEPS = [
+    { t: "The path lights up", b: "One greeting, one live number — 72% lit — and one CTA, bound to the learner's next best step. Never a menu." },
+    { t: "Today's numbers", b: "Mastery first: standards, then the nearest credential — the Bookkeeping Certificate — then Luminz, then the Video queue. Action over history." },
+    { t: "Ember — your AI guide", b: "Ember narrates the same snapshot the page renders — the story never disagrees with the numbers. The AI disclosure is persistent; Ember asks before acting." },
+    { t: "Work on next", b: "Five steps in Ember's order — instruction before practice. Every step declares its payout: the video's Luminz on pass, or the standard it clears." },
+    { t: "Watch List", b: "Every submission and its Luminz-approval state — approval only after review. Statuses run Ready to Passed, and a failed quiz simply offers Retake." },
+    { t: "Standards by subject", b: "Florida B.E.S.T. and NGSSS benchmarks, grouped by subject. Anything not yet mastered shows a one-tap Practice launch — plain name first, code attached." },
+    { t: "Your programs", b: "Progress counts objectives, not minutes. Jordan's accounting videos are feeding three programs at once — two certificates and a degree track." },
+    { t: "Pocket-sized", b: "The same system on a phone — same numbers, same guide, same next step. Built once, honest everywhere." }
+  ];
+  var SPOTS = [
+    [20, 58, 960, 126, 18], [20, 182, 960, 96, 16], [24, 276, 468, 168, 16],
+    [508, 276, 468, 168, 16], [20, 444, 960, 180, 16], [20, 620, 960, 156, 16],
+    [20, 776, 960, 104, 16]
+  ];
+  var cur = 0, step = 1, lock = false;
+  var crumb = document.getElementById("crumb");
+  var announcer = document.getElementById("announcer");
+  var btnPrev = document.getElementById("btnPrev");
+  var btnNext = document.getElementById("btnNext");
+  var hintSteps = document.getElementById("hintSteps");
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ============ chrome: dots ============ */
+  var dotsWrap = document.getElementById("dots");
+  var dotBtns = [];
+  (function buildDots() {
+    for (var i = 0; i < N; i++) {
+      var b = document.createElement("button");
+      b.className = "dotbtn";
+      b.type = "button";
+      b.setAttribute("aria-label", "Go to scene " + (i + 1) + ": " + TITLES[i]);
+      b.appendChild(document.createElement("span")).className = "dot";
+      (function (idx) {
+        b.addEventListener("click", function () { go(idx); });
+      })(i);
+      dotsWrap.appendChild(b);
+      dotBtns.push(b);
+    }
+  })();
+
+  /* ============ tour pips ============ */
+  var pipsWrap = document.getElementById("pips");
+  var pipBtns = [];
+  (function buildPips() {
+    for (var i = 0; i < 8; i++) {
+      var b = document.createElement("button");
+      b.className = "pip";
+      b.type = "button";
+      b.setAttribute("aria-label", "Tour step " + (i + 1) + ": " + STEPS[i].t);
+      (function (idx) {
+        b.addEventListener("click", function () { setStep(idx + 1, false); });
+      })(i);
+      pipsWrap.appendChild(b);
+      pipBtns.push(b);
+    }
+  })();
+
+  /* ============ chrome state ============ */
+  function paintChrome() {
+    crumb.textContent = CRUMBS[cur];
+    crumb.style.visibility = cur === 0 ? "hidden" : "visible";
+    for (var i = 0; i < N; i++) {
+      dotBtns[i].classList.toggle("done", i < cur);
+      if (i === cur) { dotBtns[i].setAttribute("aria-current", "step"); }
+      else { dotBtns[i].removeAttribute("aria-current"); }
+    }
+    var atStart = cur === 0, atEnd = cur === N - 1;
+    btnPrev.setAttribute("aria-disabled", atStart ? "true" : "false");
+    btnNext.setAttribute("aria-disabled", atEnd ? "true" : "false");
+    if (hintSteps) { hintSteps.hidden = cur !== 7; }
+  }
+  function announce() {
+    var msg = "Scene " + (cur + 1) + " of 9 — " + TITLES[cur];
+    if (cur === 7) { msg += " · Step " + step + " of 8: " + STEPS[step - 1].t; }
+    announcer.textContent = msg;
+  }
+
+  /* ============ hierarchy ladder (one persistent SVG, scenes 3–5) ============ */
+  var LADDER_STATES = ["a", "b", "c"];
+  function isLadder(i) { return i >= 2 && i <= 4; }
+  function placeLadder(i) {
+    var ladder = $("hd-ladder");
+    if (!ladder || !isLadder(i)) { return; }
+    var slot = $("ladderSlot" + (i + 1));
+    if (slot && ladder.parentElement !== slot) { slot.appendChild(ladder); }
+    ladder.setAttribute("data-state", LADDER_STATES[i - 2]);
+    var halos = ["hd-halo-a", "hd-halo-b", "hd-halo-c"];
+    for (var h = 0; h < 3; h++) {
+      var el = $(halos[h]);
+      if (el) { el.classList.toggle("pulse", !REDUCED && h === i - 2); }
+    }
+  }
+
+  /* ============ scene 6 · flow (WAAPI, falls back to final frame) ============ */
+  var flowAnims = [];
+  function stopFlow() {
+    for (var i = 0; i < flowAnims.length; i++) { try { flowAnims[i].cancel(); } catch (e) {} }
+    flowAnims = [];
+  }
+  function playFlow() {
+    stopFlow();
+    if (REDUCED) { return; }
+    var card = $("fl-card");
+    if (!card || typeof card.animate !== "function") { return; }
+    var EASE = "cubic-bezier(.22,.9,.24,1)";
+    /* card travels the track, then snaps onto the objective (shipped markup = final frame) */
+    flowAnims.push(card.animate([
+      { transform: "translate(60px,210px)", easing: EASE, offset: 0 },
+      { transform: "translate(560px,210px)", easing: EASE, offset: 0.842 },
+      { transform: "translate(653px,112px)", easing: EASE, offset: 0.96 },
+      { transform: "translate(653px,118px)", offset: 1 }
+    ], { duration: 3800, fill: "both" }));
+    /* traveled length lights behind the card */
+    var td = $("fl-track-done");
+    flowAnims.push(td.animate([
+      { strokeDasharray: "100", strokeDashoffset: 100 },
+      { strokeDasharray: "100", strokeDashoffset: 0 }
+    ], { duration: 3200, easing: "linear", fill: "both" }));
+    /* gates fire as the card center crosses them */
+    var gates = [[700, "fl-g1"], [1500, "fl-g2"], [2300, "fl-g3"], [3100, "fl-g4"]];
+    for (var g = 0; g < gates.length; g++) {
+      var el = $(gates[g][1]);
+      var tick = el.querySelector(".tick-in");
+      flowAnims.push(el.animate([{ opacity: 0.35 }, { opacity: 1 }],
+        { duration: 250, delay: gates[g][0], easing: EASE, fill: "backwards" }));
+      flowAnims.push(tick.animate([
+        { opacity: 0, transform: "scale(.6)" }, { opacity: 1, transform: "scale(1)" }
+      ], { duration: 250, delay: gates[g][0], easing: EASE, fill: "backwards" }));
+    }
+    /* connector click + objective pulse + Lz pop (the value arrived with the card) */
+    flowAnims.push($("fl-snap").animate([{ opacity: 0 }, { opacity: 1 }],
+      { duration: 150, delay: 3650, fill: "backwards" }));
+    flowAnims.push($("fl-objective").animate([{ opacity: 0.85 }, { opacity: 1 }],
+      { duration: 400, delay: 3650, easing: EASE, fill: "backwards" }));
+    flowAnims.push(document.querySelector("#fl-lz .pop-in").animate([
+      { transform: "scale(1)" }, { transform: "scale(1.18)", offset: 0.5 }, { transform: "scale(1)" }
+    ], { duration: 300, delay: 3800, easing: EASE, fill: "none" }));
+  }
+
+  /* ============ scene 7 · Luminz counter (rAF, 900ms; final frame is shipped) ============ */
+  var ctTimers = [], ctRafs = [];
+  function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+  function ctSet(id, attr, v) { var el = $(id); if (el) { el.setAttribute(attr, v); } }
+  function ctText(id, v) { var el = $(id); if (el) { el.textContent = v; } }
+  function ctOpacity(id, v) { var el = $(id); if (el) { el.setAttribute("opacity", String(v)); } }
+  function ctPop(id) {
+    var el = $(id); if (!el) { return; }
+    var target = el.querySelector(".pop-in") || el;
+    if (!REDUCED) {
+      target.classList.remove("anim-pop");
+      void target.getBoundingClientRect();
+      target.classList.add("anim-pop");
+    }
+  }
+  var CT_FINAL = {
+    d: [31.4, 22.6, 4.3], tEnd: [335.4, 180.6, 38.7], tStart: [309.6, 163.4, 34.4],
+    pFrom: [72, 38, 8], pTo: [78, 42, 9]
+  };
+  function ctFinalFrame() {
+    ctText("ct-num", "15.4");
+    ctSet("ct-vfill", "width", "300"); ctSet("ct-vtip", "cx", "300");
+    ctText("ct-vlabel", "video · 15.4 of 15.4 min");
+    ctOpacity("ct-quiz", 1); ctOpacity("ct-lock", 0); ctOpacity("ct-lock-open", 1);
+    ctOpacity("ct-chip", 1); ctOpacity("ct-flowvein", 1);
+    for (var i = 0; i < 3; i++) {
+      ctSet("ct-d" + (i + 1), "width", String(CT_FINAL.d[i]));
+      ctSet("ct-t" + (i + 1), "cx", String(CT_FINAL.tEnd[i]));
+      ctText("ct-p" + (i + 1), CT_FINAL.pTo[i] + "%");
+      ctOpacity("ct-c" + (i + 1), 1);
+    }
+  }
+  function stopCounter() {
+    for (var i = 0; i < ctTimers.length; i++) { clearTimeout(ctTimers[i]); }
+    for (var j = 0; j < ctRafs.length; j++) {
+      if (typeof cancelAnimationFrame === "function") { cancelAnimationFrame(ctRafs[j]); }
+    }
+    ctTimers = []; ctRafs = [];
+    if ($("ct-counter")) { ctFinalFrame(); }
+  }
+  function ctTween(dur, onFrame, onDone) {
+    var t0 = null;
+    function frame(ts) {
+      if (t0 === null) { t0 = ts; }
+      var p = Math.min(1, (ts - t0) / dur);
+      onFrame(easeOutQuart(p));
+      if (p < 1) { ctRafs.push(requestAnimationFrame(frame)); }
+      else if (onDone) { onDone(); }
+    }
+    ctRafs.push(requestAnimationFrame(frame));
+  }
+  function playCounter() {
+    for (var i = 0; i < ctTimers.length; i++) { clearTimeout(ctTimers[i]); }
+    for (var j = 0; j < ctRafs.length; j++) {
+      if (typeof cancelAnimationFrame === "function") { cancelAnimationFrame(ctRafs[j]); }
+    }
+    ctTimers = []; ctRafs = [];
+    if (REDUCED || typeof requestAnimationFrame !== "function" || !$("ct-counter")) { return; }
+    /* rewind to the start frame, then play forward to what the markup already shows */
+    ctText("ct-num", "0.0");
+    ctSet("ct-vfill", "width", "0"); ctSet("ct-vtip", "cx", "0");
+    ctText("ct-vlabel", "video · 0.0 of 15.4 min");
+    ctOpacity("ct-quiz", 0); ctOpacity("ct-lock", 1); ctOpacity("ct-lock-open", 0);
+    ctOpacity("ct-chip", 0.55); ctOpacity("ct-flowvein", 0);
+    for (var k = 0; k < 3; k++) {
+      ctSet("ct-d" + (k + 1), "width", "0");
+      ctSet("ct-t" + (k + 1), "cx", String(CT_FINAL.tStart[k]));
+      ctText("ct-p" + (k + 1), CT_FINAL.pFrom[k] + "%");
+      ctOpacity("ct-c" + (k + 1), 0);
+    }
+    /* 0–900ms: the video plays; the value accrues on the card the whole time */
+    ctTween(900, function (e) {
+      var v = 15.4 * e;
+      ctText("ct-num", v.toFixed(1));
+      ctSet("ct-vfill", "width", String(300 * e));
+      ctSet("ct-vtip", "cx", String(300 * e));
+      ctText("ct-vlabel", "video · " + v.toFixed(1) + " of 15.4 min");
+    });
+    ctTimers.push(setTimeout(function () { ctOpacity("ct-quiz", 1); ctPop("ct-quiz"); }, 1050));
+    ctTimers.push(setTimeout(function () { /* the unlock: the chip brightens — it never appears late */
+      ctOpacity("ct-lock", 0); ctOpacity("ct-lock-open", 1);
+      ctOpacity("ct-chip", 1); ctPop("ct-chip");
+    }, 1300));
+    ctTimers.push(setTimeout(function () { ctOpacity("ct-flowvein", 1); }, 1450));
+    for (var r = 0; r < 3; r++) {
+      (function (row) {
+        ctTimers.push(setTimeout(function () {
+          ctTween(420, function (e) {
+            ctSet("ct-d" + (row + 1), "width", String(CT_FINAL.d[row] * e));
+            ctSet("ct-t" + (row + 1), "cx",
+              String(CT_FINAL.tStart[row] + (CT_FINAL.tEnd[row] - CT_FINAL.tStart[row]) * e));
+            ctText("ct-p" + (row + 1),
+              Math.round(CT_FINAL.pFrom[row] + (CT_FINAL.pTo[row] - CT_FINAL.pFrom[row]) * e) + "%");
+          }, function () { ctOpacity("ct-c" + (row + 1), 1); ctPop("ct-c" + (row + 1)); });
+        }, 1550 + row * 160));
+      })(r);
+    }
+  }
+
+  /* ============ scene 8 · spotlight tour ============ */
+  var tourArt = $("tourArt");
+  function setSpot(i) {
+    var s = SPOTS[i];
+    var ids = ["sp-cut", "sp-glow", "sp-ring"];
+    for (var k = 0; k < ids.length; k++) {
+      var el = $(ids[k]);
+      if (!el) { continue; }
+      el.style.x = s[0] + "px"; el.style.y = s[1] + "px";
+      el.style.width = s[2] + "px"; el.style.height = s[3] + "px";
+      el.style.rx = s[4] + "px";
+    }
+  }
+  function setStep(n, instant) {
+    step = Math.max(1, Math.min(8, n));
+    $("stepEyebrow").textContent = "STEP " + step + " OF 8";
+    var body = $("stepBody");
+    function swap() {
+      $("stepTitle").textContent = STEPS[step - 1].t;
+      $("stepText").textContent = STEPS[step - 1].b;
+    }
+    if (!REDUCED && !instant) {
+      body.classList.remove("anim-step-in", "anim-step-out");
+      void body.getBoundingClientRect();
+      body.classList.add("anim-step-out");
+      setTimeout(function () {
+        swap();
+        body.classList.remove("anim-step-out");
+        body.classList.add("anim-step-in");
+      }, 150);
+    } else { swap(); }
+    for (var i = 0; i < 8; i++) {
+      pipBtns[i].classList.toggle("done", i < step - 1);
+      if (i === step - 1) { pipBtns[i].setAttribute("aria-current", "step"); }
+      else { pipBtns[i].removeAttribute("aria-current"); }
+    }
+    if (step <= 7) { setSpot(step - 1); }
+    tourArt.classList.toggle("show-phone", step === 8);
+    announce();
+  }
+  $("stepPrev").addEventListener("click", function () { advance(-1); });
+  $("stepNext").addEventListener("click", function () { advance(1); });
+
+  /* ============ router ============ */
+  function fromHash() {
+    var m = (window.location.hash || "").match(/^#\/?([1-9])$/);
+    return m ? parseInt(m[1], 10) - 1 : 0;
+  }
+  function setHash(i) {
+    var want = "#/" + (i + 1);
+    if (window.location.hash !== want) {
+      try { window.location.hash = want; } catch (e) {}
+    }
+  }
+  function clearAnim(el) {
+    el.classList.remove("anim-in-fwd", "anim-in-back", "anim-out-fwd", "anim-out-back",
+      "anim-hold-in", "anim-hold-out");
+  }
+  function enterFX(sc) {
+    if (REDUCED) { return; }
+    sc.classList.remove("anim-play");
+    void sc.getBoundingClientRect();
+    sc.classList.add("anim-play");
+  }
+  function sceneEffects(prev, next, dir) {
+    if (isLadder(next)) { placeLadder(next); }
+    if (prev === 5) { stopFlow(); }
+    if (prev === 6) { stopCounter(); }
+    if (next === 5) { playFlow(); }
+    if (next === 6) { playCounter(); }
+    if (next === 7) { setStep(dir < 0 && prev === 8 ? 8 : 1, true); }
+  }
+  var pend1 = null, pend2 = null;
+  function finishPending() {
+    /* QA fix: browser Back mid-transition could strip .active from the scene we
+       returned to — finalize any in-flight transition before starting a new one */
+    if (pend1 !== null) { clearTimeout(pend1); pend1 = null; }
+    if (pend2 !== null) { clearTimeout(pend2); pend2 = null; }
+    for (var i = 0; i < N; i++) {
+      var s = SCENES[i];
+      if (i !== cur) { s.classList.remove("active"); }
+      clearAnim(s); s.style.zIndex = "";
+    }
+    lock = false;
+  }
+  function show(idx, dir) {
+    if (idx === cur || idx < 0 || idx >= N) { return; }
+    finishPending();
+    var from = SCENES[cur], to = SCENES[idx], prev = cur;
+    var hold = isLadder(cur) && isLadder(idx);
+    cur = idx;
+    sceneEffects(prev, idx, dir);
+    clearAnim(from); clearAnim(to);
+    to.classList.add("active");
+    if (REDUCED) {
+      from.classList.remove("active");
+      from.style.zIndex = ""; to.style.zIndex = "";
+    } else {
+      lock = true;
+      to.style.zIndex = "3";
+      if (hold) {
+        to.classList.add("anim-hold-in");
+        from.classList.add("anim-hold-out");
+      } else {
+        to.classList.add(dir > 0 ? "anim-in-fwd" : "anim-in-back");
+        from.classList.add(dir > 0 ? "anim-out-fwd" : "anim-out-back");
+      }
+      enterFX(to);
+      pend1 = setTimeout(function () {
+        from.classList.remove("active"); clearAnim(from); from.style.zIndex = "";
+        pend1 = null;
+      }, 450);
+      pend2 = setTimeout(function () {
+        clearAnim(to); to.style.zIndex = ""; lock = false;
+        pend2 = null;
+      }, 460);
+    }
+    paintChrome();
+    announce();
+    setHash(idx);
+  }
+  function go(idx) {
+    if (lock || idx === cur) { return; }
+    show(idx, idx > cur ? 1 : -1);
+  }
+  function advance(dir) {
+    if (lock) { return; }
+    if (cur === 7) {
+      var ns = step + dir;
+      if (ns >= 1 && ns <= 8) { setStep(ns, false); return; }
+    }
+    var t = cur + dir;
+    if (t < 0 || t >= N) { return; }
+    show(t, dir);
+  }
+  window.addEventListener("hashchange", function () {
+    var idx = fromHash();
+    if (idx !== cur) { show(idx, idx > cur ? 1 : -1); }
+  });
+
+  /* ============ input: keys ============ */
+  function flashKeys() {
+    var keys = document.querySelectorAll(".key");
+    for (var i = 0; i < keys.length; i++) {
+      (function (k) {
+        k.classList.add("flash");
+        setTimeout(function () { k.classList.remove("flash"); }, 250);
+      })(keys[i]);
+    }
+  }
+  document.addEventListener("keydown", function (e) {
+    var k = e.key;
+    if (k === "ArrowRight" || k === "PageDown" || k === " " || k === "Spacebar") {
+      e.preventDefault(); advance(1); flashKeys();
+    } else if (k === "ArrowLeft" || k === "PageUp") {
+      e.preventDefault(); advance(-1); flashKeys();
+    } else if (k === "Home") {
+      e.preventDefault(); go(0);
+    } else if (k === "End") {
+      e.preventDefault(); go(N - 1);
+    } else if (/^[1-9]$/.test(k)) {
+      go(parseInt(k, 10) - 1); flashKeys();
+    }
+  });
+
+  /* ============ input: nav buttons, CTA ============ */
+  btnPrev.addEventListener("click", function () { if (cur > 0) { go(cur - 1); } });
+  btnNext.addEventListener("click", function () { if (cur < N - 1) { go(cur + 1); } });
+  var beginBtn = $("beginBtn");
+  if (beginBtn) { beginBtn.addEventListener("click", function () { go(1); }); }
+
+  /* ============ input: touch swipe (30px, horizontal only) ============ */
+  var tX = null, tY = null;
+  document.addEventListener("touchstart", function (e) {
+    if (e.touches.length === 1) { tX = e.touches[0].clientX; tY = e.touches[0].clientY; }
+  }, { passive: true });
+  document.addEventListener("touchend", function (e) {
+    if (tX === null || lock) { tX = null; return; }
+    var dx = e.changedTouches[0].clientX - tX;
+    var dy = e.changedTouches[0].clientY - tY;
+    tX = null; tY = null;
+    if (Math.abs(dx) >= 30 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      advance(dx < 0 ? 1 : -1);
+      var sw = document.querySelector(".hint-swipe");
+      if (sw) { sw.style.opacity = "0"; sw.style.transition = "opacity .4s"; }
+    }
+  }, { passive: true });
+
+  /* ============ input: wheel (debounced) ============ */
+  var wheelAt = 0;
+  window.addEventListener("wheel", function (e) {
+    var now = Date.now();
+    if (now - wheelAt < 500 || Math.abs(e.deltaY) < 24) { return; }
+    wheelAt = now;
+    advance(e.deltaY > 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* ============ init ============ */
+  var start = fromHash();
+  cur = start;
+  SCENES[cur].classList.add("active");
+  if (isLadder(cur)) { placeLadder(cur); }
+  if (cur === 5) { playFlow(); }
+  if (cur === 6) { playCounter(); }
+  if (cur === 7) { setStep(1, true); }
+  paintChrome();
+  announce();
+  setHash(cur);
+  if (!REDUCED) { enterFX(SCENES[cur]); }
+})();
+</script>
+</body>
+</html>
