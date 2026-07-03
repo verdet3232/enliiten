@@ -79,7 +79,7 @@ button{font:inherit;color:inherit}
 .mark{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.02em;font-size:15px;color:#FFF}
 .mark svg{filter:drop-shadow(var(--glow-flame-md))}
 .mark .lum{color:var(--flame-light)}
-.crumb{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);white-space:nowrap;overflow:hidden}
+.crumb{margin-left:auto;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);white-space:nowrap;overflow:hidden}
 .dots{display:flex;gap:8px;align-items:center}
 .dotbtn{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:none;border:0;padding:0;cursor:pointer;border-radius:var(--r-pill)}
 .dotbtn .dot{width:7px;height:7px;border-radius:50%;background:rgba(185,203,222,.28);transition:all .3s var(--ease)}
@@ -167,8 +167,9 @@ h1{
   font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-weight:600;font-style:italic;
   font-size:clamp(20px,2.6vw,30px);line-height:1.35;color:var(--mist);max-width:34ch;
 }
-.define{font-size:clamp(16px,1.9vw,21px);line-height:1.5;color:var(--mist);margin-top:22px;max-width:24ch}
+.define{font-size:clamp(16px,1.9vw,21px);line-height:1.5;color:var(--mist);margin-top:22px;max-width:30ch}
 .define strong{color:#FFF;font-weight:600}
+.define .opt{font-size:.875em}
 .cover .define{margin-top:0;max-width:44ch}
 .why{
   margin-top:30px;display:inline-flex;flex-direction:column;gap:4px;align-items:flex-start;
@@ -176,7 +177,7 @@ h1{
   font-size:clamp(14px,1.5vw,15px);color:var(--ember-tint);max-width:34ch;line-height:1.5;text-align:left;
 }
 .why b{color:#FFF;font-weight:700}
-.why-label{display:block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ember-tint);opacity:.85}
+.why-label{display:block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ember-tint);opacity:.85}
 .why-center{border-left:0;padding:0;margin-top:6px;align-items:center;text-align:center}
 .why-center .why-text{display:inline-flex;align-items:center;gap:9px}
 .why-center .why-text::before{content:"";flex:none;width:9px;height:9px;border-radius:2.5px;background:var(--grad-tittle);transform:rotate(45deg)}
@@ -196,7 +197,7 @@ h1{
 /* ---------- stage variants ---------- */
 .split{
   display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,72px);
-  align-items:center;max-width:1160px;width:100%;margin:0 auto;min-height:0;
+  align-items:center;max-width:1400px;width:100%;margin:0 auto;min-height:0;
 }
 .cover{
   max-width:880px;margin:auto;text-align:center;display:flex;flex-direction:column;
@@ -211,13 +212,13 @@ h1{
 .pchip{border:1px solid var(--hairline-strong);border-radius:var(--r-pill);padding:3px 10px;font-size:12px;font-weight:600;color:var(--mist);white-space:nowrap;background:var(--card)}
 .parrow{color:var(--flame-light)}
 .toast{
-  margin-top:22px;display:flex;gap:12px;align-items:flex-start;max-width:38ch;
+  margin-top:22px;display:flex;gap:12px;align-items:flex-start;max-width:40ch;
   background:var(--panel);border:1px solid var(--hairline);border-radius:var(--r-md);
   box-shadow:var(--shadow-panel),var(--ring-ember);padding:13px 16px;
 }
 .toast svg{flex:none;margin-top:2px}
-.toast p{font-size:13.5px;line-height:1.5;color:var(--star)}
-.toast .toast-bar{display:block;margin-top:8px;width:100%;height:4px;border-radius:2px;background:rgba(185,203,222,.16);overflow:hidden}
+.toast p{font-size:clamp(15px,1.3vw,19px);line-height:1.45;color:var(--star)}
+.toast .toast-bar{display:block;margin-top:8px;width:100%;height:5px;border-radius:2.5px;background:rgba(185,203,222,.16);overflow:hidden}
 .toast .toast-bar span{display:block;width:9%;height:100%;border-radius:2px;background:var(--grad-flame)}
 .s7 .define{max-width:30ch;font-size:clamp(15px,1.7vw,19px);margin-top:16px}
 .s7 h1{font-size:clamp(42px,6.5vw,84px)}
@@ -270,18 +271,29 @@ h1{
 .step-eyebrow{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--flame-light)}
 .step-title{font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--star);margin-top:10px;background:none;-webkit-text-fill-color:currentColor}
 .step-text{font-size:13.5px;line-height:1.5;color:var(--mist);margin-top:6px;min-height:5.2em}
-.step-controls{display:flex;align-items:center;gap:10px;margin-top:14px}
-.stepbtn{
-  width:32px;height:32px;border-radius:50%;border:1px solid var(--hairline);background:rgba(15,34,56,.55);
-  color:var(--mist);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .25s var(--ease);flex:none;
+.step-controls{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:14px;border-top:1px solid var(--hairline);padding-top:12px}
+.step-count{font-size:13px;font-weight:700;letter-spacing:.01em;color:var(--star);text-align:center}
+.pips{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
+.pip{
+  width:24px;height:24px;border:1px solid var(--hairline);background:rgba(15,34,56,.45);padding:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;border-radius:8px;
+  font-size:11px;font-weight:700;color:var(--dim);transition:all .25s var(--ease);
 }
-.stepbtn:hover{border-color:var(--flame-light);color:var(--flame-light)}
-.pips{display:flex;gap:4px;align-items:center;margin:0 auto}
-.pip{width:14px;height:14px;border:0;background:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%}
-.pip::after{content:"";width:5px;height:5px;border-radius:50%;background:rgba(185,203,222,.28);transition:all .3s var(--ease)}
-.pip.done::after{background:rgba(245,166,35,.55)}
-.pip[aria-current]::after{width:14px;border-radius:3px;background:var(--grad-flame);box-shadow:var(--glow-flame-sm)}
+.pip:hover{border-color:var(--flame-light);color:var(--flame-light)}
+.pip.done{color:var(--flame-light);border-color:rgba(245,166,35,.45)}
+.pip[aria-current]{background:var(--grad-flame);border-color:transparent;color:var(--night-0);box-shadow:var(--glow-flame-sm)}
+.tour-nav{display:flex;gap:10px}
+.tourbtn{
+  min-height:46px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease);
+}
+.tourbtn-back{flex:1;border:1px solid var(--hairline-strong);background:rgba(15,34,56,.55);color:var(--mist)}
+.tourbtn-back:hover{border-color:var(--flame-light);color:var(--flame-light)}
+.tourbtn-next{flex:1.7;border:0;background:var(--grad-flame);color:var(--night-0)}
+.tourbtn-next:hover{transform:translateY(-1px);box-shadow:var(--glow-flame-sm)}
+.tour-hint{font-size:12px;font-weight:600;color:var(--mist);text-align:center}
+.tour-hint[hidden]{display:none}
 .tour-side .why{margin-top:0}
 
 /* ---------- responsive ---------- */
@@ -318,6 +330,31 @@ h1{
   .step-text{font-size:13px}
   .art-desk{width:min(100%,calc(44vh*1.121))}
 }
+/* v9 readability: diagrams scale with width AND height on desktop.
+   The ≥861 guard is mandatory — the ≤860/≤400 mobile rules above must keep
+   winning below it by media match, not source order. */
+@media (min-width:861px){
+  .art.diagram svg{width:min(100%,620px,calc((100vh - 150px)*.87))}
+  .art.art-wide svg{width:min(100%,720px)}
+  /* scene 6 breaks out of the split: copy band on top, flow full-stage-width below */
+  .split.wide{grid-template-columns:minmax(0,1fr);align-content:center;gap:clamp(18px,3vh,32px)}
+  .split.wide .copy{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:end}
+  .split.wide h1{font-size:clamp(36px,4.4vw,62px)}
+  .split.wide .define{max-width:46ch}
+  .split.wide .pipeline{max-width:none}
+  .split.wide .why{margin-top:20px}
+  .split.wide .art.art-wide svg{width:min(100%,1100px,90vw,calc((100vh - 430px)*2.375))}
+}
+@media (min-width:861px) and (max-height:720px){
+  .split.wide{align-content:start} /* defer to the stage-scroll fix on short viewports */
+}
+@media (min-width:1440px){
+  .split{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .dotbtn .dot{width:8px;height:8px}
+  .dotbtn[aria-current] .dot{width:24px}
+  .hint{font-size:13px}
+  .navbtn{width:52px;height:52px}
+}
 @media (max-height:640px){
   h1{font-size:clamp(36px,6vw,54px)}
   .cover h1{font-size:clamp(40px,6.5vw,60px)}
@@ -333,8 +370,8 @@ h1{
 /* QA fix: 44px-class touch targets on coarse pointers */
 @media (pointer:coarse){
   .dotbtn{width:34px;height:44px}
-  .pip{width:26px;height:44px}
-  .stepbtn{width:44px;height:44px}
+  .pip{width:34px;height:44px;border-radius:10px}
+  .tourbtn{min-height:48px}
   .navbtn{width:48px;height:48px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -364,7 +401,7 @@ h1{
     <span class="hint-keys"><span class="key">←</span> <span class="key">→</span> <span>Scroll or press → to advance</span></span>
     <span class="hint-back">Press ← to go back</span>
     <span class="hint-swipe">Swipe between scenes on mobile</span>
-    <span class="hint-steps" id="hintSteps" hidden>· steps</span>
+    <span class="hint-steps" id="hintSteps" hidden>· 8 sections</span>
   </div>
 </footer>
 
@@ -420,7 +457,7 @@ h1{
       <p class="sr-only">Diagram: a hierarchy ladder. The Program layer — a Bookkeeping Certificate card — is lit; Course and Learning Objective layers wait below as ghosts.</p>
     </div>
     <div class="art diagram" id="ladderSlot3">
-      <svg id="hd-ladder" data-state="a" viewBox="0 0 520 460" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
+      <svg id="hd-ladder" data-state="a" viewBox="0 0 520 596" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
         <style>
           #hd-ladder .fx{opacity:0;transition:opacity .7s cubic-bezier(.22,.9,.24,1)}
           #hd-ladder[data-state="a"] .vis-a,
@@ -458,12 +495,12 @@ h1{
         </g>
         <g id="lyr-courses">
           <g id="hd-courses-ghost" class="fx vis-a">
-            <rect x="36" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="56" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".38">COURSE</text>
-            <text x="56" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".38">Coming next…</text>
-            <rect x="264" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="284" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".38">COURSE</text>
-            <text x="284" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".38">Coming next…</text>
+            <rect x="36" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="56" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".55">COURSE</text>
+            <text x="56" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".55">Coming next…</text>
+            <rect x="264" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="284" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".55">COURSE</text>
+            <text x="284" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".55">Coming next…</text>
           </g>
           <g id="hd-courses-lit" class="fx vis-b vis-c">
             <rect x="36" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
@@ -479,29 +516,51 @@ h1{
         </g>
         <g id="lyr-objectives">
           <g id="hd-obj-ghost" class="fx vis-a vis-b">
-            <rect x="36" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="62" y="340" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
-            <rect x="264" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="290" y="340" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
-            <rect x="36" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="62" y="408" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
-            <rect x="264" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.22)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="290" y="408" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".38">LEARNING OBJECTIVE</text>
+            <rect x="36" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="62" y="340" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="340" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="36" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="62" y="408" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="408" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="36" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="62" y="476" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="476" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="36" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="62" y="544" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="544" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
           </g>
           <g id="hd-obj-lit" class="fx vis-c">
             <rect x="36" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="62" y="327" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="62" y="327" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
             <text x="62" y="342" font-size="11" font-weight="600" fill="#FFFFFF">Apply the accrual basis</text>
             <text x="62" y="355" font-size="11" font-weight="600" fill="#FFFFFF">of accounting</text>
             <rect x="264" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="290" y="331" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="331" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
             <text x="290" y="348" font-size="11.5" font-weight="600" fill="#FFFFFF">Calculate gross-to-net pay</text>
             <rect x="36" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="62" y="399" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="62" y="399" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
             <text x="62" y="416" font-size="11.5" font-weight="600" fill="#FFFFFF">Prepare journal entries</text>
             <rect x="264" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="290" y="399" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="399" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
             <text x="290" y="416" font-size="11.5" font-weight="600" fill="#FFFFFF">Classify payroll liabilities</text>
+            <rect x="36" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="62" y="463" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="62" y="478" font-size="11" font-weight="600" fill="#FFFFFF">Record transactions with</text>
+            <text x="62" y="491" font-size="11" font-weight="600" fill="#FFFFFF">double-entry bookkeeping</text>
+            <rect x="264" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="463" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="478" font-size="11" font-weight="600" fill="#FFFFFF">Prepare the four core</text>
+            <text x="290" y="491" font-size="11" font-weight="600" fill="#FFFFFF">financial statements</text>
+            <rect x="36" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="62" y="535" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="62" y="552" font-size="11.5" font-weight="600" fill="#FFFFFF">Reconcile a bank statement</text>
+            <rect x="264" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="535" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="552" font-size="11.5" font-weight="600" fill="#FFFFFF">Explain internal controls</text>
           </g>
         </g>
       </svg>
@@ -529,10 +588,10 @@ h1{
     <div class="copy">
       <p class="eyebrow">Terminology · 3 of 3</p>
       <h1>Learning Objectives</h1>
-      <p class="define">A Learning Objective is one clear sentence about what a learner should be able to do.<br>Aligned to Florida B.E.S.T. and NGSSS benchmarks (CPALMS).</p>
+      <p class="define">A Learning Objective is one clear sentence about what a learner should be able to do — written by the professor or program designer.<br><span class="opt">Alignment to Florida B.E.S.T. (CPALMS) is optional.</span></p>
       <p class="lockup">Programs <span class="parrow">→</span> Courses <span class="parrow">→</span> Learning Objectives</p>
       <p class="why"><span class="why-label">Why it matters</span>The platform's atoms — where video credit attaches and flows.</p>
-      <p class="sr-only">Diagram: the full ladder is lit — the Program, two Courses, and four Learning Objective pills such as Apply the accrual basis of accounting.</p>
+      <p class="sr-only">Diagram: the full ladder is lit — the Program, two Courses, and eight Learning Objective pills authored by the program designer, such as Apply the accrual basis of accounting and Prepare the four core financial statements.</p>
     </div>
     <div class="art diagram" id="ladderSlot5"></div>
   </div>
@@ -540,14 +599,19 @@ h1{
 
 <!-- ============ SCENE 6 · VIDEOS & THE WATCH LIST ============ -->
 <section class="scene s6" id="s6" role="group" aria-roledescription="scene" aria-label="Scene 6 of 9 — Videos and the Watch List">
-  <div class="stage split">
+  <div class="stage split wide">
     <div class="copy">
-      <h1>Videos &amp; the Watch List</h1>
-      <p class="define">In Chrome, the Enliten Video Collector sends a YouTube video to your Watch List.</p>
-      <p class="pipeline">Vetting: <span class="pchip">transcript</span> <span class="parrow">→</span> <span class="pchip">AI classification</span> <span class="parrow">→</span> <span class="pchip">quality score</span> <span class="parrow">→</span> <span class="pchip">team approval</span>.</p>
-      <p class="define" style="margin-top:14px">Approved videos attach to the Learning Objectives they teach.</p>
-      <p class="why"><span class="why-label">Why it matters</span>Only approved videos earn — learner-sourced supply at near-zero content cost.</p>
-      <p class="sr-only">Diagram: a video card from the Watch List travels through four cleared review gates — transcript, AI classification, quality score, team approval — and docks onto a Learning Objective pill, carrying its 15.4 Luminz chip the whole way.</p>
+      <div class="copy-head">
+        <p class="eyebrow">Supply</p>
+        <h1>Videos &amp; the Watch List</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Find a YouTube video — the Enliten Video Collector sends it to your Watch List.</p>
+        <p class="pipeline">Vetting: <span class="pchip">transcript</span> <span class="parrow">→</span> <span class="pchip">AI classification</span> <span class="parrow">→</span> <span class="pchip">quality score</span> <span class="parrow">→</span> <span class="pchip">team approval</span>.</p>
+        <p class="define" style="margin-top:14px">Approved videos attach to the Learning Objectives they teach.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Only approved videos earn — learner-sourced supply at near-zero cost.</p>
+        <p class="sr-only">Diagram: a video card from the Watch List travels through four cleared review gates — transcript, AI classification, quality score, team approval — and docks onto a Learning Objective pill, carrying its 15.4 Luminz chip the whole way.</p>
+      </div>
     </div>
     <div class="art art-wide">
       <svg id="fl-flow" viewBox="0 0 760 320" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
@@ -643,7 +707,7 @@ h1{
       <p class="eyebrow">The currency</p>
       <h1>Luminz</h1>
       <p class="define">Watch. Pass the video's fresh AI quiz — 80% or better.<br>The video pays its Luminz: 1 Luminz = 1 minute of passed video.<br>Luminz flow automatically into every course whose Learning Objectives the video covers.</p>
-      <div class="toast">
+      <div class="toast" id="s7toast">
         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
         </svg>
@@ -756,7 +820,7 @@ h1{
       <h1>Pathlight</h1>
       <p class="tour-intro">The learner's home. Eight stops.</p>
     </div>
-    <p class="sr-only">Artwork: a simplified Pathlight dashboard with a moving spotlight — hero and call to action, KPI row, Ember guide card, Work on next list, Watch List table, Standards by subject, program cards — and a phone-frame variant for the final stop.</p>
+    <p class="sr-only">Artwork: the Pathlight dashboard rendered with sample data and a moving spotlight. Hero: Good morning, Jordan — your path is 72% lit to your first certificate, with a call to action to watch Accrual vs. Cash for 15 Luminz. KPI row: standards mastered 36 of 52 with 10 in progress and 6 not yet mastered; nearest credential Bookkeeping Certificate at 72% with 5 objectives to go; 342 Luminz earned, up 38 this week; video queue 2 ready of 7. Ember, the AI guide, reports the Accrual vs. Cash video is ready with 15.4 Luminz flowing toward the Bookkeeping Certificate, offers Start the video and Plan my week replies, and discloses that Ember is AI and can make mistakes. Work on next lists five steps with payouts, starting with Watch Accrual vs. Cash Accounting for +15.4. The Watch List shows Debits and Credits Explained passed with +24.6 Luminz, Accrual vs. Cash ready to watch, Payroll Basics quiz failed with a retake offered, and Photosynthesis vs. Cellular Respiration in review. Standards by subject charts Geometry 12-4-2, ELA 10 9-3-1, Biology 8-2-2, World History 7-1-1, with practice buttons for triangle theorems and cell membranes. Program cards: Bookkeeping Certificate 72% with two designer-written objectives left — Prepare the four core financial statements and Apply the accrual basis of accounting — Accounting Certificate 38%, and A.S. Business 12%. A phone-frame home screen with the same greeting, two KPI tiles, Ember ribbon, and Home-Videos-Progress-Ember tab bar appears at the final stop.</p>
     <div class="tour-grid">
       <div class="tour-art" id="tourArt">
         <div class="art-desk" id="artDesk">
@@ -774,91 +838,144 @@ h1{
             </defs>
             <g clip-path="url(#dbClip)">
               <rect width="1000" height="892" fill="#F2F5FA"/>
-              <rect width="1000" height="52" fill="#FFFFFF"/><rect y="51" width="1000" height="1" fill="#E2E9F1"/>
+              <rect width="1000" height="52" fill="#FFFFFF"/><rect y="51" width="1000" height="1" fill="#E5EBF2"/>
               <use href="#dbFl" transform="translate(20,12) scale(1.17)" fill="url(#dbFlame)"/>
-              <rect x="58" y="16" width="92" height="12" rx="6" fill="#1B3A5C"/><rect x="58" y="33" width="64" height="6" rx="3" fill="#C9D6E4"/>
-              <rect x="692" y="14" width="88" height="24" rx="12" fill="#FFFFFF" stroke="#C9D6E4"/>
-              <use href="#dbFl" transform="translate(701,19) scale(.58)" fill="#C2410C"/><rect x="720" y="23" width="46" height="6" rx="3" fill="#3D5670"/>
-              <rect x="788" y="14" width="118" height="24" rx="12" fill="#FFFFFF" stroke="#C9D6E4"/>
-              <circle cx="803" cy="26" r="5" fill="#22C55E"/><rect x="814" y="23" width="78" height="6" rx="3" fill="#C9D6E4"/>
+              <text x="56" y="28" font-size="15" font-weight="800" letter-spacing="-.02" fill="#1B3A5C">Path<tspan fill="#C2410C">light</tspan></text>
+              <text x="56" y="42" font-size="10" font-weight="500" fill="#5B7290">Enliten Luminz · your learning journey</text>
+              <rect x="270" y="15" width="158" height="22" rx="11" fill="#FEF3C7" stroke="#FDE68A"/>
+              <text x="349" y="30" text-anchor="middle" font-size="10" font-weight="700" letter-spacing=".06em" fill="#92400E">PROTOTYPE · SAMPLE DATA</text>
+              <text x="676" y="30" text-anchor="end" font-size="10.5" font-weight="500" fill="#5B7290" style="font-variant-numeric:tabular-nums">Wednesday · 07-01-2026</text>
+              <rect x="692" y="14" width="96" height="24" rx="12" fill="#FFFFFF" stroke="#CBD5E1"/>
+              <use href="#dbFl" transform="translate(701,19) scale(.58)" fill="#C2410C"/>
+              <text x="720" y="30" font-size="11" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">342<tspan font-size="10" font-weight="600" fill="#5B7290"> Luminz</tspan></text>
+              <rect x="800" y="14" width="106" height="24" rx="12" fill="#FFFFFF" stroke="#CBD5E1"/>
+              <circle cx="814" cy="26" r="4" fill="#22C55E"/>
+              <text x="824" y="30" font-size="10" font-weight="600" fill="#3D5670" style="font-variant-numeric:tabular-nums">3 of 5 days</text>
               <circle cx="944" cy="26" r="15" fill="url(#dbFlame)"/>
+              <text x="944" y="30" text-anchor="middle" font-size="11" font-weight="800" fill="#FFFFFF">JR</text>
               <g clip-path="url(#dbHeroClip)">
                 <rect y="52" width="1000" height="124" fill="url(#dbHero)"/>
                 <circle cx="930" cy="64" r="150" fill="url(#dbGlow)"/>
               </g>
-              <rect x="32" y="78" width="120" height="7" rx="3.5" fill="#F8B96B"/>
-              <rect x="32" y="94" width="470" height="14" rx="7" fill="#FFFFFF" opacity=".92"/>
-              <rect x="32" y="116" width="360" height="8" rx="4" fill="#B9CBDE" opacity=".8"/>
+              <text x="32" y="84" font-size="10" font-weight="700" letter-spacing=".14em" fill="#F8B96B">THE PATH LIGHTS UP</text>
+              <text x="32" y="112" font-size="20" font-weight="800" letter-spacing="-.02em" fill="#FFFFFF">Good morning, Jordan — your path is 72% lit to your first certificate.</text>
+              <text x="32" y="131" font-size="11" font-weight="500" fill="#B9CBDE">You earned 38 Luminz this week and cleared 2 standards — your Bookkeeping Certificate is 5 objectives away.</text>
               <g id="db-cta">
-                <rect x="32" y="136" width="252" height="30" rx="15" fill="#C2410C"/>
-                <path d="M48 144l10 7-10 7Z" fill="#FFFFFF"/>
-                <rect x="66" y="147" width="196" height="8" rx="4" fill="#FFFFFF" opacity=".92"/>
+                <rect x="32" y="141" width="392" height="28" rx="14" fill="#C2410C"/>
+                <path d="M48 149l9 6-9 6Z" fill="#FFFFFF"/>
+                <text x="64" y="159" font-size="11" font-weight="700" fill="#FFFFFF">Watch “Accrual vs. Cash” · 15 Luminz toward your certificate</text>
               </g>
               <g id="db-kpis">
-                <g transform="translate(32,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="92" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="68" height="18" rx="6" fill="#1B3A5C"/><rect x="14" y="56" width="128" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="194" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="134" height="6" rx="3" fill="url(#dbFlameH)"/></g>
-                <g transform="translate(270,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="104" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="56" height="18" rx="6" fill="#1B3A5C"/><rect x="14" y="56" width="140" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="194" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="140" height="6" rx="3" fill="url(#dbFlameH)"/></g>
-                <g transform="translate(508,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="84" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="72" height="18" rx="6" fill="#1B3A5C"/><use href="#dbFl" transform="translate(94,31) scale(.7)" fill="#C2410C"/><rect x="14" y="56" width="120" height="6" rx="3" fill="#E2E9F1"/></g>
-                <g transform="translate(746,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="14" y="14" width="76" height="7" rx="3.5" fill="#C9D6E4"/><rect x="14" y="30" width="60" height="18" rx="6" fill="#1B3A5C"/><rect x="14" y="56" width="132" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="194" height="6" rx="3" fill="#E2E9F1"/><rect x="14" y="68" width="56" height="6" rx="3" fill="url(#dbFlameH)"/></g>
+                <g transform="translate(32,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><text x="14" y="20" font-size="10" font-weight="600" fill="#5B7290">Standards mastered</text><text x="14" y="46" font-size="22" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">36<tspan font-size="13" font-weight="700" fill="#5B7290"> / 52</tspan></text><text x="14" y="62" font-size="10" fill="#3D5670" style="font-variant-numeric:tabular-nums"><tspan font-weight="700" fill="#15803D">10 in progress</tspan> · 6 not yet mastered</text><rect x="14" y="69" width="194" height="6" rx="3" fill="#E9EEF5"/><rect x="14" y="69" width="134" height="6" rx="3" fill="url(#dbFlameH)"/></g>
+                <g transform="translate(270,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><text x="14" y="20" font-size="10" font-weight="600" fill="#5B7290">Nearest credential</text><text x="14" y="46" font-size="22" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">72<tspan font-size="13" font-weight="700" fill="#5B7290">%</tspan></text><text x="14" y="61" font-size="10" font-weight="600" fill="#3D5670">Bookkeeping Certificate</text><text x="14" y="74" font-size="10" fill="#5B7290" style="font-variant-numeric:tabular-nums">5 objectives to go</text></g>
+                <g transform="translate(508,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><text x="14" y="20" font-size="10" font-weight="600" fill="#5B7290">Luminz earned</text><text x="14" y="46" font-size="22" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">342</text><use href="#dbFl" transform="translate(58,30) scale(.75)" fill="#C2410C"/><text x="14" y="61" font-size="10" font-weight="700" fill="#15803D" style="font-variant-numeric:tabular-nums">+38 this week</text><text x="14" y="74" font-size="10" fill="#5B7290">1 Luminz = 1 min of passed video</text></g>
+                <g transform="translate(746,188)"><rect width="222" height="84" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/><text x="14" y="20" font-size="10" font-weight="600" fill="#5B7290">Video queue</text><text x="14" y="46" font-size="22" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">2<tspan font-size="13" font-weight="700" fill="#5B7290"> ready / 7</tspan></text><text x="14" y="62" font-size="10" fill="#3D5670" style="font-variant-numeric:tabular-nums">2 passed · 1 quiz open · 1 retake…</text><rect x="14" y="69" width="194" height="6" rx="3" fill="#E9EEF5"/><rect x="14" y="69" width="56" height="6" rx="3" fill="url(#dbFlameH)"/></g>
               </g>
               <g id="db-ember" transform="translate(32,284)">
                 <rect width="452" height="152" rx="12" fill="#FFFFFF" stroke="#F4D9BC" stroke-width="1.4"/>
-                <circle cx="30" cy="30" r="13" fill="url(#dbFlame)"/><use href="#dbFl" transform="translate(22,22) scale(.66)" fill="#FFFFFF"/>
-                <rect x="52" y="20" width="128" height="9" rx="4.5" fill="#3D5670"/><rect x="52" y="34" width="88" height="6" rx="3" fill="#C9D6E4"/>
-                <rect x="16" y="52" width="420" height="54" rx="10" fill="#E9EEF5"/>
-                <rect x="30" y="64" width="380" height="7" rx="3.5" fill="#BCCCDC"/><rect x="30" y="77" width="340" height="7" rx="3.5" fill="#BCCCDC"/><rect x="30" y="90" width="240" height="7" rx="3.5" fill="#BCCCDC"/>
-                <rect x="16" y="118" width="86" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="110" y="118" width="110" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="228" y="118" width="78" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/>
+                <circle cx="28" cy="25" r="13" fill="url(#dbFlame)"/><use href="#dbFl" transform="translate(20,17) scale(.66)" fill="#FFFFFF"/>
+                <text x="48" y="23" font-size="12.5" font-weight="800" fill="#1B3A5C">Ember — your AI guide</text>
+                <text x="48" y="37" font-size="10" fill="#5B7290">always here · knows your path</text>
+                <rect x="16" y="46" width="420" height="58" rx="10" fill="#E9EEF5"/>
+                <text x="28" y="64" font-size="10.5" fill="#3D5670">Morning, Jordan. The <tspan font-weight="700">Accrual vs. Cash</tspan> video is ready — watch it and</text>
+                <text x="28" y="78" font-size="10.5" fill="#3D5670">pass its quiz, and the video’s <tspan font-weight="700">15.4 Luminz</tspan> flow straight toward</text>
+                <text x="28" y="92" font-size="10.5" fill="#3D5670">your Bookkeeping Certificate. Want me to queue it?</text>
+                <rect x="16" y="112" width="100" height="22" rx="11" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="66" y="126" text-anchor="middle" font-size="10" font-weight="700" fill="#1B3A5C">Start the video</text>
+                <rect x="124" y="112" width="94" height="22" rx="11" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="171" y="126" text-anchor="middle" font-size="10" font-weight="700" fill="#1B3A5C">Plan my week</text>
+                <text x="16" y="146" font-size="10" fill="#5B7290">Ember is AI and can make mistakes — your teacher can always help.</text>
               </g>
               <g id="db-next" transform="translate(516,284)">
                 <rect width="452" height="152" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
-                <rect x="16" y="18" width="140" height="9" rx="4.5" fill="#3D5670"/>
-                <circle cx="28" cy="53" r="10" fill="url(#dbFlame)"/><rect x="48" y="46" width="200" height="8" rx="4" fill="#3D5670"/><rect x="48" y="59" width="140" height="5" rx="2.5" fill="#C9D6E4"/><rect x="356" y="46" width="80" height="16" rx="8" fill="#DBEAFE"/><rect x="370" y="51" width="52" height="5" rx="2.5" fill="#1E40AF" opacity=".65"/>
-                <circle cx="28" cy="89" r="10" fill="#E9EEF5" stroke="#C9D6E4"/><rect x="48" y="82" width="184" height="8" rx="4" fill="#3D5670" opacity=".8"/><rect x="48" y="95" width="128" height="5" rx="2.5" fill="#C9D6E4"/><rect x="356" y="82" width="80" height="16" rx="8" fill="#FEF3C7"/><rect x="370" y="87" width="52" height="5" rx="2.5" fill="#92400E" opacity=".6"/>
-                <circle cx="28" cy="125" r="10" fill="#E9EEF5" stroke="#C9D6E4"/><rect x="48" y="118" width="212" height="8" rx="4" fill="#3D5670" opacity=".8"/><rect x="48" y="131" width="120" height="5" rx="2.5" fill="#C9D6E4"/><rect x="356" y="118" width="80" height="16" rx="8" fill="#FDEBD9"/><rect x="370" y="123" width="52" height="5" rx="2.5" fill="#A93A0B" opacity=".6"/>
+                <text x="16" y="24" font-size="12.5" font-weight="800" fill="#1B3A5C">Work on next</text>
+                <text x="436" y="24" text-anchor="end" font-size="10" fill="#5B7290">Ember’s order — start anywhere</text>
+                <circle cx="26" cy="46.5" r="12" fill="none" stroke="#F5A623" opacity=".55"/><circle cx="26" cy="46.5" r="9" fill="url(#dbFlame)"/><text x="26" y="50" text-anchor="middle" font-size="10" font-weight="800" fill="#FFFFFF">1</text>
+                <text x="42" y="50" font-size="10.5" font-weight="700" fill="#1B3A5C">Watch “Accrual vs. Cash Accounting”</text>
+                <rect x="378" y="36" width="58" height="18" rx="9" fill="#FDEBD9"/><text x="407" y="48.5" text-anchor="middle" font-size="10" font-weight="700" fill="#C2410C" style="font-variant-numeric:tabular-nums">+15.4 Lz</text>
+                <circle cx="26" cy="68.5" r="9" fill="#E9EEF5" stroke="#CBD5E1"/><text x="26" y="72" text-anchor="middle" font-size="10" font-weight="700" fill="#3D5670">2</text>
+                <text x="42" y="72" font-size="10.5" font-weight="700" fill="#1B3A5C">Watch “Triangle Congruence in 12 Minutes”</text>
+                <rect x="378" y="58" width="58" height="18" rx="9" fill="#FDEBD9"/><text x="407" y="70.5" text-anchor="middle" font-size="10" font-weight="700" fill="#C2410C" style="font-variant-numeric:tabular-nums">+12.4 Lz</text>
+                <circle cx="26" cy="90.5" r="9" fill="#E9EEF5" stroke="#CBD5E1"/><text x="26" y="94" text-anchor="middle" font-size="10" font-weight="700" fill="#3D5670">3</text>
+                <text x="42" y="94" font-size="10.5" font-weight="700" fill="#1B3A5C">Practice triangle theorems</text>
+                <rect x="326" y="80" width="110" height="18" rx="9" fill="#DCFCE7"/><text x="381" y="92.5" text-anchor="middle" font-size="10" font-weight="700" fill="#15803D" style="font-variant-numeric:tabular-nums">Geometry 13 of 18</text>
+                <circle cx="26" cy="112.5" r="9" fill="#E9EEF5" stroke="#CBD5E1"/><text x="26" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="#3D5670">4</text>
+                <text x="42" y="116" font-size="10.5" font-weight="700" fill="#1B3A5C">Finish the SAT Reading quiz</text>
+                <rect x="348" y="102" width="88" height="18" rx="9" fill="#FDEBD9"/><text x="392" y="114.5" text-anchor="middle" font-size="10" font-weight="700" fill="#C2410C" style="font-variant-numeric:tabular-nums">unlocks +14.8</text>
+                <circle cx="26" cy="134.5" r="9" fill="#E9EEF5" stroke="#CBD5E1"/><text x="26" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#3D5670">5</text>
+                <text x="42" y="138" font-size="10.5" font-weight="700" fill="#1B3A5C">Finish ACG 2021</text>
+                <rect x="310" y="124" width="126" height="18" rx="9" fill="#DCFCE7"/><text x="373" y="136.5" text-anchor="middle" font-size="10" font-weight="700" fill="#15803D" style="font-variant-numeric:tabular-nums">Certificate 72% → 86%</text>
               </g>
               <g id="db-watchlist" transform="translate(32,452)">
                 <rect width="936" height="164" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
-                <rect x="16" y="16" width="110" height="9" rx="4.5" fill="#3D5670"/><rect x="138" y="18" width="150" height="6" rx="3" fill="#C9D6E4"/>
-                <rect x="826" y="12" width="94" height="22" rx="11" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="840" y="20" width="60" height="6" rx="3" fill="#C9D6E4"/>
-                <rect x="16" y="46" width="54" height="6" rx="3" fill="#C9D6E4"/><rect x="300" y="46" width="54" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="46" width="44" height="6" rx="3" fill="#C9D6E4"/><rect x="540" y="46" width="60" height="6" rx="3" fill="#C9D6E4"/><rect x="690" y="46" width="40" height="6" rx="3" fill="#C9D6E4"/><rect x="830" y="46" width="48" height="6" rx="3" fill="#C9D6E4"/>
-                <rect x="16" y="60" width="904" height="1.5" fill="#E2E9F1"/>
-                <g><rect x="16" y="72" width="210" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="72" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="72" width="34" height="6" rx="3" fill="#C9D6E4"/><use href="#dbFl" transform="translate(540,66) scale(.55)" fill="#C2410C"/><rect x="558" y="72" width="56" height="6" rx="3" fill="#F4B77B"/><rect x="690" y="71" width="30" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="830" y="67" width="86" height="16" rx="8" fill="#DCFCE7"/><rect x="846" y="72" width="54" height="5" rx="2.5" fill="#14532D" opacity=".55"/></g>
-                <g><rect x="16" y="96" width="188" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="96" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="96" width="34" height="6" rx="3" fill="#C9D6E4"/><use href="#dbFl" transform="translate(540,90) scale(.55)" fill="#C2410C"/><rect x="558" y="96" width="56" height="6" rx="3" fill="#F4B77B"/><rect x="690" y="95" width="30" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="830" y="91" width="86" height="16" rx="8" fill="#DBEAFE"/><rect x="846" y="96" width="54" height="5" rx="2.5" fill="#1E40AF" opacity=".55"/></g>
-                <g><rect x="16" y="120" width="222" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="120" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="120" width="34" height="6" rx="3" fill="#C9D6E4"/><use href="#dbFl" transform="translate(540,114) scale(.55)" fill="#C2410C"/><rect x="558" y="120" width="56" height="6" rx="3" fill="#F4B77B"/><rect x="690" y="119" width="30" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="830" y="115" width="86" height="16" rx="8" fill="#FEF3C7"/><rect x="846" y="120" width="54" height="5" rx="2.5" fill="#92400E" opacity=".55"/></g>
-                <g opacity=".65"><rect x="16" y="144" width="200" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="300" y="144" width="66" height="6" rx="3" fill="#C9D6E4"/><rect x="420" y="144" width="34" height="6" rx="3" fill="#C9D6E4"/><rect x="540" y="144" width="74" height="6" rx="3" fill="#E2E9F1"/><rect x="690" y="143" width="30" height="7" rx="3.5" fill="#C9D6E4"/><rect x="830" y="139" width="86" height="16" rx="8" fill="#E9EEF5"/><rect x="846" y="144" width="54" height="5" rx="2.5" fill="#3D5670" opacity=".5"/></g>
+                <text x="16" y="26" font-size="12.5" font-weight="800" fill="#1B3A5C">Watch List</text>
+                <text x="104" y="26" font-size="10" fill="#5B7290">videos you sent in with the Enliten Video Collector</text>
+                <rect x="812" y="11" width="108" height="22" rx="11" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <text x="866" y="25.5" text-anchor="middle" font-size="10" font-weight="600" fill="#3D5670">All statuses ▾</text>
+                <text x="16" y="48" font-size="10" font-weight="700" letter-spacing=".05em" fill="#5B7290">VIDEO</text><text x="336" y="48" font-size="10" font-weight="700" letter-spacing=".05em" fill="#5B7290">SUBMITTED</text><text x="470" y="48" font-size="10" font-weight="700" letter-spacing=".05em" fill="#5B7290">LENGTH</text><text x="565" y="48" font-size="10" font-weight="700" letter-spacing=".05em" fill="#5B7290">LUMINZ</text><text x="700" y="48" font-size="10" font-weight="700" letter-spacing=".05em" fill="#5B7290">STATUS</text><text x="920" y="48" text-anchor="end" font-size="10" font-weight="700" letter-spacing=".05em" fill="#5B7290">ACTION</text>
+                <rect x="16" y="56" width="904" height="1.5" fill="#E5EBF2"/>
+                <g><text x="16" y="78" font-size="10.5" font-weight="700" fill="#1B3A5C">Debits &amp; Credits, Explained</text><text x="336" y="78" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">06-12-2026</text><text x="470" y="78" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">24.6 min</text><use href="#dbFl" transform="translate(563,68) scale(.5)" fill="#C2410C"/><text x="580" y="78" font-size="10.5" font-weight="700" fill="#C2410C" style="font-variant-numeric:tabular-nums">+24.6 Lz</text><rect x="700" y="65" width="64" height="18" rx="9" fill="#DCFCE7"/><text x="732" y="77.5" text-anchor="middle" font-size="10" font-weight="700" fill="#15803D">Passed</text></g>
+                <g><text x="16" y="102" font-size="10.5" font-weight="700" fill="#1B3A5C">Accrual vs. Cash Accounting</text><text x="336" y="102" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">06-24-2026</text><text x="470" y="102" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">15.4 min</text><text x="565" y="102" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums"><tspan font-weight="700">15.4</tspan> on pass</text><rect x="700" y="89" width="100" height="18" rx="9" fill="#DBEAFE"/><text x="750" y="101.5" text-anchor="middle" font-size="10" font-weight="700" fill="#1E40AF">Ready to watch</text><text x="920" y="102" text-anchor="end" font-size="10.5" font-weight="700" fill="#C2410C">Watch ▸</text></g>
+                <g><text x="16" y="126" font-size="10.5" font-weight="700" fill="#1B3A5C">Payroll Basics: Gross to Net</text><text x="336" y="126" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">06-28-2026</text><text x="470" y="126" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">16.0 min</text><text x="565" y="126" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums"><tspan font-weight="700">16.0</tspan> on pass</text><rect x="700" y="113" width="80" height="18" rx="9" fill="#FEF3C7"/><text x="740" y="125.5" text-anchor="middle" font-size="10" font-weight="700" fill="#92400E">Quiz failed</text><text x="920" y="126" text-anchor="end" font-size="10.5" font-weight="700" fill="#C2410C">Retake quiz ▸</text></g>
+                <g><text x="16" y="150" font-size="10.5" font-weight="700" fill="#1B3A5C">Photosynthesis vs. Cellular Respiration</text><text x="336" y="150" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">06-30-2026</text><text x="470" y="150" font-size="10.5" fill="#3D5670" style="font-variant-numeric:tabular-nums">11.2 min</text><text x="565" y="150" font-size="10.5" fill="#5B7290">not yet approved</text><rect x="700" y="137" width="72" height="18" rx="9" fill="#E9EEF5"/><text x="736" y="149.5" text-anchor="middle" font-size="10" font-weight="700" fill="#3D5670">In review</text></g>
               </g>
               <g id="db-standards" transform="translate(32,628)">
                 <rect width="936" height="140" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
-                <rect x="16" y="16" width="130" height="9" rx="4.5" fill="#3D5670"/><rect x="158" y="18" width="120" height="6" rx="3" fill="#C9D6E4"/>
-                <g>
-                  <rect x="16" y="45" width="64" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="42" width="210" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="310" y="42" width="70" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="384" y="42" width="36" height="12" rx="3" fill="#EF4444" opacity=".8"/>
-                  <rect x="16" y="69" width="52" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="66" width="190" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="290" y="66" width="60" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="354" y="66" width="22" height="12" rx="3" fill="#EF4444" opacity=".8"/>
-                  <rect x="16" y="93" width="58" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="90" width="170" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="270" y="90" width="44" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="318" y="90" width="40" height="12" rx="3" fill="#EF4444" opacity=".8"/>
-                  <rect x="16" y="117" width="70" height="6" rx="3" fill="#C9D6E4"/><rect x="96" y="114" width="150" height="12" rx="3" fill="#22C55E" opacity=".85"/><rect x="250" y="114" width="24" height="12" rx="3" fill="#F59E0B" opacity=".85"/><rect x="278" y="114" width="20" height="12" rx="3" fill="#EF4444" opacity=".8"/>
+                <text x="16" y="25" font-size="12.5" font-weight="800" fill="#1B3A5C">Standards by subject</text>
+                <circle cx="200" cy="21" r="4" fill="#22C55E"/><text x="208" y="25" font-size="10" fill="#5B7290">Mastered</text>
+                <circle cx="266" cy="21" r="4" fill="#3B82F6"/><text x="274" y="25" font-size="10" fill="#5B7290">In progress</text>
+                <circle cx="344" cy="21" r="4" fill="#F59E0B"/><text x="352" y="25" font-size="10" fill="#5B7290">Not yet</text>
+                <g style="font-variant-numeric:tabular-nums">
+                  <text x="100" y="52" text-anchor="end" font-size="10.5" font-weight="600" fill="#3D5670">Geometry</text><rect x="110" y="41.5" width="216" height="13" rx="2" fill="#22C55E"/><rect x="326" y="41.5" width="72" height="13" fill="#3B82F6"/><rect x="398" y="41.5" width="36" height="13" rx="2" fill="#F59E0B"/><text x="218" y="51.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">12</text><text x="362" y="51.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">4</text><text x="416" y="51.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">2</text>
+                  <text x="100" y="76" text-anchor="end" font-size="10.5" font-weight="600" fill="#3D5670">ELA 10</text><rect x="110" y="65.5" width="162" height="13" rx="2" fill="#22C55E"/><rect x="272" y="65.5" width="54" height="13" fill="#3B82F6"/><rect x="326" y="65.5" width="18" height="13" rx="2" fill="#F59E0B"/><text x="191" y="75.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">9</text><text x="299" y="75.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">3</text><text x="335" y="75.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">1</text>
+                  <text x="100" y="100" text-anchor="end" font-size="10.5" font-weight="600" fill="#3D5670">Biology</text><rect x="110" y="89.5" width="144" height="13" rx="2" fill="#22C55E"/><rect x="254" y="89.5" width="36" height="13" fill="#3B82F6"/><rect x="290" y="89.5" width="36" height="13" rx="2" fill="#F59E0B"/><text x="182" y="99.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">8</text><text x="272" y="99.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">2</text><text x="308" y="99.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">2</text>
+                  <text x="100" y="124" text-anchor="end" font-size="10.5" font-weight="600" fill="#3D5670">World History</text><rect x="110" y="113.5" width="126" height="13" rx="2" fill="#22C55E"/><rect x="236" y="113.5" width="18" height="13" fill="#3B82F6"/><rect x="254" y="113.5" width="18" height="13" rx="2" fill="#F59E0B"/><text x="173" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">7</text><text x="245" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">1</text><text x="263" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">1</text>
                 </g>
                 <g>
-                  <rect x="520" y="42" width="230" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="520" y="55" width="150" height="5" rx="2.5" fill="#C9D6E4"/><rect x="830" y="40" width="74" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><rect x="846" y="48" width="42" height="6" rx="3" fill="#C2410C" opacity=".85"/>
-                  <rect x="520" y="76" width="206" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="520" y="89" width="164" height="5" rx="2.5" fill="#C9D6E4"/><rect x="830" y="74" width="74" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><rect x="846" y="82" width="42" height="6" rx="3" fill="#C2410C" opacity=".85"/>
-                  <rect x="520" y="110" width="218" height="7" rx="3.5" fill="#3D5670" opacity=".85"/><rect x="520" y="123" width="140" height="5" rx="2.5" fill="#C9D6E4"/><rect x="830" y="108" width="74" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><rect x="846" y="116" width="42" height="6" rx="3" fill="#C2410C" opacity=".85"/>
+                  <text x="520" y="25" font-size="11.5" font-weight="800" fill="#1B3A5C">Not yet mastered — jump back in</text>
+                  <text x="520" y="52" font-size="10.5" font-weight="700" fill="#1B3A5C">Triangle relationships and theorems</text>
+                  <rect x="734" y="39.5" width="96" height="17" rx="8.5" fill="#FEF3C7"/><text x="782" y="51.5" text-anchor="middle" font-size="10" font-weight="700" fill="#92400E" style="font-variant-numeric:tabular-nums">retake 07-02-2026</text>
+                  <text x="520" y="67" font-size="10" fill="#5B7290" style="font-variant-numeric:tabular-nums">Geometry · MA.912.GR.1.3 · last check 06-24-2026</text>
+                  <rect x="838" y="38" width="82" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><text x="879" y="52.5" text-anchor="middle" font-size="10" font-weight="700" fill="#C2410C">Practice ▸</text>
+                  <rect x="520" y="81" width="400" height="1" fill="#E5EBF2"/>
+                  <text x="520" y="104" font-size="10.5" font-weight="700" fill="#1B3A5C">Cell membranes — passive and active transport</text>
+                  <text x="520" y="119" font-size="10" fill="#5B7290" style="font-variant-numeric:tabular-nums">Biology · SC.912.L.14.2 · last check 06-19-2026</text>
+                  <rect x="838" y="90" width="82" height="22" rx="11" fill="#FFFFFF" stroke="#C2410C" stroke-width="1.4"/><text x="879" y="104.5" text-anchor="middle" font-size="10" font-weight="700" fill="#C2410C">Practice ▸</text>
                 </g>
               </g>
               <g id="db-programs" transform="translate(32,784)">
-                <rect width="452" height="88" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
-                <rect x="16" y="14" width="120" height="8" rx="4" fill="#3D5670"/>
-                <rect x="16" y="32" width="30" height="30" rx="8" fill="url(#dbNight)"/>
-                <rect x="56" y="36" width="150" height="8" rx="4" fill="#3D5670"/><rect x="56" y="50" width="90" height="5" rx="2.5" fill="#C9D6E4"/>
-                <rect x="396" y="34" width="40" height="16" rx="5" fill="#1B3A5C"/>
-                <rect x="16" y="72" width="420" height="8" rx="4" fill="#E2E9F1"/><rect x="16" y="72" width="302" height="8" rx="4" fill="url(#dbFlameH)"/><circle cx="318" cy="76" r="6" fill="url(#dbTip)"/>
+                <rect width="296" height="88" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="14" y="10" width="26" height="26" rx="7" fill="url(#dbNight)"/><use href="#dbFl" transform="translate(18,13) scale(.42)" fill="#F8B96B"/>
+                <text x="48" y="19" font-size="10" font-weight="700" letter-spacing=".07em" fill="#5B7290">CERTIFICATE · CLOSEST</text>
+                <text x="48" y="33" font-size="11.5" font-weight="800" fill="#1B3A5C">Bookkeeping Certificate</text>
+                <text x="282" y="33" text-anchor="end" font-size="16" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">72%</text>
+                <rect x="14" y="42" width="268" height="7" rx="3.5" fill="#E9EEF5"/><rect x="14" y="42" width="193" height="7" rx="3.5" fill="url(#dbFlameH)"/><circle cx="207" cy="45.5" r="5.5" fill="url(#dbTip)"/>
+                <text x="14" y="62" font-size="10" fill="#3D5670">2 objectives left, written by the program designer:</text>
+                <text x="14" y="73" font-size="10" fill="#5B7290">“Prepare the four core financial statements” ·</text>
+                <text x="14" y="84" font-size="10" fill="#5B7290">“Apply the accrual basis of accounting”</text>
               </g>
-              <g id="db-programs-2" transform="translate(516,784)">
-                <rect width="452" height="88" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
-                <rect x="16" y="14" width="104" height="8" rx="4" fill="#3D5670"/>
-                <rect x="16" y="32" width="30" height="30" rx="8" fill="url(#dbNight)"/>
-                <rect x="56" y="36" width="132" height="8" rx="4" fill="#3D5670"/><rect x="56" y="50" width="104" height="5" rx="2.5" fill="#C9D6E4"/>
-                <rect x="396" y="34" width="40" height="16" rx="5" fill="#1B3A5C"/>
-                <rect x="16" y="72" width="420" height="8" rx="4" fill="#E2E9F1"/><rect x="16" y="72" width="160" height="8" rx="4" fill="url(#dbFlameH)"/><circle cx="176" cy="76" r="6" fill="url(#dbTip)"/>
+              <g id="db-programs-2" transform="translate(352,784)">
+                <rect width="296" height="88" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="14" y="10" width="26" height="26" rx="7" fill="url(#dbNight)"/><use href="#dbFl" transform="translate(18,13) scale(.42)" fill="#F8B96B"/>
+                <text x="48" y="19" font-size="10" font-weight="700" letter-spacing=".07em" fill="#5B7290">CERTIFICATE</text>
+                <text x="48" y="33" font-size="11.5" font-weight="800" fill="#1B3A5C">Accounting Certificate</text>
+                <text x="282" y="33" text-anchor="end" font-size="16" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">38%</text>
+                <rect x="14" y="42" width="268" height="7" rx="3.5" fill="#E9EEF5"/><rect x="14" y="42" width="102" height="7" rx="3.5" fill="url(#dbFlameH)"/><circle cx="116" cy="45.5" r="5.5" fill="url(#dbTip)"/>
+                <text x="14" y="62" font-size="10" fill="#3D5670" style="font-variant-numeric:tabular-nums">Financial Accounting 64% · Cost Accounting 22%</text>
+                <text x="14" y="76" font-size="10" fill="#5B7290">Progress flows in automatically — no sign-up needed.</text>
+              </g>
+              <g id="db-programs-3" transform="translate(672,784)">
+                <rect width="296" height="88" rx="12" fill="#FFFFFF" stroke="#E2E9F1"/>
+                <rect x="14" y="10" width="26" height="26" rx="7" fill="url(#dbNight)"/><use href="#dbFl" transform="translate(18,13) scale(.42)" fill="#F8B96B"/>
+                <text x="48" y="19" font-size="10" font-weight="700" letter-spacing=".07em" fill="#5B7290">DEGREE TRACK</text>
+                <text x="48" y="33" font-size="11.5" font-weight="800" fill="#1B3A5C">A.S. Business — Business Core</text>
+                <text x="282" y="33" text-anchor="end" font-size="16" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">12%</text>
+                <rect x="14" y="42" width="268" height="7" rx="3.5" fill="#E9EEF5"/><rect x="14" y="42" width="32" height="7" rx="3.5" fill="url(#dbFlameH)"/><circle cx="46" cy="45.5" r="5.5" fill="url(#dbTip)"/>
+                <text x="14" y="62" font-size="10" fill="#3D5670" style="font-variant-numeric:tabular-nums">Introduction to Business (GEB 1011) · 100%</text>
+                <text x="14" y="76" font-size="10" fill="#5B7290" style="font-variant-numeric:tabular-nums">Financial Accounting (ACG 2021) · 64%</text>
               </g>
             </g>
-            <rect width="1000" height="892" rx="16" fill="none" stroke="#C9D6E4"/>
+            <rect width="1000" height="892" rx="16" fill="none" stroke="#CBD5E1"/>
           </svg>
           <svg id="sp-overlay" class="overlay" viewBox="0 0 1000 892" aria-hidden="true">
             <style>
@@ -891,47 +1008,69 @@ h1{
               <rect id="ph-frame" x="6" y="6" width="328" height="688" rx="46" fill="#0A1A2E" stroke="rgba(185,203,222,.35)" stroke-width="1.2"/>
               <g clip-path="url(#phClip)">
                 <rect x="18" y="18" width="304" height="664" fill="#F2F5FA"/>
+                <rect x="18" y="18" width="304" height="66" fill="#FFFFFF"/>
                 <rect x="130" y="28" width="80" height="16" rx="8" fill="#0A1A2E"/>
-                <rect x="34" y="32" width="24" height="6" rx="3" fill="#1B3A5C"/>
-                <use href="#phFl" transform="translate(32,54) scale(.9)" fill="url(#phFlame)"/>
-                <rect x="58" y="60" width="70" height="9" rx="4.5" fill="#1B3A5C"/>
-                <rect x="232" y="56" width="72" height="20" rx="10" fill="#FFFFFF" stroke="#C9D6E4"/>
-                <use href="#phFl" transform="translate(238,59) scale(.5)" fill="#C2410C"/><rect x="256" y="63" width="38" height="6" rx="3" fill="#3D5670"/>
-                <rect x="18" y="88" width="304" height="118" fill="url(#phHero)"/>
-                <circle cx="300" cy="96" r="80" fill="url(#phGlow)"/>
-                <rect x="34" y="104" width="90" height="6" rx="3" fill="#F8B96B"/>
-                <rect x="34" y="118" width="240" height="11" rx="5.5" fill="#FFFFFF" opacity=".92"/>
-                <rect x="34" y="136" width="196" height="8" rx="4" fill="#B9CBDE" opacity=".8"/>
-                <g id="ph-cta"><rect x="34" y="156" width="200" height="26" rx="13" fill="#C2410C"/><path d="M48 163l8 6-8 6Z" fill="#FFFFFF"/><rect x="62" y="166" width="150" height="7" rx="3.5" fill="#FFFFFF" opacity=".92"/></g>
+                <text x="34" y="40" font-size="10" font-weight="700" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">9:41</text>
+                <use href="#phFl" transform="translate(32,52) scale(.85)" fill="url(#phFlame)"/>
+                <text x="54" y="67" font-size="13" font-weight="800" letter-spacing="-.02em" fill="#1B3A5C">Path<tspan fill="#C2410C">light</tspan></text>
+                <rect x="240" y="50" width="66" height="20" rx="10" fill="#FFFFFF" stroke="#CBD5E1"/>
+                <use href="#phFl" transform="translate(246,53) scale(.45)" fill="#C2410C"/>
+                <text x="262" y="64" font-size="10" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">342<tspan font-weight="600" fill="#5B7290"> Lz</tspan></text>
+                <rect x="18" y="84" width="304" height="134" fill="url(#phHero)"/>
+                <circle cx="300" cy="92" r="80" fill="url(#phGlow)"/>
+                <text x="34" y="106" font-size="8" font-weight="700" letter-spacing=".12em" fill="#F8B96B">THE PATH LIGHTS UP</text>
+                <text x="34" y="128" font-size="12" font-weight="800" fill="#FFFFFF">Good morning, Jordan — your path</text>
+                <text x="34" y="144" font-size="12" font-weight="800" fill="#FFFFFF">is 72% lit to your first certificate.</text>
+                <g id="ph-cta"><rect x="34" y="158" width="252" height="26" rx="13" fill="#C2410C"/><path d="M46 165l7 5.5-7 5.5Z" fill="#FFFFFF"/><text x="58" y="175" font-size="9.5" font-weight="700" fill="#FFFFFF">Watch “Accrual vs. Cash” · 15 Luminz</text></g>
+                <text x="34" y="204" font-size="9" fill="#B9CBDE" style="font-variant-numeric:tabular-nums">3 of 5 learning days · 342 Luminz · +38 this week</text>
                 <g id="ph-kpis">
-                  <g transform="translate(34,218)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="60" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="44" height="12" rx="4" fill="#1B3A5C"/><rect x="10" y="46" width="118" height="5" rx="2.5" fill="#E2E9F1"/><rect x="10" y="46" width="82" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
-                  <g transform="translate(182,218)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="68" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="38" height="12" rx="4" fill="#1B3A5C"/><rect x="10" y="46" width="118" height="5" rx="2.5" fill="#E2E9F1"/><rect x="10" y="46" width="85" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
-                  <g transform="translate(34,290)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="52" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="46" height="12" rx="4" fill="#1B3A5C"/><use href="#phFl" transform="translate(62,22) scale(.5)" fill="#C2410C"/><rect x="10" y="46" width="90" height="5" rx="2.5" fill="#E2E9F1"/></g>
-                  <g transform="translate(182,290)"><rect width="138" height="64" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><rect x="10" y="10" width="56" height="5" rx="2.5" fill="#C9D6E4"/><rect x="10" y="22" width="34" height="12" rx="4" fill="#1B3A5C"/><rect x="10" y="46" width="118" height="5" rx="2.5" fill="#E2E9F1"/><rect x="10" y="46" width="34" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
+                  <g transform="translate(34,232)"><rect width="138" height="68" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><text x="10" y="17" font-size="8.5" font-weight="600" fill="#5B7290">Standards mastered</text><text x="10" y="41" font-size="17" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">36<tspan font-size="10" font-weight="700" fill="#5B7290"> / 52</tspan></text><rect x="10" y="52" width="118" height="5" rx="2.5" fill="#E9EEF5"/><rect x="10" y="52" width="81" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
+                  <g transform="translate(182,232)"><rect width="138" height="68" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/><text x="10" y="17" font-size="8.5" font-weight="600" fill="#5B7290">Nearest credential</text><text x="10" y="41" font-size="17" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">72<tspan font-size="10" font-weight="700" fill="#5B7290">%</tspan></text><rect x="10" y="52" width="118" height="5" rx="2.5" fill="#E9EEF5"/><rect x="10" y="52" width="85" height="5" rx="2.5" fill="url(#phFlameH)"/></g>
                 </g>
-                <g id="ph-ember" transform="translate(34,366)">
-                  <rect width="286" height="118" rx="10" fill="#FFFFFF" stroke="#F4D9BC" stroke-width="1.4"/>
-                  <circle cx="22" cy="22" r="10" fill="url(#phFlame)"/><use href="#phFl" transform="translate(16,16) scale(.5)" fill="#FFFFFF"/>
-                  <rect x="40" y="16" width="90" height="7" rx="3.5" fill="#3D5670"/><rect x="40" y="27" width="64" height="5" rx="2.5" fill="#C9D6E4"/>
-                  <rect x="12" y="42" width="262" height="42" rx="8" fill="#E9EEF5"/>
-                  <rect x="24" y="52" width="230" height="6" rx="3" fill="#BCCCDC"/><rect x="24" y="63" width="190" height="6" rx="3" fill="#BCCCDC"/>
-                  <rect x="12" y="92" width="72" height="16" rx="8" fill="#FFFFFF" stroke="#C9D6E4"/><rect x="92" y="92" width="94" height="16" rx="8" fill="#FFFFFF" stroke="#C9D6E4"/>
+                <g id="ph-ember">
+                  <rect x="34" y="316" width="286" height="92" rx="10" fill="#FFFFFF" stroke="#F4D9BC" stroke-width="1.4"/>
+                  <circle cx="54" cy="338" r="10" fill="url(#phFlame)"/><use href="#phFl" transform="translate(48,332) scale(.5)" fill="#FFFFFF"/>
+                  <text x="72" y="336" font-size="10.5" font-weight="800" fill="#1B3A5C">Ember — your AI guide</text>
+                  <text x="304" y="337" text-anchor="end" font-size="11" font-weight="700" fill="#5B7290">›</text>
+                  <text x="48" y="354" font-size="9" fill="#3D5670">The <tspan font-weight="700">Accrual vs. Cash</tspan> video is ready — its 15.4</text>
+                  <text x="48" y="366" font-size="9" fill="#3D5670">Luminz flow toward your Bookkeeping Certificate…</text>
+                  <rect x="48" y="374" width="78" height="16" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/><text x="87" y="385" text-anchor="middle" font-size="8" font-weight="700" fill="#1B3A5C">Start the video</text>
+                  <rect x="132" y="374" width="70" height="16" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/><text x="167" y="385" text-anchor="middle" font-size="8" font-weight="700" fill="#1B3A5C">Plan my week</text>
+                  <text x="48" y="402" font-size="8" fill="#5B7290">Ember is AI and can make mistakes — your teacher can help.</text>
                 </g>
-                <g id="ph-next" transform="translate(34,496)">
-                  <rect width="286" height="106" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/>
-                  <rect x="12" y="14" width="100" height="7" rx="3.5" fill="#3D5670"/>
-                  <circle cx="24" cy="44" r="8" fill="url(#phFlame)"/><rect x="40" y="38" width="150" height="7" rx="3.5" fill="#3D5670"/><rect x="40" y="49" width="100" height="4" rx="2" fill="#C9D6E4"/><rect x="212" y="38" width="62" height="13" rx="6.5" fill="#DBEAFE"/>
-                  <circle cx="24" cy="78" r="8" fill="#E9EEF5" stroke="#C9D6E4"/><rect x="40" y="72" width="136" height="7" rx="3.5" fill="#3D5670" opacity=".8"/><rect x="40" y="83" width="92" height="4" rx="2" fill="#C9D6E4"/><rect x="212" y="72" width="62" height="13" rx="6.5" fill="#FEF3C7"/>
+                <g id="ph-next">
+                  <rect x="34" y="424" width="286" height="136" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/>
+                  <text x="46" y="444" font-size="10.5" font-weight="800" fill="#1B3A5C">Work on next</text>
+                  <circle cx="54" cy="465" r="8" fill="url(#phFlame)"/><text x="54" y="468" text-anchor="middle" font-size="8.5" font-weight="800" fill="#FFFFFF">1</text>
+                  <text x="68" y="468" font-size="9" font-weight="700" fill="#1B3A5C">Watch “Accrual vs. Cash Accounting”</text>
+                  <rect x="262" y="457" width="46" height="15" rx="7.5" fill="#FDEBD9"/><text x="285" y="467.5" text-anchor="middle" font-size="8" font-weight="700" fill="#C2410C" style="font-variant-numeric:tabular-nums">+15.4</text>
+                  <circle cx="54" cy="491" r="8" fill="#E9EEF5" stroke="#CBD5E1"/><text x="54" y="494" text-anchor="middle" font-size="8.5" font-weight="700" fill="#3D5670">2</text>
+                  <text x="68" y="494" font-size="9" font-weight="700" fill="#1B3A5C">Watch “Triangle Congruence”</text>
+                  <rect x="262" y="483" width="46" height="15" rx="7.5" fill="#FDEBD9"/><text x="285" y="493.5" text-anchor="middle" font-size="8" font-weight="700" fill="#C2410C" style="font-variant-numeric:tabular-nums">+12.4</text>
+                  <circle cx="54" cy="517" r="8" fill="#E9EEF5" stroke="#CBD5E1"/><text x="54" y="520" text-anchor="middle" font-size="8.5" font-weight="700" fill="#3D5670">3</text>
+                  <text x="68" y="520" font-size="9" font-weight="700" fill="#1B3A5C">Practice triangle theorems</text>
+                  <rect x="254" y="509" width="54" height="15" rx="7.5" fill="#DCFCE7"/><text x="281" y="519.5" text-anchor="middle" font-size="8" font-weight="700" fill="#15803D" style="font-variant-numeric:tabular-nums">13 of 18</text>
+                  <circle cx="54" cy="543" r="8" fill="#E9EEF5" stroke="#CBD5E1"/><text x="54" y="546" text-anchor="middle" font-size="8.5" font-weight="700" fill="#3D5670">4</text>
+                  <text x="68" y="546" font-size="9" font-weight="700" fill="#1B3A5C">Finish the SAT Reading quiz</text>
+                  <rect x="262" y="535" width="46" height="15" rx="7.5" fill="#FDEBD9"/><text x="285" y="545.5" text-anchor="middle" font-size="8" font-weight="700" fill="#C2410C" style="font-variant-numeric:tabular-nums">+14.8</text>
                 </g>
-                <g id="ph-program" transform="translate(34,614)">
-                  <rect width="286" height="40" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/>
-                  <rect x="12" y="10" width="100" height="6" rx="3" fill="#3D5670"/>
-                  <rect x="12" y="24" width="200" height="6" rx="3" fill="#E2E9F1"/><rect x="12" y="24" width="144" height="6" rx="3" fill="url(#phFlameH)"/>
-                  <rect x="240" y="12" width="34" height="14" rx="4" fill="#1B3A5C"/>
+                <g id="ph-program">
+                  <rect x="34" y="572" width="286" height="52" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/>
+                  <text x="46" y="592" font-size="9.5" font-weight="700" fill="#1B3A5C">Bookkeeping Certificate</text>
+                  <text x="308" y="592" text-anchor="end" font-size="11" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">72%</text>
+                  <rect x="46" y="602" width="262" height="6" rx="3" fill="#E9EEF5"/><rect x="46" y="602" width="189" height="6" rx="3" fill="url(#phFlameH)"/><circle cx="235" cy="605" r="4.5" fill="url(#phFlame)"/>
                 </g>
-                <rect x="18" y="662" width="304" height="1" fill="#E2E9F1"/>
-                <rect x="18" y="663" width="304" height="19" fill="#FFFFFF"/>
-                <circle cx="76" cy="672" r="3.5" fill="#C2410C"/><circle cx="139" cy="672" r="3.5" fill="#C9D6E4"/><circle cx="202" cy="672" r="3.5" fill="#C9D6E4"/><circle cx="265" cy="672" r="3.5" fill="#C9D6E4"/>
+                <rect x="18" y="640" width="304" height="1" fill="#E5EBF2"/>
+                <rect x="18" y="641" width="304" height="41" fill="#FFFFFF"/>
+                <use href="#phFl" transform="translate(47,646) scale(.62)" fill="#C2410C"/>
+                <text x="56" y="676" text-anchor="middle" font-size="8" font-weight="700" fill="#C2410C">Home</text>
+                <path d="M127 649l10 7-10 7Z" fill="#5B7290"/>
+                <circle cx="142" cy="650" r="6.5" fill="#C2410C"/><text x="142" y="653" text-anchor="middle" font-size="8" font-weight="800" fill="#FFFFFF">4</text>
+                <text x="132" y="676" text-anchor="middle" font-size="8" font-weight="600" fill="#5B7290">Videos</text>
+                <circle cx="208" cy="655" r="7" fill="none" stroke="#5B7290" stroke-width="1.5"/><circle cx="208" cy="655" r="2.5" fill="#5B7290"/>
+                <text x="208" y="676" text-anchor="middle" font-size="8" font-weight="600" fill="#5B7290">Progress</text>
+                <rect x="276" y="648" width="16" height="12" rx="4" fill="none" stroke="#5B7290" stroke-width="1.5"/><path d="M281 660v4l5-4" fill="none" stroke="#5B7290" stroke-width="1.5" stroke-linejoin="round"/>
+                <text x="284" y="676" text-anchor="middle" font-size="8" font-weight="600" fill="#5B7290">Ember</text>
               </g>
             </svg>
             <svg id="sp2-overlay" class="overlay" viewBox="0 0 340 700" aria-hidden="true">
@@ -954,18 +1093,22 @@ h1{
             <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
               <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
             </svg>
-            <span id="stepEyebrow">STEP 1 OF 8</span>
+            <span id="stepEyebrow">SECTION 1 OF 8</span>
           </p>
           <div class="step-body" id="stepBody">
             <h2 class="step-title" id="stepTitle">The path lights up</h2>
             <p class="step-text" id="stepText">One greeting, one live number — 72% lit — and one CTA, bound to the learner's next best step. Never a menu.</p>
           </div>
           <div class="step-controls">
-            <button class="stepbtn" id="stepPrev" aria-label="Previous tour step">←</button>
-            <div class="pips" id="pips" role="group" aria-label="Tour steps"></div>
-            <button class="stepbtn" id="stepNext" aria-label="Next tour step">→</button>
+            <p class="step-count" id="stepCount">Section 1 of 8 — The path lights up</p>
+            <div class="pips" id="pips" role="group" aria-label="Tour sections"></div>
+            <div class="tour-nav">
+              <button class="tourbtn tourbtn-back" id="stepPrev">← Back</button>
+              <button class="tourbtn tourbtn-next" id="stepNext">Next section →</button>
+            </div>
           </div>
         </div>
+        <p class="tour-hint" id="tourHint">8 sections in this tour</p>
         <p class="why"><span class="why-label">Why it matters</span>One page turns mastery data into the next action — engagement designed in, not bolted on.</p>
       </aside>
     </div>
@@ -988,7 +1131,7 @@ h1{
     <h1>Proof, not seat time.</h1>
     <p class="subline">Education measured by what a learner can prove — that is the whole idea.</p>
     <p class="define">Next: walk the full specification and the working prototypes.</p>
-    <a class="contact" href="mailto:ryan@shooksolutions.com">ryan@shooksolutions.com</a>
+    <a class="contact" href="mailto:rshook@academica.org">rshook@academica.org</a>
     <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">The design decisions are locked and the prototypes run today — execution, not exploration.</span></p>
   </div>
 </section>
@@ -1060,7 +1203,8 @@ h1{
       var b = document.createElement("button");
       b.className = "pip";
       b.type = "button";
-      b.setAttribute("aria-label", "Tour step " + (i + 1) + ": " + STEPS[i].t);
+      b.textContent = String(i + 1);
+      b.setAttribute("aria-label", "Go to section " + (i + 1) + " of 8: " + STEPS[i].t);
       (function (idx) {
         b.addEventListener("click", function () { setStep(idx + 1, false); });
       })(i);
@@ -1085,7 +1229,7 @@ h1{
   }
   function announce() {
     var msg = "Scene " + (cur + 1) + " of 9 — " + TITLES[cur];
-    if (cur === 7) { msg += " · Step " + step + " of 8: " + STEPS[step - 1].t; }
+    if (cur === 7) { msg += " · Section " + step + " of 8: " + STEPS[step - 1].t; }
     announcer.textContent = msg;
   }
 
@@ -1117,21 +1261,39 @@ h1{
     var card = $("fl-card");
     if (!card || typeof card.animate !== "function") { return; }
     var EASE = "cubic-bezier(.22,.9,.24,1)";
-    /* card travels the track, then snaps onto the objective (shipped markup = final frame) */
+    /* card walks the track with a 150ms micro-pause at each gate, then snaps
+       onto the objective (shipped markup = final frame) */
     flowAnims.push(card.animate([
       { transform: "translate(60px,210px)", easing: EASE, offset: 0 },
-      { transform: "translate(560px,210px)", easing: EASE, offset: 0.842 },
-      { transform: "translate(653px,112px)", easing: EASE, offset: 0.96 },
+      { transform: "translate(216px,210px)", easing: "linear", offset: 0.227 },
+      { transform: "translate(216px,210px)", easing: "linear", offset: 0.261 },
+      { transform: "translate(320px,210px)", easing: "linear", offset: 0.413 },
+      { transform: "translate(320px,210px)", easing: "linear", offset: 0.447 },
+      { transform: "translate(424px,210px)", easing: "linear", offset: 0.598 },
+      { transform: "translate(424px,210px)", easing: "linear", offset: 0.632 },
+      { transform: "translate(528px,210px)", easing: "linear", offset: 0.784 },
+      { transform: "translate(528px,210px)", easing: "linear", offset: 0.818 },
+      { transform: "translate(560px,210px)", easing: EASE, offset: 0.865 },
+      { transform: "translate(653px,112px)", easing: EASE, offset: 0.966 },
       { transform: "translate(653px,118px)", offset: 1 }
-    ], { duration: 3800, fill: "both" }));
-    /* traveled length lights behind the card */
+    ], { duration: 4400, fill: "both" }));
+    /* traveled length lights behind the card (pauses where the card pauses) */
     var td = $("fl-track-done");
     flowAnims.push(td.animate([
-      { strokeDasharray: "100", strokeDashoffset: 100 },
-      { strokeDasharray: "100", strokeDashoffset: 0 }
-    ], { duration: 3200, easing: "linear", fill: "both" }));
-    /* gates fire as the card center crosses them */
-    var gates = [[700, "fl-g1"], [1500, "fl-g2"], [2300, "fl-g3"], [3100, "fl-g4"]];
+      { strokeDasharray: "100", strokeDashoffset: 100, easing: EASE, offset: 0 },
+      { strokeDasharray: "100", strokeDashoffset: 68.8, easing: "linear", offset: 0.227 },
+      { strokeDasharray: "100", strokeDashoffset: 68.8, easing: "linear", offset: 0.261 },
+      { strokeDasharray: "100", strokeDashoffset: 48, easing: "linear", offset: 0.413 },
+      { strokeDasharray: "100", strokeDashoffset: 48, easing: "linear", offset: 0.447 },
+      { strokeDasharray: "100", strokeDashoffset: 27.2, easing: "linear", offset: 0.598 },
+      { strokeDasharray: "100", strokeDashoffset: 27.2, easing: "linear", offset: 0.632 },
+      { strokeDasharray: "100", strokeDashoffset: 6.4, easing: "linear", offset: 0.784 },
+      { strokeDasharray: "100", strokeDashoffset: 6.4, easing: "linear", offset: 0.818 },
+      { strokeDasharray: "100", strokeDashoffset: 0, easing: "linear", offset: 0.865 },
+      { strokeDasharray: "100", strokeDashoffset: 0, offset: 1 }
+    ], { duration: 4400, easing: "linear", fill: "both" }));
+    /* gates fire as the card arrives — the tick lands inside the micro-pause */
+    var gates = [[1000, "fl-g1"], [1820, "fl-g2"], [2630, "fl-g3"], [3450, "fl-g4"]];
     for (var g = 0; g < gates.length; g++) {
       var el = $(gates[g][1]);
       var tick = el.querySelector(".tick-in");
@@ -1143,12 +1305,12 @@ h1{
     }
     /* connector click + objective pulse + Lz pop (the value arrived with the card) */
     flowAnims.push($("fl-snap").animate([{ opacity: 0 }, { opacity: 1 }],
-      { duration: 150, delay: 3650, fill: "backwards" }));
+      { duration: 150, delay: 4250, fill: "backwards" }));
     flowAnims.push($("fl-objective").animate([{ opacity: 0.85 }, { opacity: 1 }],
-      { duration: 400, delay: 3650, easing: EASE, fill: "backwards" }));
+      { duration: 400, delay: 4250, easing: EASE, fill: "backwards" }));
     flowAnims.push(document.querySelector("#fl-lz .pop-in").animate([
       { transform: "scale(1)" }, { transform: "scale(1.18)", offset: 0.5 }, { transform: "scale(1)" }
-    ], { duration: 300, delay: 3800, easing: EASE, fill: "none" }));
+    ], { duration: 300, delay: 4400, easing: EASE, fill: "none" }));
   }
 
   /* ============ scene 7 · Luminz counter (rAF, 900ms; final frame is shipped) ============ */
@@ -1248,6 +1410,8 @@ h1{
         }, 1550 + row * 160));
       })(r);
     }
+    /* the money moment: the 9% toast pops once the third bar lands */
+    ctTimers.push(setTimeout(function () { ctPop("s7toast"); }, 2340));
   }
 
   /* ============ scene 8 · spotlight tour ============ */
@@ -1265,7 +1429,11 @@ h1{
   }
   function setStep(n, instant) {
     step = Math.max(1, Math.min(8, n));
-    $("stepEyebrow").textContent = "STEP " + step + " OF 8";
+    $("stepEyebrow").textContent = "SECTION " + step + " OF 8";
+    $("stepCount").textContent = "Section " + step + " of 8 — " + STEPS[step - 1].t;
+    $("stepNext").textContent = step === 8 ? "Finish tour →" : "Next section →";
+    var hint = $("tourHint");
+    if (hint) { hint.hidden = step !== 1; }
     var body = $("stepBody");
     function swap() {
       $("stepTitle").textContent = STEPS[step - 1].t;
