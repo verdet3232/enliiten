@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0F2238">
 <title>Enliten UI/UX Walkthrough · Enliten Luminz</title>
 <meta property="og:title" content="The Enliten UI/UX Walkthrough">
-<meta property="og:description" content="Nine scenes: videos become Luminz, Luminz become credentials. A guided concept tour.">
+<meta property="og:description" content="Seventeen scenes: videos become Luminz, Luminz become credentials. A guided concept tour.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22td%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23F2A233%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23D0491F%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%225%22%20y%3D%225%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%224.5%22%20fill%3D%22url(%23td)%22%20transform%3D%22rotate(45%2012%2012)%22%2F%3E%3C%2Fsvg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   ENLITEN INVESTOR WALKTHROUGH — 9 scenes, one file
-   "Night & Flame" v1.0 · Shook Solutions · 07-01-2026
+   ENLITEN INVESTOR WALKTHROUGH — 17 scenes, one file
+   "Night & Flame" v10 · Shook Solutions · 07-03-2026
    ============================================================ */
 :root{
   /* night ground */
@@ -130,12 +130,12 @@ button{font:inherit;color:inherit}
 /* entrance choreography (re-triggered per entry) */
 @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @keyframes glowIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-.anim-play .copy>*,.anim-play .cover>*,.anim-play .tour-head>*{animation:rise .7s var(--ease) both}
+.anim-play .copy>*,.anim-play .cover>*{animation:rise .7s var(--ease) both}
 .anim-play .eyebrow{animation-delay:.05s}
 .anim-play h1{animation-delay:.14s}
-.anim-play .define,.anim-play .subline,.anim-play .pipeline,.anim-play .lockup,.anim-play .tour-intro{animation-delay:.26s}
+.anim-play .define,.anim-play .subline,.anim-play .pipeline,.anim-play .lockup{animation-delay:.26s}
 .anim-play .why,.anim-play .cta,.anim-play .toast,.anim-play .contact{animation-delay:.4s}
-.anim-play .art,.anim-play .tour-grid{animation:glowIn .8s var(--ease) .3s both}
+.anim-play .art{animation:glowIn .8s var(--ease) .3s both}
 .anim-play .logoslot{animation:glowIn .8s var(--ease) .1s both}
 .anim-play .cover-accent{animation:glowIn .8s var(--ease) 0s both}
 @keyframes corePulse{0%,100%{opacity:.55}50%{opacity:1}}
@@ -143,10 +143,6 @@ button{font:inherit;color:inherit}
 #hd-ladder #hd-v1-solid,#hd-ladder #hd-v2-solid{transition-delay:.15s}
 @keyframes popIn{0%{transform:scale(.85)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
 .anim-pop{animation:popIn .35s var(--ease)}
-@keyframes stepOut{to{opacity:0;transform:translateY(8px)}}
-@keyframes stepIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.anim-step-out{animation:stepOut var(--t-fast) var(--ease) both}
-.anim-step-in{animation:stepIn 250ms var(--ease) 120ms both}
 
 /* ---------- type roles ---------- */
 .eyebrow{
@@ -242,82 +238,31 @@ h1{
 }
 .logoslot[data-size="close"] .logo-word{font-size:clamp(30px,4vw,42px)}
 
-/* ---------- tour (scene 8) ---------- */
-.tour{display:flex;flex-direction:column;max-width:1280px;width:100%;margin:0 auto;min-height:0;gap:var(--sp-3)}
-.tour-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
-.tour-head .eyebrow{margin-bottom:0}
-.tour-head h1{font-size:clamp(34px,4.2vw,58px)}
-.tour-intro{font-size:clamp(13px,1.4vw,15px);color:var(--mist)}
-.tour-grid{
-  flex:1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3.4fr);
-  gap:clamp(20px,3vw,40px);align-items:center;min-height:0;
-}
-.tour-art{position:relative;display:flex;justify-content:center;align-items:center;min-height:0;height:100%}
-.art-desk{position:relative;width:min(100%,calc((100vh - 264px)*1.121));border-radius:16px;box-shadow:var(--shadow-plate);transition:opacity .4s var(--ease)}
-.art-desk svg,.art-phone svg{display:block;width:100%;height:auto}
-.art-phone{
-  position:absolute;inset:0;display:flex;justify-content:center;align-items:center;
-  opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
-}
-.art-phone .phone-box{position:relative;width:min(40vw,calc((100vh - 280px)*.486),270px)}
-.tour-art.show-phone .art-phone{opacity:1}
-.tour-art.show-phone .art-desk{opacity:0}
+/* ---------- dashboard scenes 8–15 & phone scene 16 ---------- */
+.dash-art{position:relative;display:flex;justify-content:center;min-width:0;width:100%}
+.art-desk{position:relative;width:100%;border-radius:16px;box-shadow:var(--shadow-plate)}
+.dash-art .art-desk svg{display:block;width:100%;height:auto}
 .overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.tour-side{display:flex;flex-direction:column;gap:var(--sp-4);min-width:0}
-.ann{
-  background:var(--panel);border:1px solid var(--hairline);border-radius:var(--r-lg);
-  box-shadow:var(--shadow-panel),var(--ring-ember);padding:var(--sp-5);
-}
-.step-eyebrow{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--flame-light)}
-.step-title{font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--star);margin-top:10px;background:none;-webkit-text-fill-color:currentColor}
-.step-text{font-size:13.5px;line-height:1.5;color:var(--mist);margin-top:6px;min-height:5.2em}
-.step-controls{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:14px;border-top:1px solid var(--hairline);padding-top:12px}
-.step-count{font-size:13px;font-weight:700;letter-spacing:.01em;color:var(--star);text-align:center}
-.pips{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
-.pip{
-  width:24px;height:24px;border:1px solid var(--hairline);background:rgba(15,34,56,.45);padding:0;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;border-radius:8px;
-  font-size:11px;font-weight:700;color:var(--dim);transition:all .25s var(--ease);
-}
-.pip:hover{border-color:var(--flame-light);color:var(--flame-light)}
-.pip.done{color:var(--flame-light);border-color:rgba(245,166,35,.45)}
-.pip[aria-current]{background:var(--grad-flame);border-color:transparent;color:var(--night-0);box-shadow:var(--glow-flame-sm)}
-.tour-nav{display:flex;gap:10px}
-.tourbtn{
-  min-height:46px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
-  display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;
-  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease);
-}
-.tourbtn-back{flex:1;border:1px solid var(--hairline-strong);background:rgba(15,34,56,.55);color:var(--mist)}
-.tourbtn-back:hover{border-color:var(--flame-light);color:var(--flame-light)}
-.tourbtn-next{flex:1.7;border:0;background:var(--grad-flame);color:var(--night-0)}
-.tourbtn-next:hover{transform:translateY(-1px);box-shadow:var(--glow-flame-sm)}
-.tour-hint{font-size:12px;font-weight:600;color:var(--mist);text-align:center}
-.tour-hint[hidden]{display:none}
-.tour-side .why{margin-top:0}
+.art-phone{display:flex;justify-content:center;min-width:0}
+.art-phone .phone-box{position:relative;width:min(52vw,calc((100vh - 280px)*.486),270px)}
+.art-phone .phone-box svg{display:block;width:100%;height:auto}
+.dots-frac{display:none;align-items:center;gap:5px;font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--mist);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dots-frac .frac-cur{color:var(--flame-light)}
 
 /* ---------- responsive ---------- */
-@media (max-width:980px){
-  .tour-grid{grid-template-columns:1fr;align-items:start;gap:var(--sp-4)}
-  .tour-art{height:auto}
-  .art-desk{width:min(100%,calc(52vh*1.121))}
-  .art-phone .phone-box{width:min(52vw,calc(44vh*.486))}
-}
 @media (max-width:860px){
   .split{grid-template-columns:1fr;gap:26px;align-content:center}
   .split .copy{order:0}.split .art{order:1}
   .art svg,.art.art-wide svg{width:min(78vw,360px)}
   .navbtn{display:none}
+  .dots{display:none}
+  .dots-frac{display:flex}
   .define{max-width:none}
   .cover h1{font-size:clamp(44px,9vw,72px)}
 }
 @media (max-width:560px){
   .scene{padding-left:20px;padding-right:20px}
   .chrome{padding-left:20px;padding-right:20px}
-  .dots{gap:4px}
-  .dotbtn{width:20px;height:20px}
-  .dotbtn .dot{width:6px;height:6px}
-  .dotbtn[aria-current] .dot{width:18px;border-radius:5px}
   .crumb{display:none}
   .hint-swipe{font-size:11px}
 }
@@ -326,15 +271,12 @@ h1{
   .cover h1{font-size:clamp(44px,11.5vw,54px)}
   .define{font-size:16px}
   .art svg,.art.art-wide svg{width:min(78vw,320px)}
-  .ann{padding:var(--sp-4)}
-  .step-text{font-size:13px}
-  .art-desk{width:min(100%,calc(44vh*1.121))}
 }
 /* v9 readability: diagrams scale with width AND height on desktop.
    The ≥861 guard is mandatory — the ≤860/≤400 mobile rules above must keep
    winning below it by media match, not source order. */
 @media (min-width:861px){
-  .art.diagram svg{width:min(100%,620px,calc((100vh - 150px)*.87))}
+  .art.diagram svg{width:min(100%,640px,calc((100vh - 150px)*.9))}
   .art.art-wide svg{width:min(100%,720px)}
   /* scene 6 breaks out of the split: copy band on top, flow full-stage-width below */
   .split.wide{grid-template-columns:minmax(0,1fr);align-content:center;gap:clamp(18px,3vh,32px)}
@@ -343,7 +285,25 @@ h1{
   .split.wide .define{max-width:46ch}
   .split.wide .pipeline{max-width:none}
   .split.wide .why{margin-top:20px}
-  .split.wide .art.art-wide svg{width:min(100%,1100px,90vw,calc((100vh - 430px)*2.375))}
+  .split.wide .art.art-wide svg{width:min(100%,1100px,90vw,calc((100vh - 400px)*2.375))}
+  /* v10: dashboard section scenes — stacked band, per-scene zoom aspect */
+  .split.wide.dash .define{max-width:none;font-size:clamp(15px,1.35vw,19px)}
+  .split.wide.dash .why{margin-top:16px}
+  #dashSlot8 .art-desk{width:min(100%,calc((100vh - 320px)*1.121))}
+  #dashSlot9 .art-desk{width:min(100%,calc((100vh - 320px)*3.937))}
+  #dashSlot10 .art-desk{width:min(100%,calc((100vh - 320px)*4.237))}
+  #dashSlot11 .art-desk{width:min(100%,calc((100vh - 320px)*1.825))}
+  #dashSlot12 .art-desk{width:min(100%,calc((100vh - 320px)*1.825))}
+  #dashSlot13 .art-desk{width:min(100%,calc((100vh - 320px)*3.125))}
+  #dashSlot14 .art-desk{width:min(100%,calc((100vh - 320px)*3.378))}
+  #dashSlot15 .art-desk{width:min(100%,calc((100vh - 320px)*5.376))}
+  .art-phone .phone-box{width:min(36vw,calc((100vh - 250px)*.462),300px)}
+}
+/* v10: 17 dots — compact on mid-width fine pointers; fraction replaces dots <861 */
+@media (min-width:861px) and (max-width:1200px) and (pointer:fine){
+  .dotbtn{width:20px}
+  .dots{gap:6px}
+  .hint-keys > span:last-child{display:none}
 }
 @media (min-width:861px) and (max-height:720px){
   .split.wide{align-content:start} /* defer to the stage-scroll fix on short viewports */
@@ -370,8 +330,6 @@ h1{
 /* QA fix: 44px-class touch targets on coarse pointers */
 @media (pointer:coarse){
   .dotbtn{width:34px;height:44px}
-  .pip{width:34px;height:44px;border-radius:10px}
-  .tourbtn{min-height:48px}
   .navbtn{width:48px;height:48px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -397,11 +355,11 @@ h1{
 
 <footer class="chrome chrome-bot">
   <nav class="dots" id="dots" aria-label="Scene progress"></nav>
+  <p class="dots-frac" id="dotsFrac" aria-hidden="true"><span class="frac-cur" id="fracCur">1</span><span class="frac-total">/ 17</span></p>
   <div class="hint">
     <span class="hint-keys"><span class="key">←</span> <span class="key">→</span> <span>Scroll or press → to advance</span></span>
     <span class="hint-back">Press ← to go back</span>
     <span class="hint-swipe">Swipe between scenes on mobile</span>
-    <span class="hint-steps" id="hintSteps" hidden>· 8 sections</span>
   </div>
 </footer>
 
@@ -411,7 +369,7 @@ h1{
 
 <main id="scenes">
 <!-- ============ SCENE 1 · WELCOME ============ -->
-<section class="scene s1" id="s1" role="group" aria-roledescription="scene" aria-label="Scene 1 of 9 — Welcome">
+<section class="scene s1" id="s1" role="group" aria-roledescription="scene" aria-label="Scene 1 of 17 — Welcome">
   <div class="stage cover">
     <svg class="cover-accent" width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">
       <defs><linearGradient id="td1" x1="0" y1="0" x2="0" y2="1">
@@ -430,14 +388,14 @@ h1{
     </div>
     <p class="eyebrow">Enliten · Luminz</p>
     <h1>Welcome to the Enliten UI/UX Walkthrough</h1>
-    <p class="subline">Nine scenes. One belief: education measured by what you can prove — not seat time.</p>
+    <p class="subline">Seventeen scenes. One belief: education measured by what you can prove — not seat time.</p>
     <button class="cta" id="beginBtn">Begin</button>
     <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">You're about to see the loop that acquires, teaches, and retains learners.</span></p>
   </div>
 </section>
 
 <!-- ============ SCENE 2 · TERMINOLOGY ============ -->
-<section class="scene s2" id="s2" role="group" aria-roledescription="scene" aria-label="Scene 2 of 9 — But first, terminology">
+<section class="scene s2" id="s2" role="group" aria-roledescription="scene" aria-label="Scene 2 of 17 — But first, terminology">
   <div class="stage cover">
     <p class="eyebrow">Before the tour</p>
     <h1>But first — terminology.</h1>
@@ -447,7 +405,7 @@ h1{
 </section>
 
 <!-- ============ SCENE 3 · PROGRAMS ============ -->
-<section class="scene s3" id="s3" role="group" aria-roledescription="scene" aria-label="Scene 3 of 9 — Programs">
+<section class="scene s3" id="s3" role="group" aria-roledescription="scene" aria-label="Scene 3 of 17 — Programs">
   <div class="stage split">
     <div class="copy">
       <p class="eyebrow">Terminology · 1 of 3</p>
@@ -475,92 +433,92 @@ h1{
         </defs>
         <circle  id="hd-halo-a" class="fx vis-a" cx="260" cy="88"  r="118" fill="url(#hdHalo)"/>
         <ellipse id="hd-halo-b" class="fx vis-b" cx="260" cy="230" rx="238" ry="108" fill="url(#hdHalo)"/>
-        <circle  id="hd-halo-c" class="fx vis-c" cx="146" cy="336" r="100" fill="url(#hdHalo)"/>
-        <path id="hd-v1-ghost" class="fx vis-a" d="M260 136v24M146 160h228M146 160v24M374 160v24"
+        <circle  id="hd-halo-c" class="fx vis-c" cx="140" cy="336" r="100" fill="url(#hdHalo)"/>
+        <path id="hd-v1-ghost" class="fx vis-a" d="M260 136v24M140 160h240M140 160v24M380 160v24"
               fill="none" stroke="rgba(185,203,222,.25)" stroke-width="1.6" stroke-dasharray="4 6"/>
-        <path id="hd-v1-solid" class="fx vis-b vis-c" d="M260 136v24M146 160h228M146 160v24M374 160v24"
+        <path id="hd-v1-solid" class="fx vis-b vis-c" d="M260 136v24M140 160h240M140 160v24M380 160v24"
               fill="none" stroke="rgba(185,203,222,.55)" stroke-width="1.6"/>
-        <path id="hd-v2-ghost" class="fx vis-a vis-b" d="M146 276v32M374 276v32M146 364v12M374 364v12"
+        <path id="hd-v2-ghost" class="fx vis-a vis-b" d="M140 276v32M380 276v32M140 364v12M380 364v12"
               fill="none" stroke="rgba(185,203,222,.25)" stroke-width="1.6" stroke-dasharray="4 6"/>
-        <path id="hd-v2-solid" class="fx vis-c" d="M146 276v32M374 276v32M146 364v12M374 364v12"
+        <path id="hd-v2-solid" class="fx vis-c" d="M140 276v32M380 276v32M140 364v12M380 364v12"
               fill="none" stroke="rgba(185,203,222,.55)" stroke-width="1.6"/>
         <g id="lyr-program">
           <rect x="120" y="40" width="280" height="96" rx="16" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-          <text x="144" y="72" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623">PROGRAM</text>
+          <text x="144" y="72" font-size="11" font-weight="700" letter-spacing="1.8" fill="#F5A623">PROGRAM</text>
           <text x="144" y="100" font-size="18.5" font-weight="700" letter-spacing="-.37" fill="#FFFFFF">Bookkeeping Certificate</text>
-          <text x="144" y="120" font-size="12" font-weight="500" fill="#8FA6BD">degree · certificate · badge</text>
+          <text x="144" y="120" font-size="12.5" font-weight="500" fill="#8FA6BD">degree · certificate · badge</text>
           <g transform="translate(358,58)">
             <path fill="url(#hdFlame)" d="M14 0c.5 3-1 4.4-2.4 5.8C10.2 7.3 9 8.8 9 10.8a5 5 0 0 0 10 0c0-1.7-.8-2.9-1.7-3.8-.4.8-1 1.5-1.8 1.9.3-2.4-.3-6.2-1.5-8.9Z"/>
           </g>
         </g>
         <g id="lyr-courses">
           <g id="hd-courses-ghost" class="fx vis-a">
-            <rect x="36" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="56" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".55">COURSE</text>
-            <text x="56" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".55">Coming next…</text>
-            <rect x="264" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="284" y="216" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".55">COURSE</text>
+            <rect x="24" y="184" width="232" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="44" y="216" font-size="11" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".55">COURSE</text>
+            <text x="44" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".55">Coming next…</text>
+            <rect x="264" y="184" width="232" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="284" y="216" font-size="11" font-weight="700" letter-spacing="1.8" fill="#F5A623" opacity=".55">COURSE</text>
             <text x="284" y="242" font-size="15" font-weight="700" letter-spacing="-.3" fill="#FFFFFF" opacity=".55">Coming next…</text>
           </g>
           <g id="hd-courses-lit" class="fx vis-b vis-c">
-            <rect x="36" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="56" y="212" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623">COURSE</text>
-            <text x="56" y="236" font-size="16.5" font-weight="700" letter-spacing="-.33" fill="#FFFFFF">Financial Accounting</text>
-            <rect x="56" y="248" width="74" height="18" rx="9" fill="rgba(245,166,35,.14)" stroke="rgba(245,166,35,.45)" stroke-width="1"/>
-            <text x="93" y="260.5" text-anchor="middle" font-size="9.5" font-weight="700" letter-spacing=".8" fill="#F5A623">ACG 2021</text>
-            <rect x="264" y="184" width="220" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="284" y="212" font-size="10" font-weight="700" letter-spacing="1.8" fill="#F5A623">COURSE</text>
-            <text x="284" y="236" font-size="16.5" font-weight="700" letter-spacing="-.33" fill="#FFFFFF">Payroll Fundamentals</text>
-            <text x="284" y="260" font-size="11" font-weight="500" fill="#8FA6BD">certificate course</text>
+            <rect x="24" y="184" width="232" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="44" y="212" font-size="11" font-weight="700" letter-spacing="1.8" fill="#F5A623">COURSE</text>
+            <text x="44" y="236" font-size="17" font-weight="700" letter-spacing="-.34" fill="#FFFFFF">Financial Accounting</text>
+            <rect x="44" y="246" width="88" height="20" rx="10" fill="rgba(245,166,35,.14)" stroke="rgba(245,166,35,.45)" stroke-width="1"/>
+            <text x="88" y="260" text-anchor="middle" font-size="12" font-weight="700" letter-spacing=".8" fill="#F5A623">ACG 2021</text>
+            <rect x="264" y="184" width="232" height="92" rx="14" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="284" y="212" font-size="11" font-weight="700" letter-spacing="1.8" fill="#F5A623">COURSE</text>
+            <text x="284" y="236" font-size="17" font-weight="700" letter-spacing="-.34" fill="#FFFFFF">Payroll Fundamentals</text>
+            <text x="284" y="260" font-size="12" font-weight="500" fill="#8FA6BD">certificate course</text>
           </g>
         </g>
         <g id="lyr-objectives">
           <g id="hd-obj-ghost" class="fx vis-a vis-b">
-            <rect x="36" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="62" y="340" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
-            <rect x="264" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="290" y="340" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
-            <rect x="36" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="62" y="408" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
-            <rect x="264" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="290" y="408" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
-            <rect x="36" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="62" y="476" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
-            <rect x="264" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="290" y="476" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
-            <rect x="36" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="62" y="544" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
-            <rect x="264" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
-            <text x="290" y="544" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="24" y="308" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="50" y="340" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="308" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="340" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="24" y="376" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="50" y="408" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="376" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="408" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="24" y="444" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="50" y="476" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="444" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="476" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="24" y="512" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="50" y="544" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
+            <rect x="264" y="512" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="rgba(185,203,222,.35)" stroke-width="1.2" stroke-dasharray="5 6"/>
+            <text x="290" y="544" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623" opacity=".55">LEARNING OBJECTIVE</text>
           </g>
           <g id="hd-obj-lit" class="fx vis-c">
-            <rect x="36" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="62" y="327" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="62" y="342" font-size="11" font-weight="600" fill="#FFFFFF">Apply the accrual basis</text>
-            <text x="62" y="355" font-size="11" font-weight="600" fill="#FFFFFF">of accounting</text>
-            <rect x="264" y="308" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="290" y="331" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="290" y="348" font-size="11.5" font-weight="600" fill="#FFFFFF">Calculate gross-to-net pay</text>
-            <rect x="36" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="62" y="399" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="62" y="416" font-size="11.5" font-weight="600" fill="#FFFFFF">Prepare journal entries</text>
-            <rect x="264" y="376" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="290" y="399" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="290" y="416" font-size="11.5" font-weight="600" fill="#FFFFFF">Classify payroll liabilities</text>
-            <rect x="36" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="62" y="463" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="62" y="478" font-size="11" font-weight="600" fill="#FFFFFF">Record transactions with</text>
-            <text x="62" y="491" font-size="11" font-weight="600" fill="#FFFFFF">double-entry bookkeeping</text>
-            <rect x="264" y="444" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="290" y="463" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="290" y="478" font-size="11" font-weight="600" fill="#FFFFFF">Prepare the four core</text>
-            <text x="290" y="491" font-size="11" font-weight="600" fill="#FFFFFF">financial statements</text>
-            <rect x="36" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="62" y="535" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="62" y="552" font-size="11.5" font-weight="600" fill="#FFFFFF">Reconcile a bank statement</text>
-            <rect x="264" y="512" width="220" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
-            <text x="290" y="535" font-size="10" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
-            <text x="290" y="552" font-size="11.5" font-weight="600" fill="#FFFFFF">Explain internal controls</text>
+            <rect x="24" y="308" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="50" y="327" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="50" y="343" font-size="12" font-weight="600" fill="#FFFFFF">Apply the accrual basis</text>
+            <text x="50" y="357" font-size="12" font-weight="600" fill="#FFFFFF">of accounting</text>
+            <rect x="264" y="308" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="331" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="349" font-size="12" font-weight="600" fill="#FFFFFF">Calculate gross-to-net pay</text>
+            <rect x="24" y="376" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="50" y="399" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="50" y="417" font-size="12" font-weight="600" fill="#FFFFFF">Prepare journal entries</text>
+            <rect x="264" y="376" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="399" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="417" font-size="12" font-weight="600" fill="#FFFFFF">Classify payroll liabilities</text>
+            <rect x="24" y="444" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="50" y="463" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="50" y="479" font-size="12" font-weight="600" fill="#FFFFFF">Record transactions with</text>
+            <text x="50" y="493" font-size="12" font-weight="600" fill="#FFFFFF">double-entry bookkeeping</text>
+            <rect x="264" y="444" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="463" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="479" font-size="12" font-weight="600" fill="#FFFFFF">Prepare the four core</text>
+            <text x="290" y="493" font-size="12" font-weight="600" fill="#FFFFFF">financial statements</text>
+            <rect x="24" y="512" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="50" y="535" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="50" y="553" font-size="12" font-weight="600" fill="#FFFFFF">Reconcile a bank statement</text>
+            <rect x="264" y="512" width="232" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#hdFlame)" stroke-width="1.6"/>
+            <text x="290" y="535" font-size="11" font-weight="700" letter-spacing="1.5" fill="#F5A623">LEARNING OBJECTIVE</text>
+            <text x="290" y="553" font-size="12" font-weight="600" fill="#FFFFFF">Explain internal controls</text>
           </g>
         </g>
       </svg>
@@ -569,12 +527,12 @@ h1{
 </section>
 
 <!-- ============ SCENE 4 · COURSES ============ -->
-<section class="scene s4" id="s4" role="group" aria-roledescription="scene" aria-label="Scene 4 of 9 — Courses">
+<section class="scene s4" id="s4" role="group" aria-roledescription="scene" aria-label="Scene 4 of 17 — Courses">
   <div class="stage split">
     <div class="copy">
       <p class="eyebrow">Terminology · 2 of 3</p>
       <h1>Courses</h1>
-      <p class="define">Courses are made of Learning Objectives.<br>Each course carries a Florida SCNS course code — Financial Accounting is ACG 2021.</p>
+      <p class="define">Courses are made of Learning Objectives.<br>Every course carries its Florida SCNS code — Financial Accounting is ACG 2021.</p>
       <p class="why"><span class="why-label">Why it matters</span>SCNS makes courses legible to colleges — the bridge to transfer credit and degrees.</p>
       <p class="sr-only">Diagram: the ladder's Course layer lights — Financial Accounting, coded ACG 2021, and Payroll Fundamentals — now connected upward to the Program.</p>
     </div>
@@ -583,7 +541,7 @@ h1{
 </section>
 
 <!-- ============ SCENE 5 · LEARNING OBJECTIVES ============ -->
-<section class="scene s5" id="s5" role="group" aria-roledescription="scene" aria-label="Scene 5 of 9 — Learning Objectives">
+<section class="scene s5" id="s5" role="group" aria-roledescription="scene" aria-label="Scene 5 of 17 — Learning Objectives">
   <div class="stage split">
     <div class="copy">
       <p class="eyebrow">Terminology · 3 of 3</p>
@@ -598,7 +556,7 @@ h1{
 </section>
 
 <!-- ============ SCENE 6 · VIDEOS & THE WATCH LIST ============ -->
-<section class="scene s6" id="s6" role="group" aria-roledescription="scene" aria-label="Scene 6 of 9 — Videos and the Watch List">
+<section class="scene s6" id="s6" role="group" aria-roledescription="scene" aria-label="Scene 6 of 17 — Videos and the Watch List">
   <div class="stage split wide">
     <div class="copy">
       <div class="copy-head">
@@ -633,27 +591,27 @@ h1{
             <path fill="#B9CBDE" d="M7 7h5.6a3.4 3.4 0 0 1 6.8 0H27v5.6a3.4 3.4 0 0 1 0 6.8V27H7Z"/>
           </g>
           <text x="48" y="20" font-size="11.5" font-weight="700" fill="#FFFFFF">Watch List</text>
-          <text x="48" y="34" font-size="9" font-weight="500" fill="#8FA6BD">sent in with the Chrome extension</text>
+          <text x="48" y="34" font-size="9.5" font-weight="500" fill="#8FA6BD">sent in from Chrome</text>
         </g>
         <path id="fl-lead" d="M84 80C84 130 70 172 61 202" fill="none" stroke="rgba(185,203,222,.28)" stroke-width="1.4" stroke-dasharray="3 6"/>
         <circle cx="60" cy="208" r="2.5" fill="#B9CBDE"/>
         <path id="fl-track" d="M60 210H560" fill="none" stroke="rgba(185,203,222,.28)" stroke-width="1.6" stroke-dasharray="4 6"/>
         <path id="fl-track-done" d="M60 210H560" pathLength="100" fill="none" stroke="rgba(245,166,35,.5)" stroke-width="1.6"/>
         <rect x="178" y="152" width="392" height="126" rx="18" fill="rgba(15,34,56,.25)" stroke="rgba(185,203,222,.16)" stroke-width="1" stroke-dasharray="5 6"/>
-        <text x="374" y="140" text-anchor="middle" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#8FA6BD">ENLITEN REVIEW PIPELINE · EVERY VIDEO, EVERY TIME</text>
+        <text x="374" y="140" text-anchor="middle" font-size="9" font-weight="700" letter-spacing="1.5" fill="#8FA6BD">ENLITEN REVIEW PIPELINE · EVERY VIDEO, EVERY TIME</text>
         <g id="fl-g1" class="gate" transform="translate(216,210)">
           <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
           <rect x="-7" y="-10" width="14" height="19" rx="2" fill="none" stroke="#B9CBDE" stroke-width="1.5"/>
           <path d="M-3-4.5h6M-3 0h6M-3 4.5h3.5" fill="none" stroke="#B9CBDE" stroke-width="1.5" stroke-linecap="round"/>
           <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
-          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">Transcript</text>
+          <text y="48" text-anchor="middle" font-size="10.5" font-weight="600" fill="#B9CBDE">Transcript</text>
         </g>
         <g id="fl-g2" class="gate" transform="translate(320,210)">
           <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
           <path fill="#B9CBDE" d="M0-10 2.4-2.4 10 0 2.4 2.4 0 10-2.4 2.4-10 0-2.4-2.4Z"/>
           <circle cx="7.5" cy="-7.5" r="1.8" fill="#B9CBDE"/>
           <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
-          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">AI classification</text>
+          <text y="48" text-anchor="middle" font-size="10.5" font-weight="600" fill="#B9CBDE">AI classification</text>
         </g>
         <g id="fl-g3" class="gate" transform="translate(424,210)">
           <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
@@ -661,7 +619,7 @@ h1{
           <path d="M0 4 5-3.5" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/>
           <circle cy="4" r="1.8" fill="#B9CBDE"/>
           <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
-          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">Quality score</text>
+          <text y="48" text-anchor="middle" font-size="10.5" font-weight="600" fill="#B9CBDE">Quality score</text>
         </g>
         <g id="fl-g4" class="gate" transform="translate(528,210)">
           <circle r="27" fill="rgba(15,34,56,.9)" stroke="url(#flFlame)" stroke-width="1.6"/>
@@ -669,13 +627,13 @@ h1{
           <path d="M-8.5 7a6.5 6.5 0 0 1 13 0" fill="none" stroke="#B9CBDE" stroke-width="1.6" stroke-linecap="round"/>
           <path d="M4 1.5 6.6 4l4.6-5" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           <g class="tick" transform="translate(19,-19)"><g class="tick-in"><circle r="8" fill="url(#flFlame)"/><path d="M-3.4.2-1 2.6 3.6-2.4" fill="none" stroke="#0A1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
-          <text y="48" text-anchor="middle" font-size="10" font-weight="600" fill="#B9CBDE">Team approval</text>
+          <text y="48" text-anchor="middle" font-size="10.5" font-weight="600" fill="#B9CBDE">Team approval</text>
         </g>
         <g id="fl-objective" transform="translate(560,182)">
           <rect width="186" height="56" rx="28" fill="rgba(15,34,56,.72)" stroke="url(#flFlame)" stroke-width="1.6"/>
-          <text x="26" y="22" font-size="8" font-weight="700" letter-spacing="1.3" fill="#F5A623">LEARNING OBJECTIVE</text>
-          <text x="26" y="37" font-size="10" font-weight="600" fill="#FFFFFF">Apply the accrual basis</text>
-          <text x="26" y="49" font-size="10" font-weight="600" fill="#FFFFFF">of accounting</text>
+          <text x="26" y="22" font-size="9.5" font-weight="700" letter-spacing="1.3" fill="#F5A623">LEARNING OBJECTIVE</text>
+          <text x="26" y="37" font-size="10.5" font-weight="600" fill="#FFFFFF">Apply the accrual basis</text>
+          <text x="26" y="49" font-size="10.5" font-weight="600" fill="#FFFFFF">of accounting</text>
         </g>
         <path id="fl-snap" d="M653 164v18" fill="none" stroke="rgba(245,166,35,.6)" stroke-width="1.6"/>
         <g id="fl-card" transform="translate(653,118)">
@@ -683,15 +641,15 @@ h1{
           <rect x="-56" y="-36" width="112" height="44" rx="8" fill="url(#flThumb)"/>
           <rect x="-13" y="-22.5" width="26" height="17" rx="5" fill="url(#flFlame)"/>
           <path d="M-3.5-19.5 4.5-14l-8 5.5Z" fill="#0A1A2E"/>
-          <rect x="14" y="-8" width="42" height="13" rx="3" fill="rgba(10,26,46,.9)"/>
-          <text x="35" y="1.5" text-anchor="middle" font-size="8" font-weight="600" fill="#FFFFFF">15.4 min</text>
-          <text x="-56" y="22" font-size="10.5" font-weight="600" fill="#FFFFFF">Accrual vs. Cash</text>
-          <text x="-56" y="36" font-size="9.5" font-weight="500" fill="#8FA6BD">Accounting · 15.4 min</text>
+          <rect x="12" y="-8" width="48" height="13" rx="3" fill="rgba(10,26,46,.9)"/>
+          <text x="36" y="1.5" text-anchor="middle" font-size="9" font-weight="600" fill="#FFFFFF">15.4 min</text>
+          <text x="-56" y="22" font-size="11" font-weight="600" fill="#FFFFFF">Accrual vs. Cash</text>
+          <text x="-56" y="36" font-size="10" font-weight="500" fill="#8FA6BD">Accounting · 15.4 min</text>
           <g id="fl-lz" transform="translate(24,-46)">
             <g class="pop-in">
-              <rect x="-32" y="-10" width="64" height="20" rx="10" fill="url(#flFlame)"/>
-              <rect x="-24.2" y="-4.2" width="8.4" height="8.4" rx="2.6" transform="rotate(45 -20 0)" fill="#0A1A2E"/>
-              <text x="-10" y="3.5" font-size="9.5" font-weight="800" fill="#0A1A2E">15.4 Lz</text>
+              <rect x="-37" y="-10" width="74" height="20" rx="10" fill="url(#flFlame)"/>
+              <rect x="-29.2" y="-4.2" width="8.4" height="8.4" rx="2.6" transform="rotate(45 -25 0)" fill="#0A1A2E"/>
+              <text x="-13" y="3.5" font-size="10.5" font-weight="800" fill="#0A1A2E">15.4 Lz</text>
             </g>
           </g>
         </g>
@@ -701,7 +659,7 @@ h1{
 </section>
 
 <!-- ============ SCENE 7 · LUMINZ ============ -->
-<section class="scene s7" id="s7" role="group" aria-roledescription="scene" aria-label="Scene 7 of 9 — Luminz">
+<section class="scene s7" id="s7" role="group" aria-roledescription="scene" aria-label="Scene 7 of 17 — Luminz">
   <div class="stage split">
     <div class="copy">
       <p class="eyebrow">The currency</p>
@@ -717,7 +675,7 @@ h1{
       <p class="sr-only">Diagram: a passed 15.4-minute video pays 15.4 Luminz. The chip rides on the video card from the start; the quiz-passed check only unlocks it, and the value then flows into three program bars at once — Bookkeeping Certificate to 78%, Accounting Certificate to 42%, A.S. Business degree track to 9%.</p>
     </div>
     <div class="art art-wide">
-      <svg id="ct-counter" viewBox="0 0 720 424" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
+      <svg id="ct-counter" viewBox="0 0 720 432" aria-hidden="true" font-family="Inter,system-ui,sans-serif">
         <defs>
           <linearGradient id="ctFlame" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/>
@@ -740,13 +698,13 @@ h1{
           <rect x="12" y="12" width="146" height="54" rx="8" fill="url(#ctThumb)"/>
           <rect x="71" y="30" width="28" height="18" rx="5" fill="url(#ctFlame)"/>
           <path d="M81 34l10 5-10 5Z" fill="#0A1A2E"/>
-          <text x="12" y="86" font-size="9.5" font-weight="600" fill="#FFFFFF">Accrual vs. Cash Accounting</text>
-          <text x="12" y="100" font-size="9" font-weight="500" fill="#8FA6BD">15.4 min · approved for Luminz</text>
+          <text x="12" y="86" font-size="12" font-weight="600" fill="#FFFFFF">Accrual vs. Cash</text>
+          <text x="12" y="100" font-size="11" font-weight="500" fill="#8FA6BD">approved for Luminz</text>
           <g id="ct-chip" transform="translate(104,-11)">
             <g class="pop-in">
-              <rect width="78" height="22" rx="11" fill="url(#ctFlame)"/>
+              <rect width="84" height="22" rx="11" fill="url(#ctFlame)"/>
               <rect x="9.8" y="6.8" width="8.4" height="8.4" rx="2.6" transform="rotate(45 14 11)" fill="#0A1A2E"/>
-              <text x="26" y="15.5" font-size="10" font-weight="800" fill="#0A1A2E">15.4 Lz</text>
+              <text x="26" y="15.5" font-size="12" font-weight="800" fill="#0A1A2E">15.4 Lz</text>
             </g>
           </g>
           <g id="ct-lock" transform="translate(194,-2)" opacity="0">
@@ -762,49 +720,49 @@ h1{
         <rect id="ct-mark" x="252" y="52" width="40" height="40" rx="12" transform="rotate(45 272 72)" fill="url(#ctFlame)"/>
         <text id="ct-num" x="316" y="104" font-size="92" font-weight="800" letter-spacing="-3.7" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">15.4</text>
         <text id="ct-unit" x="534" y="104" font-size="26" font-weight="700" fill="#F5A623">Lz</text>
-        <text x="316" y="127" font-size="11" font-weight="500" fill="#8FA6BD">1 Luminz = 1 minute of passed video</text>
+        <text x="316" y="127" font-size="13" font-weight="500" fill="#8FA6BD">1 Luminz = 1 minute of passed video</text>
         <g transform="translate(316,140)">
           <rect width="300" height="8" rx="4" fill="rgba(185,203,222,.16)"/>
           <rect id="ct-vfill" width="300" height="8" rx="4" fill="url(#ctFlameH)"/>
           <circle id="ct-vtip" cx="300" cy="4" r="8" fill="url(#ctTip)"/>
-          <text id="ct-vlabel" y="24" font-size="9.5" font-weight="500" fill="#8FA6BD" style="font-variant-numeric:tabular-nums">video · 15.4 of 15.4 min</text>
+          <text id="ct-vlabel" y="24" font-size="12" font-weight="500" fill="#8FA6BD" style="font-variant-numeric:tabular-nums">video · 15.4 of 15.4 min</text>
         </g>
         <g id="ct-quiz" transform="translate(40,180)">
           <g class="pop-in">
-            <rect width="176" height="30" rx="15" fill="rgba(34,197,94,.14)" stroke="rgba(34,197,94,.5)" stroke-width="1.2"/>
+            <rect width="184" height="30" rx="15" fill="rgba(34,197,94,.14)" stroke="rgba(34,197,94,.5)" stroke-width="1.2"/>
             <g transform="translate(18,15)"><circle r="9" fill="#22C55E"/><path d="M-3.8.2-1.2 2.8 4-2.8" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
-            <text x="34" y="19.5" font-size="11" font-weight="700" fill="#86EFAC">quiz passed · 80%+</text>
+            <text x="34" y="19.5" font-size="13" font-weight="700" fill="#86EFAC">quiz passed · 80%+</text>
           </g>
         </g>
         <path id="ct-flowvein" d="M128 214v18" fill="none" stroke="rgba(245,166,35,.5)" stroke-width="1.6"/>
         <g transform="translate(40,252)">
-          <text y="-4" font-size="8.5" font-weight="700" letter-spacing="1.5" fill="#8FA6BD">AUTO-FLOW · ONE VIDEO FEEDS EVERY MATCHING PROGRAM</text>
+          <text y="-4" font-size="12" font-weight="700" letter-spacing="1.4" fill="#8FA6BD">AUTO-FLOW · ONE VIDEO, EVERY MATCHING PROGRAM</text>
           <g transform="translate(0,14)">
-            <text y="12" font-size="12" font-weight="600" fill="#F8FAFC">Bookkeeping Certificate</text>
+            <text y="12" font-size="13.5" font-weight="600" fill="#F8FAFC">Bookkeeping Certificate</text>
             <rect y="20" width="430" height="10" rx="5" fill="rgba(185,203,222,.14)"/>
             <rect y="20" width="309.6" height="10" rx="5" fill="url(#ctFlameH)"/>
             <rect id="ct-d1" x="304" y="20" width="31.4" height="10" rx="5" fill="#FFD9A8" opacity=".95"/>
             <circle id="ct-t1" cx="335.4" cy="25" r="7" fill="url(#ctTip)"/>
-            <text id="ct-p1" x="486" y="30" text-anchor="end" font-size="15" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">78%</text>
-            <g id="ct-c1"><rect x="496" y="16" width="44" height="17" rx="8.5" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="518" y="28" text-anchor="middle" font-size="9.5" font-weight="700" fill="#F5A623">+6%</text></g>
+            <text id="ct-p1" x="486" y="30" text-anchor="end" font-size="16" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">78%</text>
+            <g id="ct-c1"><rect x="496" y="15" width="48" height="20" rx="10" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="520" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#F5A623">+6%</text></g>
           </g>
           <g transform="translate(0,70)">
-            <text y="12" font-size="12" font-weight="600" fill="#F8FAFC">Accounting Certificate</text>
+            <text y="12" font-size="13.5" font-weight="600" fill="#F8FAFC">Accounting Certificate</text>
             <rect y="20" width="430" height="10" rx="5" fill="rgba(185,203,222,.14)"/>
             <rect y="20" width="163.4" height="10" rx="5" fill="url(#ctFlameH)"/>
             <rect id="ct-d2" x="158" y="20" width="22.6" height="10" rx="5" fill="#FFD9A8" opacity=".95"/>
             <circle id="ct-t2" cx="180.6" cy="25" r="7" fill="url(#ctTip)"/>
-            <text id="ct-p2" x="486" y="30" text-anchor="end" font-size="15" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">42%</text>
-            <g id="ct-c2"><rect x="496" y="16" width="44" height="17" rx="8.5" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="518" y="28" text-anchor="middle" font-size="9.5" font-weight="700" fill="#F5A623">+4%</text></g>
+            <text id="ct-p2" x="486" y="30" text-anchor="end" font-size="16" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">42%</text>
+            <g id="ct-c2"><rect x="496" y="15" width="48" height="20" rx="10" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="520" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#F5A623">+4%</text></g>
           </g>
           <g transform="translate(0,126)">
-            <text y="12" font-size="12" font-weight="600" fill="#F8FAFC">A.S. Business <tspan font-size="9.5" font-weight="500" fill="#8FA6BD">· degree track</tspan></text>
+            <text y="12" font-size="13.5" font-weight="600" fill="#F8FAFC">A.S. Business <tspan font-size="12" font-weight="500" fill="#8FA6BD">· degree track</tspan></text>
             <rect y="20" width="430" height="10" rx="5" fill="rgba(185,203,222,.14)"/>
             <rect y="20" width="38.7" height="10" rx="5" fill="url(#ctFlameH)"/>
             <rect id="ct-d3" x="34.4" y="20" width="4.3" height="10" rx="2.1" fill="#FFD9A8" opacity=".95"/>
             <circle id="ct-t3" cx="38.7" cy="25" r="7" fill="url(#ctTip)"/>
-            <text id="ct-p3" x="486" y="30" text-anchor="end" font-size="15" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">9%</text>
-            <g id="ct-c3"><rect x="496" y="16" width="44" height="17" rx="8.5" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="518" y="28" text-anchor="middle" font-size="9.5" font-weight="700" fill="#F5A623">+1%</text></g>
+            <text id="ct-p3" x="486" y="30" text-anchor="end" font-size="16" font-weight="800" fill="#F8FAFC" style="font-variant-numeric:tabular-nums">9%</text>
+            <g id="ct-c3"><rect x="496" y="15" width="48" height="20" rx="10" fill="rgba(245,166,35,.15)" stroke="rgba(245,166,35,.4)" stroke-width="1"/><text x="520" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#F5A623">+1%</text></g>
           </g>
         </g>
       </svg>
@@ -812,18 +770,22 @@ h1{
   </div>
 </section>
 
-<!-- ============ SCENE 8 · PATHLIGHT TOUR ============ -->
-<section class="scene s8" id="s8" role="group" aria-roledescription="scene" aria-label="Scene 8 of 9 — Pathlight, the dashboard tour">
-  <div class="stage tour">
-    <div class="tour-head">
-      <p class="eyebrow">The concept UI</p>
-      <h1>Pathlight</h1>
-      <p class="tour-intro">The learner's home. Eight stops.</p>
+<!-- ============ SCENE 8 · MEET PATHLIGHT ============ -->
+<section class="scene s8" id="s8" role="group" aria-roledescription="scene" aria-label="Scene 8 of 17 — Meet Pathlight">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">The concept UI</p>
+        <h1>Meet Pathlight</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Pathlight is the learner's home — where Programs, Luminz, and the Watch List become one page with one next action. Seven sections, then your pocket.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Engagement designed in, not bolted on.</p>
+        <p class="sr-only">Artwork: the full Pathlight dashboard rendered with sample data — top bar, dark hero band, four KPI cards, the Ember panel, Work on next, the Watch List table, the standards chart, and three program cards. The next seven scenes visit one section each.</p>
+      </div>
     </div>
-    <p class="sr-only">Artwork: the Pathlight dashboard rendered with sample data and a moving spotlight. Hero: Good morning, Jordan — your path is 72% lit to your first certificate, with a call to action to watch Accrual vs. Cash for 15 Luminz. KPI row: standards mastered 36 of 52 with 10 in progress and 6 not yet mastered; nearest credential Bookkeeping Certificate at 72% with 5 objectives to go; 342 Luminz earned, up 38 this week; video queue 2 ready of 7. Ember, the AI guide, reports the Accrual vs. Cash video is ready with 15.4 Luminz flowing toward the Bookkeeping Certificate, offers Start the video and Plan my week replies, and discloses that Ember is AI and can make mistakes. Work on next lists five steps with payouts, starting with Watch Accrual vs. Cash Accounting for +15.4. The Watch List shows Debits and Credits Explained passed with +24.6 Luminz, Accrual vs. Cash ready to watch, Payroll Basics quiz failed with a retake offered, and Photosynthesis vs. Cellular Respiration in review. Standards by subject charts Geometry 12-4-2, ELA 10 9-3-1, Biology 8-2-2, World History 7-1-1, with practice buttons for triangle theorems and cell membranes. Program cards: Bookkeeping Certificate 72% with two designer-written objectives left — Prepare the four core financial statements and Apply the accrual basis of accounting — Accounting Certificate 38%, and A.S. Business 12%. A phone-frame home screen with the same greeting, two KPI tiles, Ember ribbon, and Home-Videos-Progress-Ember tab bar appears at the final stop.</p>
-    <div class="tour-grid">
-      <div class="tour-art" id="tourArt">
-        <div class="art-desk" id="artDesk">
+    <div class="art dash-art" id="dashSlot8">
+      <div class="art-desk" id="artDesk">
           <svg id="db-dash" viewBox="0 0 1000 892" aria-hidden="true">
             <defs>
               <linearGradient id="dbFlame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
@@ -978,24 +940,160 @@ h1{
             <rect width="1000" height="892" rx="16" fill="none" stroke="#CBD5E1"/>
           </svg>
           <svg id="sp-overlay" class="overlay" viewBox="0 0 1000 892" aria-hidden="true">
-            <style>
-              #sp-overlay .mv{transition:x .65s cubic-bezier(.22,.9,.24,1),y .65s cubic-bezier(.22,.9,.24,1),width .65s cubic-bezier(.22,.9,.24,1),height .65s cubic-bezier(.22,.9,.24,1),rx .65s cubic-bezier(.22,.9,.24,1)}
-              @media (prefers-reduced-motion:reduce){#sp-overlay .mv{transition:none}}
-            </style>
             <defs>
               <linearGradient id="spFlame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
               <mask id="spMask">
                 <rect width="1000" height="892" fill="#FFFFFF"/>
-                <rect id="sp-cut" class="mv" x="20" y="58" width="960" height="126" rx="18" fill="#000000"/>
+                <rect id="sp-cut" x="20" y="58" width="960" height="126" rx="18" fill="#000000"/>
               </mask>
             </defs>
-            <rect width="1000" height="892" fill="rgba(4,12,22,.62)" mask="url(#spMask)"/>
-            <rect id="sp-glow" class="mv" x="20" y="58" width="960" height="126" rx="18" fill="none" stroke="rgba(245,166,35,.22)" stroke-width="7"/>
-            <rect id="sp-ring" class="mv" x="20" y="58" width="960" height="126" rx="18" fill="none" stroke="url(#spFlame)" stroke-width="1.6"/>
+            <rect width="1000" height="892" fill="rgba(4,12,22,.48)" mask="url(#spMask)"/>
+            <rect id="sp-glow" x="20" y="58" width="960" height="126" rx="18" fill="none" stroke="rgba(245,166,35,.22)" stroke-width="7"/>
+            <rect id="sp-ring" x="20" y="58" width="960" height="126" rx="18" fill="none" stroke="url(#spFlame)" stroke-width="1.6"/>
           </svg>
-        </div>
-        <div class="art-phone" id="artPhone">
-          <div class="phone-box">
+          </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENE 9 · THE PATH LIGHTS UP ============ -->
+<section class="scene s9" id="s9" role="group" aria-roledescription="scene" aria-label="Scene 9 of 17 — The path lights up">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">Pathlight · 1 of 7</p>
+        <h1>The path lights up</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">One greeting — <strong>your path is 72% lit to your first certificate</strong> — and one glowing action: <strong>Watch “Accrual vs. Cash” · 15 Luminz toward your certificate</strong>. Never a menu.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Retention is designed into the first three seconds — one action, pre-chosen.</p>
+        <p class="sr-only">Artwork: the dashboard hero band under the flame ring — Good morning, Jordan — your path is 72% lit to your first certificate, with one call to action: watch Accrual vs. Cash for 15 Luminz toward your certificate.</p>
+      </div>
+    </div>
+    <div class="art dash-art" id="dashSlot9"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 10 · TODAY'S NUMBERS ============ -->
+<section class="scene s10" id="s10" role="group" aria-roledescription="scene" aria-label="Scene 10 of 17 — Today's numbers">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">Pathlight · 2 of 7</p>
+        <h1>Today's numbers</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Four cards, mastery first: <strong>36 / 52</strong> standards, nearest credential <strong>72%</strong> with <strong>5 objectives to go</strong>, <strong>342</strong> Luminz earned, <strong>2 ready / 7</strong> in the video queue. Every number points forward, not at history.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Mastery, credential, currency, supply — the unit economics of learning on one row.</p>
+        <p class="sr-only">Artwork: the four KPI cards — standards mastered 36 of 52 with 10 in progress and 6 not yet mastered; nearest credential Bookkeeping Certificate at 72% with 5 objectives to go; 342 Luminz earned, up 38 this week; video queue 2 ready of 7.</p>
+      </div>
+    </div>
+    <div class="art dash-art" id="dashSlot10"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 11 · EMBER — YOUR AI GUIDE ============ -->
+<section class="scene s11" id="s11" role="group" aria-roledescription="scene" aria-label="Scene 11 of 17 — Ember — your AI guide">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">Pathlight · 3 of 7</p>
+        <h1>Ember — your AI guide</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Ember narrates the same data the page renders — the <strong>Accrual vs. Cash</strong> video is ready, its <strong>15.4 Luminz</strong> flowing toward the Bookkeeping Certificate. Ember asks before acting; the disclosure stays on screen.</p>
+        <p class="why"><span class="why-label">Why it matters</span><b>Ember is AI and can make mistakes — your teacher can always help.</b> Trust as a feature.</p>
+        <p class="sr-only">Artwork: the Ember card — Ember reports the Accrual vs. Cash video is ready with 15.4 Luminz flowing toward the Bookkeeping Certificate, offers Start the video and Plan my week replies, and keeps its AI disclosure on screen.</p>
+      </div>
+    </div>
+    <div class="art dash-art" id="dashSlot11"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 12 · WORK ON NEXT ============ -->
+<section class="scene s12" id="s12" role="group" aria-roledescription="scene" aria-label="Scene 12 of 17 — Work on next">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">Pathlight · 4 of 7</p>
+        <h1>Work on next</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Five steps in Ember's order — instruction before practice. Every step declares its payout up front: the video's <strong>+15.4 Lz</strong> on pass, a cleared standard, <strong>Certificate 72% → 86%</strong>.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Motivation with receipts — every task names its return up front.</p>
+        <p class="sr-only">Artwork: the Work on next card — five steps in Ember's order with payouts declared up front, starting with Watch Accrual vs. Cash Accounting for +15.4 Lz and ending at Certificate 72% to 86%.</p>
+      </div>
+    </div>
+    <div class="art dash-art" id="dashSlot12"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 13 · THE WATCH LIST ============ -->
+<section class="scene s13" id="s13" role="group" aria-roledescription="scene" aria-label="Scene 13 of 17 — The Watch List">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">Pathlight · 5 of 7</p>
+        <h1>The Watch List</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Jordan's submissions and their review states — <strong>Passed</strong> pays <strong>+24.6 Lz</strong>, <strong>In review</strong> earns nothing yet. A failed quiz is just a <strong>Retake quiz</strong> button — free, and the questions change.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Failure never dead-ends — free retakes keep the earning loop alive.</p>
+        <p class="sr-only">Artwork: the Watch List table — Debits and Credits Explained passed with +24.6 Luminz, Accrual vs. Cash ready to watch, Payroll Basics quiz failed with a free retake offered, and Photosynthesis vs. Cellular Respiration in review.</p>
+      </div>
+    </div>
+    <div class="art dash-art" id="dashSlot13"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 14 · STANDARDS & PRACTICE ============ -->
+<section class="scene s14" id="s14" role="group" aria-roledescription="scene" aria-label="Scene 14 of 17 — Standards &amp; practice">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">Pathlight · 6 of 7</p>
+        <h1>Standards &amp; practice</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Florida B.E.S.T. and NGSSS benchmarks, charted by subject — Geometry: <strong>12</strong> mastered, <strong>4</strong> in progress, <strong>2</strong> not yet. A gap isn't a grade; it's a one-tap <strong>Practice</strong> button.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Compliance is native — state standards stay first-class; Luminz adds alongside.</p>
+        <p class="sr-only">Artwork: the standards chart — Geometry 12 mastered, 4 in progress, 2 not yet; ELA 10 at 9, 3 and 1; Biology at 8, 2 and 2; World History at 7, 1 and 1 — with one-tap Practice buttons for triangle theorems and cell membranes.</p>
+      </div>
+    </div>
+    <div class="art dash-art" id="dashSlot14"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 15 · YOUR PROGRAMS ============ -->
+<section class="scene s15" id="s15" role="group" aria-roledescription="scene" aria-label="Scene 15 of 17 — Your programs">
+  <div class="stage split wide dash">
+    <div class="copy">
+      <div class="copy-head">
+        <p class="eyebrow">Pathlight · 7 of 7</p>
+        <h1>Your programs</h1>
+      </div>
+      <div class="copy-body">
+        <p class="define">Jordan's accounting videos feed three programs at once — Bookkeeping Certificate <strong>72%</strong>, Accounting Certificate <strong>38%</strong>, A.S. Business <strong>12%</strong> — no sign-up needed. Progress counts objectives <strong>written by the program designer</strong>, not minutes.</p>
+        <p class="why"><span class="why-label">Why it matters</span>One watched video advances three credentials — compounding built into the data model.</p>
+        <p class="sr-only">Artwork: three program cards — Bookkeeping Certificate 72% with two designer-written objectives left, Prepare the four core financial statements and Apply the accrual basis of accounting; Accounting Certificate 38%; A.S. Business — Business Core 12%.</p>
+      </div>
+    </div>
+    <div class="art dash-art" id="dashSlot15"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 16 · IN YOUR POCKET ============ -->
+<section class="scene s16" id="s16" role="group" aria-roledescription="scene" aria-label="Scene 16 of 17 — In your pocket">
+  <div class="stage split">
+    <div class="copy">
+      <p class="eyebrow">Pathlight · everywhere</p>
+      <h1>In your pocket</h1>
+      <p class="define">The same Pathlight in a phone frame — <strong>342</strong> Luminz, <strong>72%</strong> lit, Ember one tab away. Same numbers, same guide, same next step — built once, honest everywhere.</p>
+      <p class="why"><span class="why-label">Why it matters</span>Learners live on phones — the daily loop travels with them.</p>
+      <p class="sr-only">Artwork: a phone frame running Pathlight — the same Good morning greeting at 72% lit, a 342 Luminz wallet chip, two KPI tiles, the Ember ribbon with its AI disclosure, Work on next, and a Home, Videos, Progress, Ember tab bar.</p>
+    </div>
+    <div class="art art-phone">
+      <div class="phone-box">
             <svg id="ph-dash" viewBox="0 0 340 700" aria-hidden="true">
               <defs>
                 <linearGradient id="phFlame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E8842C"/></linearGradient>
@@ -1085,38 +1183,12 @@ h1{
               <rect id="sp2-ring" x="6" y="6" width="328" height="688" rx="46" fill="none" stroke="url(#sp2Flame)" stroke-width="1.6"/>
             </svg>
           </div>
-        </div>
-      </div>
-      <aside class="tour-side">
-        <div class="ann" id="annCard">
-          <p class="step-eyebrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
-            </svg>
-            <span id="stepEyebrow">SECTION 1 OF 8</span>
-          </p>
-          <div class="step-body" id="stepBody">
-            <h2 class="step-title" id="stepTitle">The path lights up</h2>
-            <p class="step-text" id="stepText">One greeting, one live number — 72% lit — and one CTA, bound to the learner's next best step. Never a menu.</p>
-          </div>
-          <div class="step-controls">
-            <p class="step-count" id="stepCount">Section 1 of 8 — The path lights up</p>
-            <div class="pips" id="pips" role="group" aria-label="Tour sections"></div>
-            <div class="tour-nav">
-              <button class="tourbtn tourbtn-back" id="stepPrev">← Back</button>
-              <button class="tourbtn tourbtn-next" id="stepNext">Next section →</button>
-            </div>
-          </div>
-        </div>
-        <p class="tour-hint" id="tourHint">8 sections in this tour</p>
-        <p class="why"><span class="why-label">Why it matters</span>One page turns mastery data into the next action — engagement designed in, not bolted on.</p>
-      </aside>
     </div>
   </div>
 </section>
 
-<!-- ============ SCENE 9 · CLOSE ============ -->
-<section class="scene s9" id="s9" role="group" aria-roledescription="scene" aria-label="Scene 9 of 9 — Proof, not seat time">
+<!-- ============ SCENE 17 · CLOSE ============ -->
+<section class="scene s17" id="s17" role="group" aria-roledescription="scene" aria-label="Scene 17 of 17 — Proof, not seat time">
   <div class="stage cover">
     <div class="logoslot" data-size="close">
       <span class="plate"><!-- SWAP: brand PNG --><img src="assets/enliten-logo.png" alt="enliten" onload="this.closest('.logoslot').classList.add('haslogo')" onerror="this.closest('.logoslot').classList.add('nologo')"></span>
@@ -1130,9 +1202,9 @@ h1{
     <p class="eyebrow">Enliten Luminz</p>
     <h1>Proof, not seat time.</h1>
     <p class="subline">Education measured by what a learner can prove — that is the whole idea.</p>
-    <p class="define">Next: walk the full specification and the working prototypes.</p>
+    <p class="define">You've walked the whole loop — next: the specification and the working prototypes.</p>
     <a class="contact" href="mailto:rshook@academica.org">rshook@academica.org</a>
-    <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">The design decisions are locked and the prototypes run today — execution, not exploration.</span></p>
+    <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">Design decisions locked, prototypes running today — execution, not exploration.</span></p>
   </div>
 </section>
 </main>
@@ -1149,32 +1221,34 @@ h1{
   var REDUCED = (typeof window.matchMedia === "function") &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var SCENES = Array.prototype.slice.call(document.querySelectorAll("section.scene"));
-  var N = SCENES.length; /* 9 */
+  var N = SCENES.length; /* 17 */
   var TITLES = ["Welcome", "But first — terminology.", "Programs", "Courses",
-    "Learning Objectives", "Videos & the Watch List", "Luminz", "Pathlight", "Proof, not seat time."];
+    "Learning Objectives", "Videos & the Watch List", "Luminz", "Meet Pathlight",
+    "The path lights up", "Today's numbers", "Ember — your AI guide", "Work on next",
+    "The Watch List", "Standards & practice", "Your programs", "In your pocket",
+    "Proof, not seat time."];
   var CRUMBS = ["", "Before the tour", "Terminology · 1 of 3", "Terminology · 2 of 3",
-    "Terminology · 3 of 3", "Supply", "The currency", "Product tour", "Enliten Luminz"];
-  var STEPS = [
-    { t: "The path lights up", b: "One greeting, one live number — 72% lit — and one CTA, bound to the learner's next best step. Never a menu." },
-    { t: "Today's numbers", b: "Mastery first: standards, then the nearest credential — the Bookkeeping Certificate — then Luminz, then the Video queue. Action over history." },
-    { t: "Ember — your AI guide", b: "Ember narrates the same snapshot the page renders — the story never disagrees with the numbers. The AI disclosure is persistent; Ember asks before acting." },
-    { t: "Work on next", b: "Five steps in Ember's order — instruction before practice. Every step declares its payout: the video's Luminz on pass, or the standard it clears." },
-    { t: "Watch List", b: "Every submission and its Luminz-approval state — approval only after review. Statuses run Ready to Passed, and a failed quiz simply offers Retake." },
-    { t: "Standards by subject", b: "Florida B.E.S.T. and NGSSS benchmarks, grouped by subject. Anything not yet mastered shows a one-tap Practice launch — plain name first, code attached." },
-    { t: "Your programs", b: "Progress counts objectives, not minutes. Jordan's accounting videos are feeding three programs at once — two certificates and a degree track." },
-    { t: "Pocket-sized", b: "The same system on a phone — same numbers, same guide, same next step. Built once, honest everywhere." }
+    "Terminology · 3 of 3", "Supply", "The currency", "The concept UI",
+    "Pathlight · 1 of 7", "Pathlight · 2 of 7", "Pathlight · 3 of 7", "Pathlight · 4 of 7",
+    "Pathlight · 5 of 7", "Pathlight · 6 of 7", "Pathlight · 7 of 7", "Pathlight · everywhere",
+    "Enliten Luminz"];
+  /* v10 flattened tour: scenes 8–15 share one dashboard node; win = viewBox window, ring = flame-ring rect */
+  var DASH_FRAMES = [
+    { win: [0, 0, 1000, 892], ring: null },
+    { win: [0, 0, 1000, 254], ring: [20, 58, 960, 126, 18] },
+    { win: [0, 112, 1000, 236], ring: [20, 182, 960, 96, 16] },
+    { win: [0, 206, 562, 308], ring: [24, 276, 468, 168, 16] },
+    { win: [438, 206, 562, 308], ring: [508, 276, 468, 168, 16] },
+    { win: [0, 374, 1000, 320], ring: [20, 444, 960, 180, 16] },
+    { win: [0, 550, 1000, 296], ring: [20, 620, 960, 156, 16] },
+    { win: [0, 706, 1000, 186], ring: [20, 776, 960, 104, 16] }
   ];
-  var SPOTS = [
-    [20, 58, 960, 126, 18], [20, 182, 960, 96, 16], [24, 276, 468, 168, 16],
-    [508, 276, 468, 168, 16], [20, 444, 960, 180, 16], [20, 620, 960, 156, 16],
-    [20, 776, 960, 104, 16]
-  ];
-  var cur = 0, step = 1, lock = false;
+  var cur = 0, lock = false;
   var crumb = document.getElementById("crumb");
   var announcer = document.getElementById("announcer");
   var btnPrev = document.getElementById("btnPrev");
   var btnNext = document.getElementById("btnNext");
-  var hintSteps = document.getElementById("hintSteps");
+  var fracCur = document.getElementById("fracCur");
   var $ = function (id) { return document.getElementById(id); };
 
   /* ============ chrome: dots ============ */
@@ -1195,24 +1269,6 @@ h1{
     }
   })();
 
-  /* ============ tour pips ============ */
-  var pipsWrap = document.getElementById("pips");
-  var pipBtns = [];
-  (function buildPips() {
-    for (var i = 0; i < 8; i++) {
-      var b = document.createElement("button");
-      b.className = "pip";
-      b.type = "button";
-      b.textContent = String(i + 1);
-      b.setAttribute("aria-label", "Go to section " + (i + 1) + " of 8: " + STEPS[i].t);
-      (function (idx) {
-        b.addEventListener("click", function () { setStep(idx + 1, false); });
-      })(i);
-      pipsWrap.appendChild(b);
-      pipBtns.push(b);
-    }
-  })();
-
   /* ============ chrome state ============ */
   function paintChrome() {
     crumb.textContent = CRUMBS[cur];
@@ -1225,12 +1281,10 @@ h1{
     var atStart = cur === 0, atEnd = cur === N - 1;
     btnPrev.setAttribute("aria-disabled", atStart ? "true" : "false");
     btnNext.setAttribute("aria-disabled", atEnd ? "true" : "false");
-    if (hintSteps) { hintSteps.hidden = cur !== 7; }
+    if (fracCur) { fracCur.textContent = String(cur + 1); }
   }
   function announce() {
-    var msg = "Scene " + (cur + 1) + " of 9 — " + TITLES[cur];
-    if (cur === 7) { msg += " · Section " + step + " of 8: " + STEPS[step - 1].t; }
-    announcer.textContent = msg;
+    announcer.textContent = "Scene " + (cur + 1) + " of 17 — " + TITLES[cur];
   }
 
   /* ============ hierarchy ladder (one persistent SVG, scenes 3–5) ============ */
@@ -1414,56 +1468,55 @@ h1{
     ctTimers.push(setTimeout(function () { ctPop("s7toast"); }, 2340));
   }
 
-  /* ============ scene 8 · spotlight tour ============ */
-  var tourArt = $("tourArt");
-  function setSpot(i) {
-    var s = SPOTS[i];
-    var ids = ["sp-cut", "sp-glow", "sp-ring"];
-    for (var k = 0; k < ids.length; k++) {
-      var el = $(ids[k]);
-      if (!el) { continue; }
-      el.style.x = s[0] + "px"; el.style.y = s[1] + "px";
-      el.style.width = s[2] + "px"; el.style.height = s[3] + "px";
-      el.style.rx = s[4] + "px";
-    }
+  /* ============ scenes 8–15 · frameDash: one dashboard node, one frame per scene ============ */
+  function isDash(i) { return i >= 7 && i <= 14; }
+  var dashWin = null, panRaf = null;
+  function setWin(vb) {
+    var v = vb[0] + " " + vb[1] + " " + vb[2] + " " + vb[3];
+    var d = $("db-dash"), o = $("sp-overlay");
+    if (d) { d.setAttribute("viewBox", v); }
+    if (o) { o.setAttribute("viewBox", v); }
   }
-  function setStep(n, instant) {
-    step = Math.max(1, Math.min(8, n));
-    $("stepEyebrow").textContent = "SECTION " + step + " OF 8";
-    $("stepCount").textContent = "Section " + step + " of 8 — " + STEPS[step - 1].t;
-    $("stepNext").textContent = step === 8 ? "Finish tour →" : "Next section →";
-    var hint = $("tourHint");
-    if (hint) { hint.hidden = step !== 1; }
-    var body = $("stepBody");
-    function swap() {
-      $("stepTitle").textContent = STEPS[step - 1].t;
-      $("stepText").textContent = STEPS[step - 1].b;
+  function frameDash(i) {
+    var art = $("artDesk"), f = DASH_FRAMES[i - 7];
+    if (!art || !f) { return; }
+    var slot = $("dashSlot" + (i + 1));
+    if (slot && art.parentElement !== slot) { slot.appendChild(art); }
+    var o = $("sp-overlay");
+    if (f.ring) {
+      if (o) { o.style.display = ""; }
+      var ids = ["sp-cut", "sp-glow", "sp-ring"];
+      for (var k = 0; k < ids.length; k++) {
+        var el = $(ids[k]);
+        if (!el) { continue; }
+        el.setAttribute("x", f.ring[0]); el.setAttribute("y", f.ring[1]);
+        el.setAttribute("width", f.ring[2]); el.setAttribute("height", f.ring[3]);
+        el.setAttribute("rx", f.ring[4]);
+      }
+    } else if (o) { o.style.display = "none"; }
+    var from = dashWin || [0, 0, 1000, 892], to = f.win;
+    dashWin = to;
+    if (panRaf !== null && typeof cancelAnimationFrame === "function") {
+      cancelAnimationFrame(panRaf); panRaf = null;
     }
-    if (!REDUCED && !instant) {
-      body.classList.remove("anim-step-in", "anim-step-out");
-      void body.getBoundingClientRect();
-      body.classList.add("anim-step-out");
-      setTimeout(function () {
-        swap();
-        body.classList.remove("anim-step-out");
-        body.classList.add("anim-step-in");
-      }, 150);
-    } else { swap(); }
-    for (var i = 0; i < 8; i++) {
-      pipBtns[i].classList.toggle("done", i < step - 1);
-      if (i === step - 1) { pipBtns[i].setAttribute("aria-current", "step"); }
-      else { pipBtns[i].removeAttribute("aria-current"); }
+    var same = from[0] === to[0] && from[1] === to[1] && from[2] === to[2] && from[3] === to[3];
+    if (REDUCED || same || typeof requestAnimationFrame !== "function") { setWin(to); return; }
+    /* one-time ≤600ms ease-out-quart camera pan; ring rects sit in artwork space and never move */
+    var t0 = null;
+    function pan(ts) {
+      if (t0 === null) { t0 = ts; }
+      var e = easeOutQuart(Math.min(1, (ts - t0) / 600));
+      setWin([from[0] + (to[0] - from[0]) * e, from[1] + (to[1] - from[1]) * e,
+        from[2] + (to[2] - from[2]) * e, from[3] + (to[3] - from[3]) * e]);
+      if (e < 1) { panRaf = requestAnimationFrame(pan); } else { panRaf = null; }
     }
-    if (step <= 7) { setSpot(step - 1); }
-    tourArt.classList.toggle("show-phone", step === 8);
-    announce();
+    setWin(from);
+    panRaf = requestAnimationFrame(pan);
   }
-  $("stepPrev").addEventListener("click", function () { advance(-1); });
-  $("stepNext").addEventListener("click", function () { advance(1); });
 
   /* ============ router ============ */
   function fromHash() {
-    var m = (window.location.hash || "").match(/^#\/?([1-9])$/);
+    var m = (window.location.hash || "").match(/^#\/?(1[0-7]|[1-9])$/);
     return m ? parseInt(m[1], 10) - 1 : 0;
   }
   function setHash(i) {
@@ -1486,9 +1539,10 @@ h1{
     if (isLadder(next)) { placeLadder(next); }
     if (prev === 5) { stopFlow(); }
     if (prev === 6) { stopCounter(); }
+    if (isDash(prev) && !isDash(next)) { dashWin = null; }
     if (next === 5) { playFlow(); }
     if (next === 6) { playCounter(); }
-    if (next === 7) { setStep(dir < 0 && prev === 8 ? 8 : 1, true); }
+    if (isDash(next)) { frameDash(next); }
   }
   var pend1 = null, pend2 = null;
   function finishPending() {
@@ -1545,10 +1599,6 @@ h1{
   }
   function advance(dir) {
     if (lock) { return; }
-    if (cur === 7) {
-      var ns = step + dir;
-      if (ns >= 1 && ns <= 8) { setStep(ns, false); return; }
-    }
     var t = cur + dir;
     if (t < 0 || t >= N) { return; }
     show(t, dir);
@@ -1578,6 +1628,8 @@ h1{
       e.preventDefault(); go(0);
     } else if (k === "End") {
       e.preventDefault(); go(N - 1);
+    } else if (k === "0") {
+      go(9); flashKeys();
     } else if (/^[1-9]$/.test(k)) {
       go(parseInt(k, 10) - 1); flashKeys();
     }
@@ -1622,7 +1674,7 @@ h1{
   if (isLadder(cur)) { placeLadder(cur); }
   if (cur === 5) { playFlow(); }
   if (cur === 6) { playCounter(); }
-  if (cur === 7) { setStep(1, true); }
+  if (isDash(cur)) { frameDash(cur); }
   paintChrome();
   announce();
   setHash(cur);
