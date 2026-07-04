@@ -171,6 +171,8 @@ button{font:inherit;color:inherit}
 .eyebrow{
   font-size:clamp(11px,1.1vw,13px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--flame-light);
   display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  /* v15 type (memo 3 item 6): "N of 7" counters must not jitter width scene-to-scene */
+  font-variant-numeric:tabular-nums;
 }
 .eyebrow::before{content:"";width:26px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--flame-light),transparent)}
 .cover .eyebrow{margin-bottom:0;justify-content:center}
@@ -319,10 +321,27 @@ html:not(.has-enliten) .logoslot[data-size="close"].haslogo-luminz .close-luminz
 }
 
 /* ---------- dashboard scenes 8–15 & phone scene 16 ---------- */
-.dash-art{position:relative;display:flex;justify-content:center;min-width:0;width:100%;--avail:calc(100vh - 360px)}
+/* v15 layout: --copy-h/--copy-gap drive the live art-height remainder (see >=861 block).
+   --copy-h defaults hold if JS never measures; scene 8 carries its own taller value. */
+.dash-art{position:relative;display:flex;justify-content:center;min-width:0;width:100%;
+  --copy-gap:clamp(18px,3vh,32px);--copy-h:193px;--avail:calc(100vh - 360px)}
 @supports (height:100svh){.dash-art{--avail:calc(100svh - 360px)}}
-.art-desk{position:relative;width:100%;border-radius:16px;box-shadow:var(--shadow-plate)}
+/* v15 spotlight (memo 2): camera-card treatment — deck card radius token, hairline border,
+   plate shadow + 1px inner seat so the clip edge reads as a framed screenshot, not a crop. */
+.art-desk{position:relative;width:100%;border-radius:var(--r-lg);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow-plate),0 0 0 1px rgba(4,12,22,.06)}
+/* v15 FOUNDATION FIX (supervisor forensics): the framed dashboard pair painted outside its
+   layout box (SVG default overflow:visible) — the true root of the page-10 "text covered" and
+   page-9 past-the-fold bleed. Scope the clip to the desk artifacts ONLY. The ladder/flow/counter/
+   phone SVGs keep overflow:visible so their halos legitimately bleed. */
+#db-dash,#sp-overlay{overflow:hidden}
 .dash-art .art-desk svg{display:block;width:100%;height:auto}
+/* v15 spotlight (memo 2): per-edge mask fades so the hard clip dissolves at sliced-neighbor
+   edges instead of reading as a screenshot crop. 14px for shallow slivers, 16px for deeper. */
+.art-desk.fade-t{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16px,#000 100%);mask-image:linear-gradient(180deg,transparent 0,#000 16px,#000 100%)}
+.art-desk.fade-b{-webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 16px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 16px),transparent 100%)}
+.art-desk.fade-tb{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
 .overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .art-phone{display:flex;justify-content:center;min-width:0;--avail-phone:calc(100vh - 280px)}
 @supports (height:100svh){.art-phone{--avail-phone:calc(100svh - 280px)}}
@@ -390,7 +409,9 @@ html:not(.has-enliten) .logoslot[data-size="close"].haslogo-luminz .close-luminz
   }
   .art.diagram svg{width:min(100%,640px,calc(var(--avail-ladder)*.9))}
   .art.art-wide svg{width:min(100%,720px)}
-  /* scene 6 breaks out of the split: copy band on top, flow full-stage-width below */
+  /* scene 6 breaks out of the split: copy band on top, flow full-stage-width below.
+     s6 is the last full-scale .split.wide; s8+ (.dash) compress for dash density — do NOT
+     merge these two scopes (memo 5, row 2). */
   .split.wide{grid-template-columns:minmax(0,1fr);align-content:center;gap:clamp(18px,3vh,32px)}
   .split.wide .copy{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:end}
   .split.wide h1{font-size:clamp(36px,4.4vw,62px)}
@@ -398,17 +419,60 @@ html:not(.has-enliten) .logoslot[data-size="close"].haslogo-luminz .close-luminz
   .split.wide .pipeline{max-width:none}
   .split.wide .why{margin-top:20px}
   .split.wide .art.art-wide svg{width:min(100%,1100px,90vw,calc(var(--avail-flow)*2.375))}
-  /* v10: dashboard section scenes — stacked band, per-scene zoom aspect */
-  .split.wide.dash .define{max-width:none;font-size:clamp(15px,1.35vw,19px)}
-  .split.wide.dash .why{margin-top:16px}
-  #dashSlot8 .art-desk{width:min(100%,calc(var(--avail)*1.121))}
-  #dashSlot9 .art-desk{width:min(100%,calc(var(--avail)*3.937))}
-  #dashSlot10 .art-desk{width:min(100%,calc(var(--avail)*4.237))}
-  #dashSlot11 .art-desk{width:min(100%,calc(var(--avail)*1.825))}
-  #dashSlot12 .art-desk{width:min(100%,calc(var(--avail)*2.145))}
-  #dashSlot13 .art-desk{width:min(100%,calc(var(--avail)*3.125))}
-  #dashSlot14 .art-desk{width:min(100%,calc(var(--avail)*2.551))}
-  #dashSlot15 .art-desk{width:min(100%,calc(var(--avail)*5.376))}
+  /* ============ v15 dashboard scenes 8–15 — layout + type (memos 1 & 3) ============ */
+  /* LAYOUT (memo 1): anchor the copy+art group from the stage top with an intentional
+     optical offset at every height — kills the floating-copy band that dumped all wide-short
+     slack as one dead void above copy. */
+  .split.wide.dash{align-content:start;padding-top:clamp(28px,4svh,56px)}
+  .split.wide.dash .copy{grid-row:1}
+  .split.wide.dash .dash-art{grid-row:2;
+    /* art earns the TRUE remaining height: live copy height + gap + chrome/pad reserve, replacing
+       the old flat 360px guess. --copy-h is measured per scene at frameDash() time. The 130px
+       reserve absorbs the 70px .scene grid shell (40+30 pad rows) + the ≤56px intentional
+       padding-top below, so the anchored group (padTop+copy+gap+art+margin) always fits the stage
+       row at every height — verified worst-case 1728×1080 scene 11 (supervisor geometry harness). */
+    --avail:calc(100svh - var(--copy-h,193px) - var(--copy-gap) - 130px)}
+  /* TYPE (memo 3): dash h1 steps DOWN one notch from scene 6 and goes 700 — dash strings run
+     long, the band must also hold eyebrow+define+why in ~193px, and 700 holds up against GDI
+     hinting at the 34px min and balances the KPI artwork's 800 numerals below it. */
+  .split.wide.dash h1{font-size:clamp(34px,3.6vw,52px);line-height:1.08;font-weight:700}
+  /* define: the deck's only long-paragraph context — cap the measure (30ch override removed it). */
+  .split.wide.dash .define{max-width:52ch;font-size:clamp(15px,1.3vw,18px);line-height:1.48}
+  /* vertical rhythm 10/2/10/14 — tighten label→title→body, ease into the why aside. Scoped to
+     the .copy-head/.copy-body wrappers where they carry it (memo 5, row 1) so scene 6 — which
+     shares the wrapper markup but not .dash — never inherits the compressed dash rhythm. */
+  .split.wide.dash .copy-head .eyebrow{margin-bottom:10px}
+  .split.wide.dash .copy-head h1{margin-bottom:2px}
+  .split.wide.dash .copy-body .define{margin-top:10px}
+  .split.wide.dash .copy-body .why{margin-top:14px}
+  /* why-block at dash density: widen the measure to match define, recede the label as a tag. */
+  .split.wide.dash .why{font-size:14px;line-height:1.45;max-width:56ch;padding-left:12px;gap:2px}
+  .split.wide.dash .why-label{font-size:10px;letter-spacing:.16em;opacity:.75;margin-bottom:1px}
+  /* ART WIDTH (memo 1): width = min(colWidth 1400px cap, avail*aspect). Staying inside the copy
+     column's 1400px max is what makes copy+art read as one composition. */
+  #dashSlot8 .art-desk{width:min(1400px,calc(var(--avail)*1.121))}
+  /* v15: aspect multiplier = the NEW window aspect after memo 2's nudges (invariant: for
+     uncapped scenes artH = avail exactly, so art never exceeds its earned height). Scene 9 win
+     0,0,1000,272 → 1000/272=3.676 (was 3.937); scene 11 win 0,188,562,326 → 562/326=1.724
+     (was 1.825, the load-bearing fix — scene 11 is uncapped, so a stale multiplier made art
+     taller than avail and overflowed the stage at ≥900h). */
+  #dashSlot9 .art-desk{width:min(1400px,calc(var(--avail)*3.676))}
+  #dashSlot10 .art-desk{width:min(1400px,calc(var(--avail)*4.237))}
+  #dashSlot11 .art-desk{width:min(1400px,calc(var(--avail)*1.724))}
+  #dashSlot12 .art-desk{width:min(1400px,calc(var(--avail)*2.145))}
+  #dashSlot13 .art-desk{width:min(1400px,calc(var(--avail)*3.125))}
+  #dashSlot14 .art-desk{width:min(1400px,calc(var(--avail)*2.551))}
+  #dashSlot15 .art-desk{width:min(1400px,calc(var(--avail)*5.376))}
+  /* WIDE-SHORT VOIDS (memo 1): the capped scenes (aspect too wide to ever claim full height)
+     convert their unavoidable leftover into a DELIBERATE pre-art gap — half the void, capped at
+     64px so it reads as breathing room, never a floating band. --asp = the window aspect. */
+  .split.wide.dash .dash-art{margin-top:min(64px,calc((var(--avail) - (100% / var(--asp))) * .5))}
+  #dashSlot9{--asp:3.676}#dashSlot10{--asp:4.237}
+  #dashSlot13{--asp:3.125}#dashSlot14{--asp:2.551}#dashSlot15{--asp:5.376}
+  /* memo 5 row 12 / memo 1: scene 8 is the ONLY dash copy stack with a .tourmap line
+     (~32px taller than its 7 siblings). Give it its own copy-h so it never inflates the
+     shared art budget for 9–15. JS refines this live; this is the no-JS/reduced fallback. */
+  #dashSlot8{--copy-h:225px}
   .art-phone{--avail-phone:calc(100vh - 250px)}
   @supports (height:100svh){.art-phone{--avail-phone:calc(100svh - 250px)}}
   .art-phone .phone-box{width:min(40vw,calc(var(--avail-phone)*.462),330px)}
@@ -1361,13 +1425,13 @@ html:not(.has-enliten) .logoslot[data-size="close"].haslogo-luminz .close-luminz
     <p class="eyebrow">Enliten Luminz</p>
     <h1>Proof, not seat time.</h1>
     <p class="subline">Education measured by what a learner can prove.</p>
-    <p class="define">You've walked the whole loop — next: the specification and the working prototypes.</p>
+    <p class="define">The category is open. The concept is ready.</p>
     <div class="close-actions">
-      <a class="cta cta-close" href="mailto:rshook@academica.org">Request the spec <span aria-hidden="true">→</span></a>
+      <a class="cta cta-close" href="mailto:rshook@academica.org">Start the conversation <span aria-hidden="true">→</span></a>
       <button class="linklike linklike-restart" id="restartBtn" type="button"><span aria-hidden="true">↺</span> Start over</button>
     </div>
     <p class="close-addr">rshook@academica.org</p>
-    <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">Design decisions locked, prototypes running today — execution, not exploration.</span></p>
+    <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">One belief, one team — worth backing early.</span></p>
   </div>
 </section>
 </main>
@@ -1421,16 +1485,22 @@ html:not(.has-enliten) .logoslot[data-size="close"].haslogo-luminz .close-luminz
     "Pathlight · 1 of 7", "Pathlight · 2 of 7", "Pathlight · 3 of 7", "Pathlight · 4 of 7",
     "Pathlight · 5 of 7", "Pathlight · 6 of 7", "Pathlight · 7 of 7", "Pathlight · beyond the 7",
     "Enliten Luminz"];
-  /* v10 flattened tour: scenes 8–15 share one dashboard node; win = viewBox window, ring = flame-ring rect */
+  /* v10 flattened tour: scenes 8–15 share one dashboard node; win = viewBox window, ring = flame-ring rect.
+     v15 spotlight (memo 2): + per-scene scrim alpha (.36–.44, was flat .48) and edge-fade class.
+     Two windows nudged to land on the artwork's real card gutters (≤20-unit in-gutter moves only):
+       · scene 9 bottom 254→272 (+18) — lands at the KPI-row gutter
+       · scene 11 top 206→188 (−18) — lands at the Ember/Next-row gutter; bottom stays 514, so h=326
+     The ring rx values (16/18) are keyed to the ARTWORK's own card-corner radii per window — they are
+     NOT the outer .art-desk frame radius (that's --r-lg in CSS) and must never be swapped (memo 5 row 14). */
   var DASH_FRAMES = [
     { win: [0, 0, 1000, 892], ring: null },
-    { win: [0, 0, 1000, 254], ring: [20, 58, 960, 126, 18] },
-    { win: [0, 112, 1000, 236], ring: [20, 182, 960, 96, 16] },
-    { win: [0, 206, 562, 308], ring: [24, 276, 468, 168, 16] },
-    { win: [438, 224, 562, 262], ring: [508, 276, 468, 168, 16] },
-    { win: [0, 374, 1000, 320], ring: [20, 444, 960, 180, 16] },
-    { win: [0, 500, 1000, 392], ring: [20, 620, 960, 156, 16] },
-    { win: [0, 706, 1000, 186], ring: [20, 776, 960, 104, 16] }
+    { win: [0, 0, 1000, 272], ring: [20, 58, 960, 126, 18], scrim: ".40", fade: "fade-b" },
+    { win: [0, 112, 1000, 236], ring: [20, 182, 960, 96, 16], scrim: ".44", fade: "fade-tb" },
+    { win: [0, 188, 562, 326], ring: [24, 276, 468, 168, 16], scrim: ".40", fade: "fade-b" },
+    { win: [438, 224, 562, 262], ring: [508, 276, 468, 168, 16], scrim: ".36", fade: "fade-tb" },
+    { win: [0, 374, 1000, 320], ring: [20, 444, 960, 180, 16], scrim: ".44", fade: "fade-tb" },
+    { win: [0, 500, 1000, 392], ring: [20, 620, 960, 156, 16], scrim: ".44", fade: "fade-t" },
+    { win: [0, 706, 1000, 186], ring: [20, 776, 960, 104, 16], scrim: ".36", fade: "fade-t" }
   ];
   var cur = 0, lock = false;
   var crumb = document.getElementById("crumb");
@@ -1710,9 +1780,31 @@ html:not(.has-enliten) .logoslot[data-size="close"].haslogo-luminz .close-luminz
     if (!art || !f) { return; }
     var slot = $("dashSlot" + (i + 1));
     if (slot && art.parentElement !== slot) { slot.appendChild(art); }
+    /* v15 layout (memo 1 §b): art earns its height from the REAL copy band, not a flat
+       guess. Read the live copy height once per entry and publish it as --copy-h on the
+       .dash-art element so the >=861 --avail formula reflects true leftover room. Guarded:
+       only overrides when a real measurement exists (>0) and only on the wide desktop layout
+       (>=861px, where the formula runs) — otherwise the CSS per-scene default holds (scene 8
+       keeps its taller value; jsdom, which never lays out, stays on defaults, no thrash). */
+    var dashArt = slot ? slot : art.parentElement;
+    if (dashArt && dashArt.classList.contains("dash-art")) {
+      var wide = (typeof window.matchMedia === "function") && window.matchMedia("(min-width:861px)").matches;
+      var copyEl = dashArt.parentElement ? dashArt.parentElement.querySelector(".copy") : null;
+      var ch = (wide && copyEl) ? copyEl.offsetHeight : 0;
+      if (ch > 0) { dashArt.style.setProperty("--copy-h", ch + "px"); }
+      else { dashArt.style.removeProperty("--copy-h"); }
+    }
+    /* v15 spotlight (memo 2): per-scene edge fades. Toggle the fade class set from the frame
+       spec so the hard clip dissolves only at sliced-neighbor edges (not at canvas boundaries). */
+    art.classList.remove("fade-t", "fade-b", "fade-tb");
+    if (f.fade) { art.classList.add(f.fade); }
     var o = $("sp-overlay");
     if (f.ring) {
       if (o) { o.style.display = ""; }
+      /* v15 spotlight (memo 2): per-window scrim alpha (.36–.44), replacing the flat .48.
+         The masked scrim rect is the first <rect> child of #sp-overlay. */
+      var scrimRect = o ? o.querySelector("rect[mask]") : null;
+      if (scrimRect && f.scrim != null) { scrimRect.setAttribute("fill", "rgba(4,12,22," + f.scrim + ")"); }
       var ids = ["sp-cut", "sp-glow", "sp-ring"];
       for (var k = 0; k < ids.length; k++) {
         var el = $(ids[k]);
