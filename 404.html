@@ -71,7 +71,9 @@ body{
 button{font:inherit;color:inherit}
 
 /* ---------- persistent chrome ---------- */
-.chrome{position:fixed;left:0;right:0;z-index:var(--z-chrome);display:flex;align-items:center;gap:14px;padding:0 clamp(20px,5vw,64px)}
+/* v14 (responsive): explicit 4-value padding so left/right each add the matching
+   env(safe-area-inset-*) — keeps chrome text/CTA off the notch in landscape. */
+.chrome{position:fixed;left:0;right:0;z-index:var(--z-chrome);display:flex;align-items:center;gap:14px;padding:0 calc(clamp(20px,5vw,64px) + env(safe-area-inset-right)) 0 calc(clamp(20px,5vw,64px) + env(safe-area-inset-left))}
 .chrome-top{top:calc(env(safe-area-inset-top) + 22px);height:24px}
 .chrome-bot{bottom:calc(env(safe-area-inset-bottom) + 18px);height:24px;gap:18px}
 .chrome,.navbtn{animation:chromeIn .5s ease both}
@@ -79,13 +81,32 @@ button{font:inherit;color:inherit}
 .mark{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.02em;font-size:15px;color:#FFF}
 .mark svg{filter:drop-shadow(var(--glow-flame-md))}
 .mark .lum{color:var(--flame-light)}
-.crumb{margin-left:auto;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);white-space:nowrap;overflow:hidden}
+/* v11 brand: chrome dual lockup (enliten + luminz), independent auto-detect, baseline-aligned.
+   Per spec: EITHER image missing reverts the whole chrome lockup to the original text mark —
+   no mixed "one image, one broken image" state. Both must load for the plate to show.
+   v14: enliten presence now carried by the root class `html.has-enliten` (one shared probe),
+   luminz still self-detects per-slot via `.haslogo-luminz`; both-or-neither preserved. */
+.logoslot[data-size="chrome"]{display:flex;justify-content:flex-start}
+.logoslot[data-size="chrome"] .plate-chrome{
+  display:none;align-items:flex-end;gap:10px;background:var(--plate);border-radius:var(--r-sm);
+  padding:3px 8px;box-shadow:none;
+}
+.logoslot[data-size="chrome"] .plate-chrome img{height:20px;width:auto;display:block}
+.has-enliten .logoslot[data-size="chrome"].haslogo-luminz .plate-chrome{display:flex}
+.has-enliten .logoslot[data-size="chrome"].haslogo-luminz .logo-fallback-chrome{display:none}
+.crumbwrap{margin-left:auto;display:flex;align-items:center;gap:12px;min-width:0}
+.crumb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);white-space:nowrap;overflow:hidden}
+.crumb-of{font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px;border-left:1px solid var(--hairline)}
+.crumb-of .crumb-of-cur{color:var(--flame-light)}
 .dots{display:flex;gap:8px;align-items:center}
 .dotbtn{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:none;border:0;padding:0;cursor:pointer;border-radius:var(--r-pill)}
 .dotbtn .dot{width:7px;height:7px;border-radius:50%;background:rgba(185,203,222,.28);transition:all .3s var(--ease)}
 .dotbtn.done .dot{background:rgba(245,166,35,.55)}
 .dotbtn[aria-current] .dot{width:22px;border-radius:5px;background:var(--grad-flame);box-shadow:var(--glow-flame-sm)}
-.hint{margin-left:auto;font-size:12px;color:var(--mist);display:flex;gap:14px;align-items:center;white-space:nowrap}
+/* v14 (responsive, WCAG 1.4.10): let the hint wrap instead of overflowing behind the
+   html/body overflow-x:clip at 400% zoom / 320px. text-align:right + capped width keep
+   it from crowding the dots-frac/crumb counter on the shared footer flex row. */
+.hint{margin-left:auto;font-size:12px;color:var(--mist);display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:flex-end;white-space:normal;text-align:right;max-width:46vw}
 .key{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border:1px solid var(--hairline-strong);border-radius:6px;font-size:11px;font-weight:600;color:var(--mist)}
 .key.flash{border-color:var(--flame-light);color:var(--flame-light)}
 .hint-swipe{display:none}
@@ -106,7 +127,8 @@ button{font:inherit;color:inherit}
 /* ---------- scene shell ---------- */
 .scene{
   position:fixed;inset:0;display:grid;grid-template-rows:40px minmax(0,1fr) 30px;
-  padding:calc(env(safe-area-inset-top) + 22px) clamp(20px,5vw,64px) calc(env(safe-area-inset-bottom) + 18px);
+  /* v14 (responsive): 4-value padding adds env(safe-area-inset-right/left) per side */
+  padding:calc(env(safe-area-inset-top) + 22px) calc(clamp(20px,5vw,64px) + env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 18px) calc(clamp(20px,5vw,64px) + env(safe-area-inset-left));
   visibility:hidden;opacity:0;pointer-events:none;z-index:var(--z-scene);
 }
 .scene.active{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
@@ -135,6 +157,7 @@ button{font:inherit;color:inherit}
 .anim-play h1{animation-delay:.14s}
 .anim-play .define,.anim-play .subline,.anim-play .pipeline,.anim-play .lockup{animation-delay:.26s}
 .anim-play .why,.anim-play .cta,.anim-play .toast,.anim-play .contact{animation-delay:.4s}
+.anim-play .navhint{animation-delay:.48s}
 .anim-play .art{animation:glowIn .8s var(--ease) .3s both}
 .anim-play .logoslot{animation:glowIn .8s var(--ease) .1s both}
 .anim-play .cover-accent{animation:glowIn .8s var(--ease) 0s both}
@@ -189,6 +212,22 @@ h1{
   transition:border-color .2s var(--ease),color .2s var(--ease);
 }
 .contact:hover{border-color:var(--flame-light);color:var(--flame-light)}
+.close-actions{display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center}
+.tourmap{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:clamp(11px,1.1vw,12.5px);font-weight:600;letter-spacing:.02em;color:var(--dim)}
+.tourmap-k{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--flame-light);padding:2px 7px;border:1px solid var(--hairline-strong);border-radius:var(--r-pill)}
+.tourmap-sep{color:var(--hairline-strong)}
+.contact-restart{background:none;cursor:pointer;gap:7px}
+/* v13 S17 hierarchy: contact CTA is the one primary (flame); Start over is a quiet text link */
+.cta-close{text-decoration:none}
+.linklike{
+  display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:6px 4px;cursor:pointer;
+  color:var(--dim);font-size:12.5px;font-weight:600;letter-spacing:.01em;text-decoration:none;
+  transition:color .2s var(--ease);
+}
+.linklike:hover{color:var(--flame-light)}
+.close-addr{margin-top:2px;font-size:12px;font-weight:500;letter-spacing:.01em;color:var(--dim)}
+.navhint{margin-top:-6px;font-size:clamp(11px,1.15vw,12.5px);font-weight:500;letter-spacing:.01em;color:var(--dim);display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.navhint-k{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border:1px solid var(--hairline-strong);border-radius:5px;font-size:11px;font-weight:600;color:var(--mist)}
 
 /* ---------- stage variants ---------- */
 .split{
@@ -226,11 +265,37 @@ h1{
   display:none;background:var(--plate);border-radius:var(--r-xl);box-shadow:var(--shadow-plate),0 0 0 1px rgba(46,108,164,.2);
   padding:clamp(14px,2.4vw,24px) clamp(20px,3.4vw,34px);
 }
+/* S7 uses this generic .haslogo (tagline PNG self-detects); S1 hero is enliten-only,
+   now gated by the root class below instead of a per-img .haslogo. */
 .logoslot.haslogo .plate{display:inline-flex}
 .logoslot.haslogo .logo-fallback{display:none}
+/* v14: S1 hero plate shows only when the shared enliten probe succeeded */
+.has-enliten .logoslot[data-size="hero"] .plate{display:inline-flex}
+.has-enliten .logoslot[data-size="hero"] .logo-fallback{display:none}
 .logoslot[data-size="hero"] .plate img{width:min(46vw,340px);min-width:96px;display:block}
 .logoslot[data-size="close"] .plate img{width:min(32vw,238px);min-width:96px;display:block}
 .logoslot[data-size="hero"] .plate{box-shadow:var(--shadow-plate),0 0 0 1px rgba(46,108,164,.2),0 0 40px rgba(245,166,35,.12)}
+/* v11 brand: scene 17 close pairing (enliten + luminz), independent auto-detect.
+   v14: enliten presence is `html.has-enliten` (shared probe); luminz self-detects
+   per-slot via `.haslogo-luminz`. Three branches (both / enliten-only / luminz-only)
+   preserved exactly; data-size="hero" (scene 1) handled above. */
+.has-enliten .logoslot[data-size="close"] .plate,
+.logoslot[data-size="close"].haslogo-luminz .plate{display:inline-flex;align-items:flex-end;gap:14px}
+.has-enliten .logoslot[data-size="close"] .logo-fallback,
+.logoslot[data-size="close"].haslogo-luminz .logo-fallback{display:none}
+.logoslot[data-size="close"] .close-enliten,
+.logoslot[data-size="close"] .close-luminz{display:none}
+/* both loaded: shrink each to the paired width so the pair matches the original solo footprint */
+.has-enliten .logoslot[data-size="close"].haslogo-luminz .close-enliten,
+.has-enliten .logoslot[data-size="close"].haslogo-luminz .close-luminz{width:min(20vw,150px);min-width:72px;display:block}
+/* only enliten loaded: show it alone at the original solo width */
+.has-enliten .logoslot[data-size="close"]:not(.haslogo-luminz) .close-enliten{width:min(32vw,238px);min-width:96px;display:block}
+/* only luminz loaded (enliten absent): show it alone at the same solo width, same treatment */
+html:not(.has-enliten) .logoslot[data-size="close"].haslogo-luminz .close-luminz{width:min(32vw,238px);min-width:96px;display:block}
+@media (max-width:860px){
+  .has-enliten .logoslot[data-size="close"] .plate,
+  .logoslot[data-size="close"].haslogo-luminz .plate{gap:10px}
+}
 .logo-fallback{display:inline-flex;align-items:center;gap:12px}
 .logo-word{
   font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:-.01em;color:var(--star);
@@ -238,13 +303,30 @@ h1{
 }
 .logoslot[data-size="close"] .logo-word{font-size:clamp(30px,4vw,42px)}
 
+/* v11 brand: scene 7 Luminz mark, stacked above the h1. PNG-only placement —
+   per spec §1b/§2, when the PNG 404s the whole element collapses to nothing
+   (no flame-diamond+word fallback here; it would duplicate the adjacent h1). */
+.logoslot-s7{display:none;justify-content:flex-start;margin-bottom:14px}
+.logoslot-s7.haslogo{display:flex}
+.logoslot-s7 .plate{
+  display:inline-flex;background:var(--plate);border-radius:var(--r-xl);box-shadow:var(--shadow-plate),0 0 0 1px rgba(46,108,164,.2);
+  padding:clamp(10px,1.6vw,16px) clamp(14px,2.2vw,22px);
+}
+.logoslot-s7 .plate img{height:44px;width:auto;display:block}
+.logoslot-s7 .logo-fallback{display:none}
+@media (max-width:860px){
+  .logoslot-s7 .plate img{height:32px}
+}
+
 /* ---------- dashboard scenes 8–15 & phone scene 16 ---------- */
-.dash-art{position:relative;display:flex;justify-content:center;min-width:0;width:100%}
+.dash-art{position:relative;display:flex;justify-content:center;min-width:0;width:100%;--avail:calc(100vh - 360px)}
+@supports (height:100svh){.dash-art{--avail:calc(100svh - 360px)}}
 .art-desk{position:relative;width:100%;border-radius:16px;box-shadow:var(--shadow-plate)}
 .dash-art .art-desk svg{display:block;width:100%;height:auto}
 .overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.art-phone{display:flex;justify-content:center;min-width:0}
-.art-phone .phone-box{position:relative;width:min(52vw,calc((100vh - 280px)*.486),270px)}
+.art-phone{display:flex;justify-content:center;min-width:0;--avail-phone:calc(100vh - 280px)}
+@supports (height:100svh){.art-phone{--avail-phone:calc(100svh - 280px)}}
+.art-phone .phone-box{position:relative;width:min(52vw,calc(var(--avail-phone)*.486),270px)}
 .art-phone .phone-box svg{display:block;width:100%;height:auto}
 .dots-frac{display:none;align-items:center;gap:5px;font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--mist);font-variant-numeric:tabular-nums;white-space:nowrap}
 .dots-frac .frac-cur{color:var(--flame-light)}
@@ -258,12 +340,23 @@ h1{
   .dots{display:none}
   .dots-frac{display:flex}
   .define{max-width:none}
+  .why{max-width:none}
   .cover h1{font-size:clamp(44px,9vw,72px)}
+  /* v11 brand: chrome lockup holds at fixed mobile scale, matching today's 18px .mark icon */
+  .logoslot[data-size="chrome"] .plate-chrome{gap:8px}
+  .logoslot[data-size="chrome"] .plate-chrome img{height:18px}
+  /* v14 (responsive): scene 8's near-square frame (AR 1.121) runs tall vs its 7 siblings
+     and crowds the copy stack on ~393x852 portrait phones. Height-bind it only; width
+     auto keeps the ring overlay (inset:0) registered to the artwork. */
+  #dashSlot8 .art-desk{width:auto;max-width:100%;max-height:60vh}
+  #dashSlot8 .art-desk svg{width:auto;height:auto;max-width:100%;max-height:60vh}
 }
 @media (max-width:560px){
-  .scene{padding-left:20px;padding-right:20px}
-  .chrome{padding-left:20px;padding-right:20px}
+  /* v14 (responsive): keep the safe-area insets while tightening the base padding */
+  .scene{padding-left:calc(20px + env(safe-area-inset-left));padding-right:calc(20px + env(safe-area-inset-right))}
+  .chrome{padding-left:calc(20px + env(safe-area-inset-left));padding-right:calc(20px + env(safe-area-inset-right))}
   .crumb{display:none}
+  .crumb-of{display:none}
   .hint-swipe{font-size:11px}
 }
 @media (max-width:400px){
@@ -272,11 +365,30 @@ h1{
   .define{font-size:16px}
   .art svg,.art.art-wide svg{width:min(78vw,320px)}
 }
+/* v14 (responsive): landscape-phone (short + narrow) — the mobile path renders the
+   dash SVG at width:100%/height:auto, which overshoots a ~262px stage row on scenes
+   8/11/12/14. Height-bind the artwork here (mirrors the >=861 --avail pattern the
+   desktop formulas never reach at this width). NOTE: --avail/--avail-phone math only
+   applies >=861px; below that, artwork falls back to width:100%/vw sizing with no
+   height reserve except these overrides. The <=720h stage-scroll remains the net. */
+@media (max-width:860px) and (max-height:430px){
+  /* art-desk hugs the height-bound SVG (width:auto) so the ring overlay (inset:0)
+     stays registered to the artwork, not a wider box. */
+  .dash-art .art-desk{width:auto;max-width:100%;max-height:calc(100svh - 170px)}
+  .dash-art .art-desk svg{width:auto;height:auto;max-width:100%;max-height:calc(100svh - 170px)}
+  /* phone scene 16: keep the device mock from collapsing to a thumbnail */
+  .art-phone{--avail-phone:calc(100svh - 120px)}
+  .art-phone .phone-box{width:min(30vw,calc(var(--avail-phone)*.486),200px)}
+}
 /* v9 readability: diagrams scale with width AND height on desktop.
    The ≥861 guard is mandatory — the ≤860/≤400 mobile rules above must keep
    winning below it by media match, not source order. */
 @media (min-width:861px){
-  .art.diagram svg{width:min(100%,640px,calc((100vh - 150px)*.9))}
+  :root{--avail-ladder:calc(100vh - 150px);--avail-flow:calc(100vh - 400px)}
+  @supports (height:100svh){
+    :root{--avail-ladder:calc(100svh - 150px);--avail-flow:calc(100svh - 400px)}
+  }
+  .art.diagram svg{width:min(100%,640px,calc(var(--avail-ladder)*.9))}
   .art.art-wide svg{width:min(100%,720px)}
   /* scene 6 breaks out of the split: copy band on top, flow full-stage-width below */
   .split.wide{grid-template-columns:minmax(0,1fr);align-content:center;gap:clamp(18px,3vh,32px)}
@@ -285,28 +397,38 @@ h1{
   .split.wide .define{max-width:46ch}
   .split.wide .pipeline{max-width:none}
   .split.wide .why{margin-top:20px}
-  .split.wide .art.art-wide svg{width:min(100%,1100px,90vw,calc((100vh - 400px)*2.375))}
+  .split.wide .art.art-wide svg{width:min(100%,1100px,90vw,calc(var(--avail-flow)*2.375))}
   /* v10: dashboard section scenes — stacked band, per-scene zoom aspect */
   .split.wide.dash .define{max-width:none;font-size:clamp(15px,1.35vw,19px)}
   .split.wide.dash .why{margin-top:16px}
-  #dashSlot8 .art-desk{width:min(100%,calc((100vh - 320px)*1.121))}
-  #dashSlot9 .art-desk{width:min(100%,calc((100vh - 320px)*3.937))}
-  #dashSlot10 .art-desk{width:min(100%,calc((100vh - 320px)*4.237))}
-  #dashSlot11 .art-desk{width:min(100%,calc((100vh - 320px)*1.825))}
-  #dashSlot12 .art-desk{width:min(100%,calc((100vh - 320px)*1.825))}
-  #dashSlot13 .art-desk{width:min(100%,calc((100vh - 320px)*3.125))}
-  #dashSlot14 .art-desk{width:min(100%,calc((100vh - 320px)*3.378))}
-  #dashSlot15 .art-desk{width:min(100%,calc((100vh - 320px)*5.376))}
-  .art-phone .phone-box{width:min(36vw,calc((100vh - 250px)*.462),300px)}
+  #dashSlot8 .art-desk{width:min(100%,calc(var(--avail)*1.121))}
+  #dashSlot9 .art-desk{width:min(100%,calc(var(--avail)*3.937))}
+  #dashSlot10 .art-desk{width:min(100%,calc(var(--avail)*4.237))}
+  #dashSlot11 .art-desk{width:min(100%,calc(var(--avail)*1.825))}
+  #dashSlot12 .art-desk{width:min(100%,calc(var(--avail)*2.145))}
+  #dashSlot13 .art-desk{width:min(100%,calc(var(--avail)*3.125))}
+  #dashSlot14 .art-desk{width:min(100%,calc(var(--avail)*2.551))}
+  #dashSlot15 .art-desk{width:min(100%,calc(var(--avail)*5.376))}
+  .art-phone{--avail-phone:calc(100vh - 250px)}
+  @supports (height:100svh){.art-phone{--avail-phone:calc(100svh - 250px)}}
+  .art-phone .phone-box{width:min(40vw,calc(var(--avail-phone)*.462),330px)}
 }
 /* v10: 17 dots — compact on mid-width fine pointers; fraction replaces dots <861 */
 @media (min-width:861px) and (max-width:1200px) and (pointer:fine){
-  .dotbtn{width:20px}
+  /* v14 (WCAG 2.5.8): keep the 24px hit target; shrink only the visual glyph for
+     compactness (mirrors the >=1440px pattern that grows the glyph, not the box). */
+  .dotbtn .dot{width:6px;height:6px}
+  .dotbtn[aria-current] .dot{width:18px}
   .dots{gap:6px}
   .hint-keys > span:last-child{display:none}
 }
 @media (min-width:861px) and (max-height:720px){
   .split.wide{align-content:start} /* defer to the stage-scroll fix on short viewports */
+}
+/* v11 geometry: scenes 8–15's stacked copy-over-art stage — never push copy above the
+   viewport on short screens. Default (taller viewports) keeps align-content:center. */
+@media (max-height:899px){
+  .split.wide.dash{align-content:start}
 }
 @media (min-width:1440px){
   .split{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
@@ -332,6 +454,23 @@ h1{
   .dotbtn{width:34px;height:44px}
   .navbtn{width:48px;height:48px}
 }
+/* v14 (a11y): Windows High Contrast / forced-colors. The dot states rely on rgba
+   fills that the OS flattens to one system color, collapsing done/upcoming. Restore
+   distinction with borders (which survive) + the existing size jump; keep every
+   button and the flame CTA visibly bounded and system-legible. */
+@media (forced-colors:active){
+  /* three distinguishable dot states without color: none / bordered / bordered+large */
+  .dotbtn .dot{border:1px solid GrayText}
+  .dotbtn.done .dot{border:1px solid Highlight}
+  .dotbtn[aria-current] .dot{border:2px solid Highlight}
+  /* buttons: guarantee a visible outline under system colors */
+  .navbtn{border:1px solid ButtonText}
+  .cta,.cta-close,.contact,.linklike{border:1px solid ButtonText}
+  /* the flame CTA loses its gradient to a system fill — a border keeps it a clear button */
+  .cta{forced-color-adjust:none;background:Highlight;color:HighlightText;border:1px solid HighlightText}
+  /* keep focus ring perceivable (system may already do this, belt-and-suspenders) */
+  :focus-visible{outline:2px solid Highlight;outline-offset:3px}
+}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
@@ -342,15 +481,27 @@ h1{
 <!-- ============ persistent chrome ============ -->
 <header class="chrome chrome-top">
   <div class="mark">
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-      <defs><linearGradient id="tdChrome" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#F2A233"/><stop offset="1" stop-color="#D0491F"/>
-      </linearGradient></defs>
-      <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#tdChrome)" transform="rotate(45 12 12)"/>
-    </svg>
-    enliten <span class="lum">· luminz</span>
+    <div class="logoslot logoslot-chrome" data-size="chrome">
+      <span class="plate-chrome">
+        <!-- v14: enliten src omitted; the single Image() probe sets html.has-enliten and fills this src from data-esrc (one 404 max, all enliten slots render from the root class) -->
+        <img alt="enliten" class="mark-enliten enliten-img" data-esrc="assets/enliten-logo.png">
+        <img src="assets/luminz-logo.png" alt="Luminz" class="mark-luminz" loading="eager" fetchpriority="high" onload="this.closest('.logoslot').classList.add('haslogo-luminz')" onerror="this.closest('.logoslot').classList.add('nologo-luminz')">
+      </span>
+      <span class="logo-fallback-chrome">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <defs><linearGradient id="tdChrome" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F2A233"/><stop offset="1" stop-color="#D0491F"/>
+          </linearGradient></defs>
+          <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#tdChrome)" transform="rotate(45 12 12)"/>
+        </svg>
+        enliten <span class="lum">· luminz</span>
+      </span>
+    </div>
   </div>
-  <div class="crumb" id="crumb"></div>
+  <div class="crumbwrap">
+    <div class="crumb" id="crumb"></div>
+    <span class="crumb-of" id="crumbOf" aria-hidden="true"><span class="crumb-of-cur" id="crumbOfCur">1</span> / 17</span>
+  </div>
 </header>
 
 <footer class="chrome chrome-bot">
@@ -378,7 +529,7 @@ h1{
       <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
     </svg>
     <div class="logoslot" data-size="hero">
-      <span class="plate"><!-- SWAP: brand PNG --><img src="assets/enliten-logo.png" alt="enliten" loading="eager" fetchpriority="high" onload="this.closest('.logoslot').classList.add('haslogo')" onerror="this.closest('.logoslot').classList.add('nologo')"></span>
+      <span class="plate"><!-- SWAP: brand PNG · v14: src filled by the single enliten probe via data-esrc --><img alt="enliten" class="enliten-img" data-esrc="assets/enliten-logo.png"></span>
       <span class="logo-fallback" aria-hidden="true">
         <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
@@ -390,6 +541,7 @@ h1{
     <h1>Welcome to the Enliten UI/UX Walkthrough</h1>
     <p class="subline">Seventeen scenes. One belief: education measured by what you can prove — not seat time.</p>
     <button class="cta" id="beginBtn">Begin</button>
+    <p class="navhint" aria-hidden="true"><span class="navhint-k">→</span> or swipe to move · 17 short scenes</p>
     <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">You're about to see the loop that acquires, teaches, and retains learners.</span></p>
   </div>
 </section>
@@ -560,13 +712,13 @@ h1{
   <div class="stage split wide">
     <div class="copy">
       <div class="copy-head">
-        <p class="eyebrow">Supply</p>
+        <p class="eyebrow">Supply · 1 of 2</p>
         <h1>Videos &amp; the Watch List</h1>
       </div>
       <div class="copy-body">
         <p class="define">Find a YouTube video — the Enliten Video Collector sends it to your Watch List.</p>
         <p class="pipeline">Vetting: <span class="pchip">transcript</span> <span class="parrow">→</span> <span class="pchip">AI classification</span> <span class="parrow">→</span> <span class="pchip">quality score</span> <span class="parrow">→</span> <span class="pchip">team approval</span>.</p>
-        <p class="define" style="margin-top:14px">Approved videos attach to the Learning Objectives they teach.</p>
+        <p class="define" style="margin-top:14px">Approved videos attach to every Learning Objective they teach.</p>
         <p class="why"><span class="why-label">Why it matters</span>Only approved videos earn — learner-sourced supply at near-zero cost.</p>
         <p class="sr-only">Diagram: a video card from the Watch List travels through four cleared review gates — transcript, AI classification, quality score, team approval — and docks onto a Learning Objective pill, carrying its 15.4 Luminz chip the whole way.</p>
       </div>
@@ -662,7 +814,10 @@ h1{
 <section class="scene s7" id="s7" role="group" aria-roledescription="scene" aria-label="Scene 7 of 17 — Luminz">
   <div class="stage split">
     <div class="copy">
-      <p class="eyebrow">The currency</p>
+      <div class="logoslot logoslot-s7" data-size="s7">
+        <span class="plate"><img src="assets/luminz-logo-tagline.png" alt="Luminz — credits &amp; credentials" loading="lazy" decoding="async" onload="this.closest('.logoslot').classList.add('haslogo')" onerror="this.closest('.logoslot').classList.add('nologo')"></span>
+      </div>
+      <p class="eyebrow">Currency · 2 of 2</p>
       <h1>Luminz</h1>
       <p class="define">Watch. Pass the video's fresh AI quiz — 80% or better.<br>The video pays its Luminz: 1 Luminz = 1 minute of passed video.<br>Luminz flow automatically into every course whose Learning Objectives the video covers.</p>
       <div class="toast" id="s7toast">
@@ -771,17 +926,18 @@ h1{
 </section>
 
 <!-- ============ SCENE 8 · MEET PATHLIGHT ============ -->
-<section class="scene s8" id="s8" role="group" aria-roledescription="scene" aria-label="Scene 8 of 17 — Meet Pathlight">
+<section class="scene s8" id="s8" role="group" aria-roledescription="scene" aria-label="Scene 8 of 17 — This is your Pathlight">
   <div class="stage split wide dash">
     <div class="copy">
       <div class="copy-head">
-        <p class="eyebrow">The concept UI</p>
-        <h1>Meet Pathlight</h1>
+        <p class="eyebrow">Your journey begins</p>
+        <h1>This is your Pathlight</h1>
       </div>
       <div class="copy-body">
-        <p class="define">Pathlight is the learner's home — where Programs, Luminz, and the Watch List become one page with one next action. Seven sections, then your pocket.</p>
-        <p class="why"><span class="why-label">Why it matters</span>Engagement designed in, not bolted on.</p>
-        <p class="sr-only">Artwork: the full Pathlight dashboard rendered with sample data — top bar, dark hero band, four KPI cards, the Ember panel, Work on next, the Watch List table, the standards chart, and three program cards. The next seven scenes visit one section each.</p>
+        <p class="define">This is the learner's home — every Program, every Luminz, every video in one page. From here, one clear next step, never a menu.</p>
+        <p class="tourmap"><span class="tourmap-k">Next</span> 7 short stops <span class="tourmap-sep">·</span> one section each</p>
+        <p class="why"><span class="why-label">Why it matters</span>Engagement is structural, not bolted on.</p>
+        <p class="sr-only">Artwork: the full Pathlight dashboard rendered with sample data — top bar, dark hero band, four KPI cards, the Ember panel, Work on next, the Watch List table, the standards chart, and three program cards. The next seven scenes — 9 through 15 — visit one section each.</p>
       </div>
     </div>
     <div class="art dash-art" id="dashSlot8">
@@ -931,8 +1087,8 @@ h1{
                 <rect x="14" y="10" width="26" height="26" rx="7" fill="url(#dbNight)"/><use href="#dbFl" transform="translate(18,13) scale(.42)" fill="#F8B96B"/>
                 <text x="48" y="19" font-size="10" font-weight="700" letter-spacing=".07em" fill="#5B7290">DEGREE TRACK</text>
                 <text x="48" y="33" font-size="11.5" font-weight="800" fill="#1B3A5C">A.S. Business — Business Core</text>
-                <text x="282" y="33" text-anchor="end" font-size="16" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">12%</text>
-                <rect x="14" y="42" width="268" height="7" rx="3.5" fill="#E9EEF5"/><rect x="14" y="42" width="32" height="7" rx="3.5" fill="url(#dbFlameH)"/><circle cx="46" cy="45.5" r="5.5" fill="url(#dbTip)"/>
+                <text x="282" y="33" text-anchor="end" font-size="16" font-weight="800" fill="#1B3A5C" style="font-variant-numeric:tabular-nums">9%</text>
+                <rect x="14" y="42" width="268" height="7" rx="3.5" fill="#E9EEF5"/><rect x="14" y="42" width="24" height="7" rx="3.5" fill="url(#dbFlameH)"/><circle cx="38" cy="45.5" r="5.5" fill="url(#dbTip)"/>
                 <text x="14" y="62" font-size="10" fill="#3D5670" style="font-variant-numeric:tabular-nums">Introduction to Business (GEB 1011) · 100%</text>
                 <text x="14" y="76" font-size="10" fill="#5B7290" style="font-variant-numeric:tabular-nums">Financial Accounting (ACG 2021) · 64%</text>
               </g>
@@ -965,8 +1121,8 @@ h1{
         <h1>The path lights up</h1>
       </div>
       <div class="copy-body">
-        <p class="define">One greeting — <strong>your path is 72% lit to your first certificate</strong> — and one glowing action: <strong>Watch “Accrual vs. Cash” · 15 Luminz toward your certificate</strong>. Never a menu.</p>
-        <p class="why"><span class="why-label">Why it matters</span>Retention is designed into the first three seconds — one action, pre-chosen.</p>
+        <p class="define">Here's where your page starts — one greeting, one glowing next step. You never dig for what to do; it's already lit and waiting for you.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Retention starts in the first three seconds.</p>
         <p class="sr-only">Artwork: the dashboard hero band under the flame ring — Good morning, Jordan — your path is 72% lit to your first certificate, with one call to action: watch Accrual vs. Cash for 15 Luminz toward your certificate.</p>
       </div>
     </div>
@@ -983,8 +1139,8 @@ h1{
         <h1>Today's numbers</h1>
       </div>
       <div class="copy-body">
-        <p class="define">Four cards, mastery first: <strong>36 / 52</strong> standards, nearest credential <strong>72%</strong> with <strong>5 objectives to go</strong>, <strong>342</strong> Luminz earned, <strong>2 ready / 7</strong> in the video queue. Every number points forward, not at history.</p>
-        <p class="why"><span class="why-label">Why it matters</span>Mastery, credential, currency, supply — the unit economics of learning on one row.</p>
+        <p class="define">Four numbers, always pointing forward — standards mastered, your nearest credential, Luminz earned, videos ready. Nothing here is a report card; it's your next move.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Mastery, credential, currency, supply — on one row.</p>
         <p class="sr-only">Artwork: the four KPI cards — standards mastered 36 of 52 with 10 in progress and 6 not yet mastered; nearest credential Bookkeeping Certificate at 72% with 5 objectives to go; 342 Luminz earned, up 38 this week; video queue 2 ready of 7.</p>
       </div>
     </div>
@@ -1001,8 +1157,8 @@ h1{
         <h1>Ember — your AI guide</h1>
       </div>
       <div class="copy-body">
-        <p class="define">Ember narrates the same data the page renders — the <strong>Accrual vs. Cash</strong> video is ready, its <strong>15.4 Luminz</strong> flowing toward the Bookkeeping Certificate. Ember asks before acting; the disclosure stays on screen.</p>
-        <p class="why"><span class="why-label">Why it matters</span><b>Ember is AI and can make mistakes — your teacher can always help.</b> Trust as a feature.</p>
+        <p class="define">Ember already knows your day — what's ready, what it's worth — and still asks before doing anything. You're never guessing what comes next.</p>
+        <p class="why"><span class="why-label">Why it matters</span><b>Ember is AI and can make mistakes — your teacher can always help.</b></p>
         <p class="sr-only">Artwork: the Ember card — Ember reports the Accrual vs. Cash video is ready with 15.4 Luminz flowing toward the Bookkeeping Certificate, offers Start the video and Plan my week replies, and keeps its AI disclosure on screen.</p>
       </div>
     </div>
@@ -1019,8 +1175,8 @@ h1{
         <h1>Work on next</h1>
       </div>
       <div class="copy-body">
-        <p class="define">Five steps in Ember's order — instruction before practice. Every step declares its payout up front: the video's <strong>+15.4 Lz</strong> on pass, a cleared standard, <strong>Certificate 72% → 86%</strong>.</p>
-        <p class="why"><span class="why-label">Why it matters</span>Motivation with receipts — every task names its return up front.</p>
+        <p class="define">Five steps, laid out in order for you — instruction before practice. Each one shows what it pays before you start, so you always know it's worth it.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Every task names its return up front — motivation, priced.</p>
         <p class="sr-only">Artwork: the Work on next card — five steps in Ember's order with payouts declared up front, starting with Watch Accrual vs. Cash Accounting for +15.4 Lz and ending at Certificate 72% to 86%.</p>
       </div>
     </div>
@@ -1037,8 +1193,8 @@ h1{
         <h1>The Watch List</h1>
       </div>
       <div class="copy-body">
-        <p class="define">Jordan's submissions and their review states — <strong>Passed</strong> pays <strong>+24.6 Lz</strong>, <strong>In review</strong> earns nothing yet. A failed quiz is just a <strong>Retake quiz</strong> button — free, and the questions change.</p>
-        <p class="why"><span class="why-label">Why it matters</span>Failure never dead-ends — free retakes keep the earning loop alive.</p>
+        <p class="define">Every video you send in shows up here, with exactly where it stands. Fail a quiz and it's just a free retake — nothing you submit ever dead-ends.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Free retakes keep the earning loop alive — nothing a learner submits is wasted.</p>
         <p class="sr-only">Artwork: the Watch List table — Debits and Credits Explained passed with +24.6 Luminz, Accrual vs. Cash ready to watch, Payroll Basics quiz failed with a free retake offered, and Photosynthesis vs. Cellular Respiration in review.</p>
       </div>
     </div>
@@ -1055,8 +1211,8 @@ h1{
         <h1>Standards &amp; practice</h1>
       </div>
       <div class="copy-body">
-        <p class="define">Florida B.E.S.T. and NGSSS benchmarks, charted by subject — Geometry: <strong>12</strong> mastered, <strong>4</strong> in progress, <strong>2</strong> not yet. A gap isn't a grade; it's a one-tap <strong>Practice</strong> button.</p>
-        <p class="why"><span class="why-label">Why it matters</span>Compliance is native — state standards stay first-class; Luminz adds alongside.</p>
+        <p class="define">Your state benchmarks, charted by subject, right alongside your Luminz. A gap here is never a bad grade — it's one tap away from Practice.</p>
+        <p class="why"><span class="why-label">Why it matters</span>Compliance stays native — state standards stay first-class; Luminz adds alongside.</p>
         <p class="sr-only">Artwork: the standards chart — Geometry 12 mastered, 4 in progress, 2 not yet; ELA 10 at 9, 3 and 1; Biology at 8, 2 and 2; World History at 7, 1 and 1 — with one-tap Practice buttons for triangle theorems and cell membranes.</p>
       </div>
     </div>
@@ -1073,9 +1229,9 @@ h1{
         <h1>Your programs</h1>
       </div>
       <div class="copy-body">
-        <p class="define">Jordan's accounting videos feed three programs at once — Bookkeeping Certificate <strong>72%</strong>, Accounting Certificate <strong>38%</strong>, A.S. Business <strong>12%</strong> — no sign-up needed. Progress counts objectives <strong>written by the program designer</strong>, not minutes.</p>
-        <p class="why"><span class="why-label">Why it matters</span>One watched video advances three credentials — compounding built into the data model.</p>
-        <p class="sr-only">Artwork: three program cards — Bookkeeping Certificate 72% with two designer-written objectives left, Prepare the four core financial statements and Apply the accrual basis of accounting; Accounting Certificate 38%; A.S. Business — Business Core 12%.</p>
+        <p class="define">One video you watch can count toward several credentials at once — a certificate, a second certificate, a degree track — automatically, with no extra sign-up.</p>
+        <p class="why"><span class="why-label">Why it matters</span>One watched video advances three credentials at once — compounding by design.</p>
+        <p class="sr-only">Artwork: three program cards — Bookkeeping Certificate 72% with two designer-written objectives left, Prepare the four core financial statements and Apply the accrual basis of accounting; Accounting Certificate 38%; A.S. Business — Business Core 9%.</p>
       </div>
     </div>
     <div class="art dash-art" id="dashSlot15"></div>
@@ -1086,9 +1242,9 @@ h1{
 <section class="scene s16" id="s16" role="group" aria-roledescription="scene" aria-label="Scene 16 of 17 — In your pocket">
   <div class="stage split">
     <div class="copy">
-      <p class="eyebrow">Pathlight · everywhere</p>
+      <p class="eyebrow">Pathlight · beyond the 7</p>
       <h1>In your pocket</h1>
-      <p class="define">The same Pathlight in a phone frame — <strong>342</strong> Luminz, <strong>72%</strong> lit, Ember one tab away. Same numbers, same guide, same next step — built once, honest everywhere.</p>
+      <p class="define">The same Pathlight, in your hand — your journey doesn't pause when you close the laptop. Same numbers, same guide, same next step, wherever you are.</p>
       <p class="why"><span class="why-label">Why it matters</span>Learners live on phones — the daily loop travels with them.</p>
       <p class="sr-only">Artwork: a phone frame running Pathlight — the same Good morning greeting at 72% lit, a 342 Luminz wallet chip, two KPI tiles, the Ember ribbon with its AI disclosure, Work on next, and a Home, Videos, Progress, Ember tab bar.</p>
     </div>
@@ -1134,7 +1290,7 @@ h1{
                   <text x="48" y="366" font-size="9" fill="#3D5670">Luminz flow toward your Bookkeeping Certificate…</text>
                   <rect x="48" y="374" width="78" height="16" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/><text x="87" y="385" text-anchor="middle" font-size="8" font-weight="700" fill="#1B3A5C">Start the video</text>
                   <rect x="132" y="374" width="70" height="16" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/><text x="167" y="385" text-anchor="middle" font-size="8" font-weight="700" fill="#1B3A5C">Plan my week</text>
-                  <text x="48" y="402" font-size="8" fill="#5B7290">Ember is AI and can make mistakes — your teacher can help.</text>
+                  <text x="42" y="402" font-size="7.5" fill="#5B7290">Ember is AI and can make mistakes — your teacher can always help.</text>
                 </g>
                 <g id="ph-next">
                   <rect x="34" y="424" width="286" height="136" rx="10" fill="#FFFFFF" stroke="#E2E9F1"/>
@@ -1191,7 +1347,10 @@ h1{
 <section class="scene s17" id="s17" role="group" aria-roledescription="scene" aria-label="Scene 17 of 17 — Proof, not seat time">
   <div class="stage cover">
     <div class="logoslot" data-size="close">
-      <span class="plate"><!-- SWAP: brand PNG --><img src="assets/enliten-logo.png" alt="enliten" onload="this.closest('.logoslot').classList.add('haslogo')" onerror="this.closest('.logoslot').classList.add('nologo')"></span>
+      <span class="plate">
+        <img alt="enliten" class="close-enliten enliten-img" data-esrc="assets/enliten-logo.png">
+        <img src="assets/luminz-logo.png" alt="Luminz" class="close-luminz" loading="lazy" decoding="async" onload="this.closest('.logoslot').classList.add('haslogo-luminz')" onerror="this.closest('.logoslot').classList.add('nologo-luminz')">
+      </span>
       <span class="logo-fallback" aria-hidden="true">
         <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="5" y="5" width="14" height="14" rx="4.5" fill="url(#td1)" transform="rotate(45 12 12)"/>
@@ -1201,9 +1360,13 @@ h1{
     </div>
     <p class="eyebrow">Enliten Luminz</p>
     <h1>Proof, not seat time.</h1>
-    <p class="subline">Education measured by what a learner can prove — that is the whole idea.</p>
+    <p class="subline">Education measured by what a learner can prove.</p>
     <p class="define">You've walked the whole loop — next: the specification and the working prototypes.</p>
-    <a class="contact" href="mailto:rshook@academica.org">rshook@academica.org</a>
+    <div class="close-actions">
+      <a class="cta cta-close" href="mailto:rshook@academica.org">Request the spec <span aria-hidden="true">→</span></a>
+      <button class="linklike linklike-restart" id="restartBtn" type="button"><span aria-hidden="true">↺</span> Start over</button>
+    </div>
+    <p class="close-addr">rshook@academica.org</p>
     <p class="why why-center"><span class="why-label">Why it matters</span><span class="why-text">Design decisions locked, prototypes running today — execution, not exploration.</span></p>
   </div>
 </section>
@@ -1217,20 +1380,46 @@ h1{
 <script>
 "use strict";
 (function () {
+  /* ============ enliten logo: ONE shared probe ============ */
+  /* v14 (perf): dedupe the enliten-logo fetch to a single request. All enliten slots
+     (chrome / S1 hero / S17 close) ship src-less <img.enliten-img data-esrc>, so they
+     fire zero requests on their own. One Image() probe hits the asset once: on success
+     it sets html.has-enliten (every slot renders via that root class) and fills each
+     img's real src (served from cache — no second network hit); on failure it sets
+     html.no-enliten and the imgs stay src-less, so exactly one ~404 occurs, with the
+     text fallbacks showing and no broken images / no layout shift. */
+  (function probeEnliten() {
+    var slots = document.querySelectorAll(".enliten-img");
+    var url = "";
+    for (var i = 0; i < slots.length && !url; i++) { url = slots[i].getAttribute("data-esrc") || ""; }
+    var root = document.documentElement;
+    if (!url) { root.classList.add("no-enliten"); return; }
+    var probe = new Image();
+    probe.onload = function () {
+      root.classList.add("has-enliten");
+      for (var j = 0; j < slots.length; j++) {
+        var s = slots[j].getAttribute("data-esrc");
+        if (s) { slots[j].src = s; }
+      }
+    };
+    probe.onerror = function () { root.classList.add("no-enliten"); };
+    probe.src = url;
+  })();
+
   /* ============ setup ============ */
   var REDUCED = (typeof window.matchMedia === "function") &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var SCENES = Array.prototype.slice.call(document.querySelectorAll("section.scene"));
   var N = SCENES.length; /* 17 */
   var TITLES = ["Welcome", "But first — terminology.", "Programs", "Courses",
-    "Learning Objectives", "Videos & the Watch List", "Luminz", "Meet Pathlight",
+    "Learning Objectives", "Videos & the Watch List", "Luminz", "This is your Pathlight",
     "The path lights up", "Today's numbers", "Ember — your AI guide", "Work on next",
     "The Watch List", "Standards & practice", "Your programs", "In your pocket",
     "Proof, not seat time."];
   var CRUMBS = ["", "Before the tour", "Terminology · 1 of 3", "Terminology · 2 of 3",
-    "Terminology · 3 of 3", "Supply", "The currency", "The concept UI",
+    "Terminology · 3 of 3", "Supply · 1 of 2", "Currency · 2 of 2", "Your journey begins",
     "Pathlight · 1 of 7", "Pathlight · 2 of 7", "Pathlight · 3 of 7", "Pathlight · 4 of 7",
-    "Pathlight · 5 of 7", "Pathlight · 6 of 7", "Pathlight · 7 of 7", "Pathlight · everywhere",
+    "Pathlight · 5 of 7", "Pathlight · 6 of 7", "Pathlight · 7 of 7", "Pathlight · beyond the 7",
     "Enliten Luminz"];
   /* v10 flattened tour: scenes 8–15 share one dashboard node; win = viewBox window, ring = flame-ring rect */
   var DASH_FRAMES = [
@@ -1238,9 +1427,9 @@ h1{
     { win: [0, 0, 1000, 254], ring: [20, 58, 960, 126, 18] },
     { win: [0, 112, 1000, 236], ring: [20, 182, 960, 96, 16] },
     { win: [0, 206, 562, 308], ring: [24, 276, 468, 168, 16] },
-    { win: [438, 206, 562, 308], ring: [508, 276, 468, 168, 16] },
+    { win: [438, 224, 562, 262], ring: [508, 276, 468, 168, 16] },
     { win: [0, 374, 1000, 320], ring: [20, 444, 960, 180, 16] },
-    { win: [0, 550, 1000, 296], ring: [20, 620, 960, 156, 16] },
+    { win: [0, 500, 1000, 392], ring: [20, 620, 960, 156, 16] },
     { win: [0, 706, 1000, 186], ring: [20, 776, 960, 104, 16] }
   ];
   var cur = 0, lock = false;
@@ -1249,6 +1438,8 @@ h1{
   var btnPrev = document.getElementById("btnPrev");
   var btnNext = document.getElementById("btnNext");
   var fracCur = document.getElementById("fracCur");
+  var crumbOf = document.getElementById("crumbOf");
+  var crumbOfCur = document.getElementById("crumbOfCur");
   var $ = function (id) { return document.getElementById(id); };
 
   /* ============ chrome: dots ============ */
@@ -1259,6 +1450,10 @@ h1{
       var b = document.createElement("button");
       b.className = "dotbtn";
       b.type = "button";
+      /* v14 (a11y): roving tabindex — only the current dot is tabbable; the rest are
+         -1 so the whole 17-dot rail is ONE tab stop, not seventeen. paintChrome()
+         keeps the roving 0 on the current dot as the scene changes. */
+      b.tabIndex = -1;
       b.setAttribute("aria-label", "Go to scene " + (i + 1) + ": " + TITLES[i]);
       b.appendChild(document.createElement("span")).className = "dot";
       (function (idx) {
@@ -1268,13 +1463,33 @@ h1{
       dotBtns.push(b);
     }
   })();
+  /* v14 (a11y): arrow/Home/End move within the dot group (APG roving pattern). Arrow
+     keys mirror global scene nav (accepted per spec); we stop propagation so the
+     document-level keydown doesn't also advance (no double-step), then keep focus on
+     the now-current dot so the roving focus follows the selection. */
+  dotsWrap.addEventListener("keydown", function (e) {
+    var k = e.key, handled = true;
+    if (k === "ArrowRight" || k === "ArrowDown") { advance(1); }
+    else if (k === "ArrowLeft" || k === "ArrowUp") { advance(-1); }
+    else if (k === "Home") { go(0); }
+    else if (k === "End") { go(N - 1); }
+    else { handled = false; }
+    if (handled) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (dotBtns[cur]) { dotBtns[cur].focus(); }
+    }
+  });
 
   /* ============ chrome state ============ */
   function paintChrome() {
     crumb.textContent = CRUMBS[cur];
     crumb.style.visibility = cur === 0 ? "hidden" : "visible";
+    if (crumbOfCur) { crumbOfCur.textContent = String(cur + 1); }
+    if (crumbOf) { crumbOf.style.visibility = cur === 0 ? "hidden" : "visible"; }
     for (var i = 0; i < N; i++) {
       dotBtns[i].classList.toggle("done", i < cur);
+      dotBtns[i].tabIndex = (i === cur) ? 0 : -1; /* v14: roving tabindex follows current */
       if (i === cur) { dotBtns[i].setAttribute("aria-current", "step"); }
       else { dotBtns[i].removeAttribute("aria-current"); }
     }
@@ -1283,8 +1498,21 @@ h1{
     btnNext.setAttribute("aria-disabled", atEnd ? "true" : "false");
     if (fracCur) { fracCur.textContent = String(cur + 1); }
   }
+  /* v14 (a11y): move focus to the active scene's h1 on every scene change.
+     h1 gets tabindex="-1" once (idempotent) so it's focusable but out of the tab order. */
+  function focusScene(sc) {
+    var h = sc.querySelector("h1");
+    if (!h) { return; }
+    if (h.getAttribute("tabindex") === null) { h.setAttribute("tabindex", "-1"); }
+    try { h.focus({ preventScroll: true }); }
+    catch (e) { try { h.focus(); } catch (e2) {} }
+  }
+  /* v14 (a11y): coherent, non-duplicating announce. Focusing the h1 (focusScene)
+     already speaks the title, so the live region carries only orientation the h1
+     lacks — scene position + the crumb/eyebrow — avoiding a double-read of the title. */
   function announce() {
-    announcer.textContent = "Scene " + (cur + 1) + " of 17 — " + TITLES[cur];
+    var extra = CRUMBS[cur] ? " — " + CRUMBS[cur] : "";
+    announcer.textContent = "Scene " + (cur + 1) + " of 17" + extra;
   }
 
   /* ============ hierarchy ladder (one persistent SVG, scenes 3–5) ============ */
@@ -1470,7 +1698,7 @@ h1{
 
   /* ============ scenes 8–15 · frameDash: one dashboard node, one frame per scene ============ */
   function isDash(i) { return i >= 7 && i <= 14; }
-  var dashWin = null, panRaf = null;
+  var dashWin = null;
   function setWin(vb) {
     var v = vb[0] + " " + vb[1] + " " + vb[2] + " " + vb[3];
     var d = $("db-dash"), o = $("sp-overlay");
@@ -1494,24 +1722,14 @@ h1{
         el.setAttribute("rx", f.ring[4]);
       }
     } else if (o) { o.style.display = "none"; }
-    var from = dashWin || [0, 0, 1000, 892], to = f.win;
-    dashWin = to;
-    if (panRaf !== null && typeof cancelAnimationFrame === "function") {
-      cancelAnimationFrame(panRaf); panRaf = null;
-    }
-    var same = from[0] === to[0] && from[1] === to[1] && from[2] === to[2] && from[3] === to[3];
-    if (REDUCED || same || typeof requestAnimationFrame !== "function") { setWin(to); return; }
-    /* one-time ≤600ms ease-out-quart camera pan; ring rects sit in artwork space and never move */
-    var t0 = null;
-    function pan(ts) {
-      if (t0 === null) { t0 = ts; }
-      var e = easeOutQuart(Math.min(1, (ts - t0) / 600));
-      setWin([from[0] + (to[0] - from[0]) * e, from[1] + (to[1] - from[1]) * e,
-        from[2] + (to[2] - from[2]) * e, from[3] + (to[3] - from[3]) * e]);
-      if (e < 1) { panRaf = requestAnimationFrame(pan); } else { panRaf = null; }
-    }
-    setWin(from);
-    panRaf = requestAnimationFrame(pan);
+    /* v11 fix: the camera pan proved unreliable across navigation paths in the wild
+       (viewBox lagged one scene behind — the section rendered the full dashboard and
+       overflowed the stage, covering copy). The frame now applies SYNCHRONOUSLY on
+       every entry path: arrows, dots, digits, hashchange, popstate, deep link, back.
+       The scene's own 420ms crossfade provides the motion; the artwork arrives
+       pre-framed. Identical behavior with reduced motion. */
+    dashWin = f.win;
+    setWin(f.win);
   }
 
   /* ============ router ============ */
@@ -1566,6 +1784,13 @@ h1{
     sceneEffects(prev, idx, dir);
     clearAnim(from); clearAnim(to);
     to.classList.add("active");
+    /* v14 (a11y CRITICAL): move focus into the now-active scene so it is never
+       stranded inside the outgoing visibility:hidden subtree. Land on the scene's
+       h1 (tabindex="-1" so it's programmatically focusable but not a tab stop).
+       Covers every nav path — arrows, dots, nav buttons, swipe, wheel, Begin,
+       Start over — since all route through show(). preventScroll keeps the fixed
+       layout from jumping. Runs for the REDUCED branch too (it's above the split). */
+    focusScene(to);
     if (REDUCED) {
       from.classList.remove("active");
       from.style.zIndex = ""; to.style.zIndex = "";
@@ -1640,6 +1865,8 @@ h1{
   btnNext.addEventListener("click", function () { if (cur < N - 1) { go(cur + 1); } });
   var beginBtn = $("beginBtn");
   if (beginBtn) { beginBtn.addEventListener("click", function () { go(1); }); }
+  var restartBtn = $("restartBtn");
+  if (restartBtn) { restartBtn.addEventListener("click", function () { go(0); }); }
 
   /* ============ input: touch swipe (30px, horizontal only) ============ */
   var tX = null, tY = null;
